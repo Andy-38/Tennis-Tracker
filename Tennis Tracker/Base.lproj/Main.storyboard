@@ -27,6 +27,9 @@
                                     <directionalEdgeInsets key="contentInsets" top="14" leading="-1" bottom="10" trailing="0.0"/>
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="Lose1ButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2bK-4F-4Se"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPw-Qn-5rj">
                                 <rect key="frame" x="10" y="553" width="79.666666666666671" height="62"/>
@@ -36,6 +39,9 @@
                                     <fontDescription key="titleFontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
                                     <directionalEdgeInsets key="contentInsets" top="14" leading="-1" bottom="10" trailing="0.0"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="Win1ButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PVi-kf-aqM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X75-08-TCv">
                                 <rect key="frame" x="195.66666666666663" y="698" width="169.33333333333337" height="60"/>
@@ -53,7 +59,7 @@
                                     <directionalEdgeInsets key="contentInsets" top="20" leading="0.0" bottom="20" trailing="0.0"/>
                                 </buttonConfiguration>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_return_right" translatesAutoresizingMaskIntoConstraints="NO" id="abG-LJ-sjE">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_return_right" translatesAutoresizingMaskIntoConstraints="NO" id="abG-LJ-sjE">
                                 <rect key="frame" x="195.66666666666666" y="588" width="79.999999999999972" height="80"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                                 <constraints>
@@ -165,7 +171,7 @@
                                     <imageReference key="image" image="arrow.left.arrow.right.square.fill" catalog="system" symbolScale="large"/>
                                 </buttonConfiguration>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_serve_left" translatesAutoresizingMaskIntoConstraints="NO" id="FAL-BA-j7i">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_serve_left" translatesAutoresizingMaskIntoConstraints="NO" id="FAL-BA-j7i">
                                 <rect key="frame" x="99.666666666666686" y="588" width="80" height="80"/>
                                 <color key="backgroundColor" systemColor="systemCyanColor"/>
                                 <constraints>
@@ -182,6 +188,9 @@
                                     <directionalEdgeInsets key="contentInsets" top="14" leading="-1" bottom="10" trailing="0.0"/>
                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="Lose2ButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q0T-Jr-FKi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNc-5f-8Me">
                                 <rect key="frame" x="285.66666666666669" y="553" width="79.333333333333314" height="62"/>
@@ -191,6 +200,9 @@
                                     <fontDescription key="titleFontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
                                     <directionalEdgeInsets key="contentInsets" top="14" leading="-1" bottom="10" trailing="0.0"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="Win2ButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YZi-T8-n8o"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -263,8 +275,18 @@
                     </view>
                     <connections>
                         <outlet property="FirstPlayerNameTextField" destination="u1K-x6-VAb" id="4fJ-qP-IZk"/>
+                        <outlet property="Game1Label" destination="7zC-aj-8dh" id="8ee-fu-6xQ"/>
+                        <outlet property="Game2Label" destination="SDx-S8-oQg" id="viD-Pz-e35"/>
+                        <outlet property="Lose1Button" destination="XGl-u1-kPl" id="6ZB-4g-sSt"/>
+                        <outlet property="Lose2Button" destination="nhf-ab-pcT" id="jaJ-cf-xZL"/>
+                        <outlet property="Point1Label" destination="mg9-PR-ZTC" id="gqy-ib-CGl"/>
+                        <outlet property="Point2Label" destination="IV7-1b-M47" id="aSB-ZM-Azz"/>
                         <outlet property="SecondPlayerNameTextField" destination="Sf3-fy-7LC" id="UMC-Nc-k1J"/>
+                        <outlet property="Set1Label" destination="dcs-BQ-5nV" id="nJe-1K-RFJ"/>
+                        <outlet property="Set2Label" destination="hRs-ug-mtV" id="BMV-Em-jSn"/>
                         <outlet property="TurnirTextField" destination="zoN-6e-Tld" id="sQr-F1-pFM"/>
+                        <outlet property="Win1Button" destination="UPw-Qn-5rj" id="uH2-65-CxT"/>
+                        <outlet property="Win2Button" destination="tNc-5f-8Me" id="mBY-Jn-zwG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -280,22 +302,22 @@
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
