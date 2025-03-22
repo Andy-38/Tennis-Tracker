@@ -11,6 +11,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
     let MaxGame = 6 // игра до 6 геймов в сэте
+    let MaxSet = 2 // игра до победы в 2-х сэтах
     
     var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
     var Podacha: Int = 1 // какая сейчас подача 1-я/2-я
@@ -45,6 +46,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var FirstPlayerImage: UIImageView! // изображение 1-го игрока
     @IBOutlet weak var SecondPlayerImage: UIImageView! // изображение 2-го игрока
+ 
+    func showAlert(playerName : String) {
+        let alertController = UIAlertController(title: "Матч окончен", message: "Победитель матча: "+playerName, preferredStyle: .alert) // создаем алерт-контроллер
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil) // создаем действие "ОК"
+        alertController.addAction(defaultAction) // добавляем действие к алерт-контроллеру
+        present(alertController, animated: true, completion: nil) // отображаем алерт-контроллер
+    }
     
     func SmenaPodachi () { // при смене подачи
         switch PodaetNow {
@@ -83,12 +91,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player1set+=1
             player1game = 0
             player2game = 0
+            if player1set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
+                showAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+            }
         }
         if (player2game>=MaxGame)&&(player2game - player1game >= 2) {
             // игрок 2 набрал 6 или больше геймов с разницей в 2 гейма
             player2set+=1
             player1game = 0
             player2game = 0
+            if player2set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
+                showAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+            }
         }
         if (player1game == MaxGame) && (player2game == MaxGame) {
             // при счете 6:6 по сэтам начинается тайбрейк
@@ -105,6 +119,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player2set = player2set + (player2game - MaxGame)
             player1game = 0
             player2game = 0
+            
+            if player1set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
+                showAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+            }
+            if player2set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
+                showAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+            }
         }
     }
     
@@ -172,8 +193,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         default: BallLabel.frame.origin.x = Point1Label.frame.origin.x
         }
-        
-                
     }
     
     override func viewDidLoad() {
