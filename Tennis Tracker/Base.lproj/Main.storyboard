@@ -73,7 +73,7 @@
                                     <constraint firstAttribute="height" constant="80" id="oWl-1u-wcq"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подача" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhd-2c-PRQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 подача" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhd-2c-PRQ">
                                 <rect key="frame" x="99.666666666666686" y="566" width="80" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
@@ -210,6 +210,12 @@
                                     <action selector="Win2ButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YZi-T8-n8o"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1r-s5-s3C">
+                                <rect key="frame" x="145.66666666666666" y="406" width="21" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -226,6 +232,7 @@
                             <constraint firstItem="X75-08-TCv" firstAttribute="leading" secondItem="Sf3-fy-7LC" secondAttribute="leading" constant="-10" id="67M-qE-xKg"/>
                             <constraint firstItem="7zC-aj-8dh" firstAttribute="trailing" secondItem="u1K-x6-VAb" secondAttribute="trailing" id="9BW-is-VgW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uLT-1v-ykL" secondAttribute="bottom" constant="20" id="9aa-i9-La8"/>
+                            <constraint firstItem="V1r-s5-s3C" firstAttribute="leading" secondItem="mg9-PR-ZTC" secondAttribute="leading" constant="-5" id="A0B-yW-pEb"/>
                             <constraint firstItem="abG-LJ-sjE" firstAttribute="top" secondItem="jQL-h1-sxG" secondAttribute="bottom" constant="1" id="A7Q-nL-HDm"/>
                             <constraint firstItem="uLT-1v-ykL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="AF7-UV-VMD"/>
                             <constraint firstItem="IV7-1b-M47" firstAttribute="leading" secondItem="Sf3-fy-7LC" secondAttribute="leading" id="DT2-sX-lgr"/>
@@ -235,6 +242,7 @@
                             <constraint firstItem="Lhd-2c-PRQ" firstAttribute="centerX" secondItem="FAL-BA-j7i" secondAttribute="centerX" id="FRz-jV-grS"/>
                             <constraint firstItem="jQL-h1-sxG" firstAttribute="centerX" secondItem="abG-LJ-sjE" secondAttribute="centerX" id="G1V-eL-6jj"/>
                             <constraint firstItem="dcs-BQ-5nV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tn5-sf-bkS" secondAttribute="trailing" constant="8" symbolic="YES" id="HiV-rg-EnR"/>
+                            <constraint firstItem="V1r-s5-s3C" firstAttribute="top" secondItem="mg9-PR-ZTC" secondAttribute="bottom" constant="10" id="KPW-Rb-4GS"/>
                             <constraint firstItem="tNc-5f-8Me" firstAttribute="leading" secondItem="abG-LJ-sjE" secondAttribute="trailing" constant="10" id="KYf-4n-mp5"/>
                             <constraint firstItem="dcs-BQ-5nV" firstAttribute="bottom" secondItem="tn5-sf-bkS" secondAttribute="bottom" id="LTJ-xr-8xr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X75-08-TCv" secondAttribute="trailing" constant="10" id="NDm-SI-8cI"/>
@@ -280,7 +288,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="BallLabel" destination="V1r-s5-s3C" id="36G-mz-l5O"/>
                         <outlet property="FirstPlayerNameTextField" destination="u1K-x6-VAb" id="4fJ-qP-IZk"/>
+                        <outlet property="FirstPlayerStatusLabel" destination="Lhd-2c-PRQ" id="1mJ-Bz-Url"/>
                         <outlet property="Game1Label" destination="7zC-aj-8dh" id="8ee-fu-6xQ"/>
                         <outlet property="Game2Label" destination="SDx-S8-oQg" id="viD-Pz-e35"/>
                         <outlet property="Lose1Button" destination="XGl-u1-kPl" id="6ZB-4g-sSt"/>

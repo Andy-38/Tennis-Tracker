@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
     let MaxGame = 6 // игра до 6 геймов в сэте
     var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
+    var Podacha: Int = 1 // какая сейчас подача 1/2
     var player1point: Int = 0 // очки 1-го игрока
     var player2point: Int = 0 // очки 2-го игрока
     var player1game: Int = 0 // геймы 1-го игрока
@@ -36,6 +37,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Point1Label: UILabel! // количество очков 1-го игрока
     @IBOutlet weak var Point2Label: UILabel! // количество очков 2-го игрока
     @IBOutlet weak var ScoreLabel: UILabel! // индикатор очков 0/15/30/40 или тайбрейка
+    @IBOutlet weak var FirstPlayerStatusLabel: UILabel! // подача или прием у 1-го игрока
+    @IBOutlet weak var BallLabel: UILabel! // один или два мячика - ндикатор подачи
+    
+    
     
     func ChangeGames( g1: Int, g2: Int) { // g1, g2 - изменение геймов 1-го и 2-го игроков
         // функция для пересчета геймов
@@ -75,6 +80,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // функция для пересчета счета
         player1point = player1point + p1
         player2point = player2point + p2
+        Podacha = 1 // снова первая подача
         
         if (player1point >= MaxPoint)&&(player1point - player2point >= 2) { // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
             //player1game+=1
@@ -109,6 +115,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Game2Label.text = String(player2game)
         Set1Label.text = String(player1set)
         Set2Label.text = String(player2set)
+        FirstPlayerStatusLabel.text = String(Podacha)+" подача"
+        if Podacha == 1 { BallLabel.text = "🎾"}
+        else { BallLabel.text = "🎾🎾"}
     }
     
     override func viewDidLoad() {
@@ -138,7 +147,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Lose1ButtonPress(_ sender: Any) {
         // при нажатии кнопки проигрыша 1-го игрока
-        ChangePoints(p1: 0, p2: 1)
+        if Podacha == 1 {
+            Podacha = 2 // 2-я подача
+        }
+        else {
+            ChangePoints(p1: 0, p2: 1) // ошибка на 2-й подаче = выигранное очко
+        }
         UpdatePoints()
     }
     
