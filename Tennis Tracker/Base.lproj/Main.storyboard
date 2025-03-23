@@ -216,6 +216,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40h-5s-De5">
+                                <rect key="frame" x="249.66666666666666" y="360" width="61.333333333333343" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Labe7a">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemGreenColor"/>
+                                            <font key="NSFont" size="17" name="CourierNewPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvz-g7-Cvx">
+                                <rect key="frame" x="249.66666666666666" y="380" width="61.333333333333343" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Label3">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemPurpleColor"/>
+                                            <font key="NSFont" size="17" name="CourierNewPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -246,7 +270,10 @@
                             <constraint firstItem="dcs-BQ-5nV" firstAttribute="bottom" secondItem="tn5-sf-bkS" secondAttribute="bottom" id="LTJ-xr-8xr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X75-08-TCv" secondAttribute="trailing" constant="10" id="NDm-SI-8cI"/>
                             <constraint firstItem="u1K-x6-VAb" firstAttribute="top" secondItem="zoN-6e-Tld" secondAttribute="bottom" constant="10" id="Nhr-L2-PAj"/>
+                            <constraint firstItem="Kvz-g7-Cvx" firstAttribute="leading" secondItem="40h-5s-De5" secondAttribute="leading" id="OBp-0n-oqI"/>
+                            <constraint firstItem="40h-5s-De5" firstAttribute="top" secondItem="IV7-1b-M47" secondAttribute="top" id="Ow4-aH-dbZ"/>
                             <constraint firstItem="zoN-6e-Tld" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Pm1-Cc-4Fm"/>
+                            <constraint firstItem="40h-5s-De5" firstAttribute="leading" secondItem="mg9-PR-ZTC" secondAttribute="trailing" constant="80" id="QGj-mB-9b7"/>
                             <constraint firstItem="uLT-1v-ykL" firstAttribute="top" secondItem="FAL-BA-j7i" secondAttribute="bottom" constant="30" id="QMT-8K-v2U"/>
                             <constraint firstItem="SDx-S8-oQg" firstAttribute="leading" secondItem="Sf3-fy-7LC" secondAttribute="leading" id="QY1-it-69U"/>
                             <constraint firstItem="zoN-6e-Tld" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="RgD-IC-A4g"/>
@@ -271,6 +298,7 @@
                             <constraint firstItem="XKJ-7b-CTW" firstAttribute="leading" secondItem="2Gf-ca-ipp" secondAttribute="leading" id="fSh-If-U73"/>
                             <constraint firstItem="uLT-1v-ykL" firstAttribute="trailing" secondItem="u1K-x6-VAb" secondAttribute="trailing" constant="10" id="hC6-US-nmZ"/>
                             <constraint firstItem="Lhd-2c-PRQ" firstAttribute="leading" secondItem="FAL-BA-j7i" secondAttribute="leading" id="hJA-Fi-unb"/>
+                            <constraint firstItem="Kvz-g7-Cvx" firstAttribute="top" secondItem="40h-5s-De5" secondAttribute="bottom" id="hch-0W-A2i"/>
                             <constraint firstItem="nhf-ab-pcT" firstAttribute="leading" secondItem="abG-LJ-sjE" secondAttribute="trailing" constant="10" id="hhK-uV-Bv2"/>
                             <constraint firstItem="X75-08-TCv" firstAttribute="top" secondItem="nhf-ab-pcT" secondAttribute="bottom" constant="10" id="hsP-fy-3ly"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lhd-2c-PRQ" secondAttribute="trailing" symbolic="YES" id="jBt-fv-eWx"/>
@@ -304,6 +332,8 @@
                         <outlet property="SecondPlayerStetusLabel" destination="jQL-h1-sxG" id="Sie-cL-Igb"/>
                         <outlet property="Set1Label" destination="dcs-BQ-5nV" id="nJe-1K-RFJ"/>
                         <outlet property="Set2Label" destination="hRs-ug-mtV" id="BMV-Em-jSn"/>
+                        <outlet property="Stat1Label" destination="40h-5s-De5" id="O7a-xp-hQt"/>
+                        <outlet property="Stat2Label" destination="Kvz-g7-Cvx" id="RpD-Ts-9xA"/>
                         <outlet property="TurnirTextField" destination="zoN-6e-Tld" id="sQr-F1-pFM"/>
                         <outlet property="Win1Button" destination="UPw-Qn-5rj" id="uH2-65-CxT"/>
                         <outlet property="Win2Button" destination="tNc-5f-8Me" id="mBY-Jn-zwG"/>
@@ -311,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19.090909090909093" y="2.510460251046025"/>
+            <point key="canvasLocation" x="18.399999999999999" y="2.2167487684729066"/>
         </scene>
     </scenes>
     <resources>

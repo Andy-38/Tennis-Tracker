@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var player1set: Int = 0 // сэты 1-го игрока
     var player2set: Int = 0 // сэты 2-го игрока
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
+    var player1stat: String = "" // статистика 1-го игрока
+    var player2stat: String = "" // статистика 2-го игрока
     
     @IBOutlet weak var TurnirTextField: UITextField! // поле ввода названия турнира
     @IBOutlet weak var FirstPlayerNameTextField: UITextField! // поле ввода имени 1-го игрока
@@ -43,6 +45,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var FirstPlayerStatusLabel: UILabel! // подача или прием у 1-го игрока
     @IBOutlet weak var SecondPlayerStetusLabel: UILabel! // и у второго игрока
     @IBOutlet weak var BallLabel: UILabel! // один или два мячика - ндикатор подачи
+    
+    @IBOutlet weak var Stat1Label: UILabel! // для отображения статистики 1-го игрока
+    @IBOutlet weak var Stat2Label: UILabel! // для отображения статистики 2-го игрока
     
     @IBOutlet weak var FirstPlayerImage: UIImageView! // изображение 1-го игрока
     @IBOutlet weak var SecondPlayerImage: UIImageView! // изображение 2-го игрока
@@ -166,6 +171,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Game2Label.text = String(player2game)
         Set1Label.text = String(player1set)
         Set2Label.text = String(player2set)
+        Stat1Label.text = player1stat
+        Stat2Label.text = player2stat
         switch Podacha { // какая подача (1/2) - столько и мячиков на экране
         case 1: BallLabel.text = "🎾"
         case 2: BallLabel.text = "🎾🎾"
@@ -217,6 +224,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win1ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 1-го игрока
+        
+        if (PodaetNow == 1) && (Podacha == 2) {
+            player1stat.removeLast()
+            player2stat.removeLast()
+            //var i: String
+            if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
+                player1stat = player1stat + "Ạ"
+            }
+            else {
+                player1stat = player1stat + "!"
+            }
+            
+        }
+        else {
+            if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
+                player1stat = player1stat + "A"
+            }
+            else {
+                player1stat = player1stat + "/"
+            }
+            //player1stat = player1stat + "/"
+        }
+        //"⁄"
+        player2stat = player2stat + "_"
+        //" "
         ChangePoints(p1: 1, p2: 0)
         UpdatePoints()
     }
@@ -225,9 +257,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки проигрыша 1-го игрока
         if (PodaetNow == 1) && (Podacha == 1) { // если подает 1-й и ошибка на подаче то
             Podacha = 2 // 2-я подача
+            player1stat = player1stat + "."
+            //"﹒•"
+            player2stat = player2stat + "_"
+            //" "
         }
         else {
             ChangePoints(p1: 0, p2: 1) // ошибка на 2-й подаче = выигранное очко
+            if (PodaetNow == 1) {
+                player2stat.removeLast()
+                player2stat = player2stat + "D"
+            }
         }
         UpdatePoints()
     }
@@ -235,6 +275,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func Win2ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 2-го игрока
         ChangePoints(p1: 0, p2: 1)
+        player2stat = player2stat + "/"
+        //"⁄"
+        player1stat = player1stat + " "
+        //" "
         UpdatePoints()
     }
     
