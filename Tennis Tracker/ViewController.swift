@@ -23,8 +23,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var player1set: Int = 0 // сэты 1-го игрока
     var player2set: Int = 0 // сэты 2-го игрока
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
-    var player1stat: String = "" // статистика 1-го игрока
-    var player2stat: String = "" // статистика 2-го игрока
+    var GameNow: Int = 1 // какой сейчас идет гейм
+    var player1stat: [String] = ["",""] // статистика 1-го игрока
+    var player2stat: [String] = ["",""] // статистика 2-го игрока
     
     @IBOutlet weak var TurnirTextField: UITextField! // поле ввода названия турнира
     @IBOutlet weak var FirstPlayerNameTextField: UITextField! // поле ввода имени 1-го игрока
@@ -52,7 +53,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var FirstPlayerImage: UIImageView! // изображение 1-го игрока
     @IBOutlet weak var SecondPlayerImage: UIImageView! // изображение 2-го игрока
  
-    func showAlert(playerName : String) {
+    func showWinAlert(playerName : String) { // показывает сообщение о победе игрока
         let alertController = UIAlertController(title: "Матч окончен", message: "Победитель матча: "+playerName, preferredStyle: .alert) // создаем алерт-контроллер
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil) // создаем действие "ОК"
         alertController.addAction(defaultAction) // добавляем действие к алерт-контроллеру
@@ -97,7 +98,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player1game = 0
             player2game = 0
             if player1set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                showAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+                showWinAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
             }
         }
         if (player2game>=MaxGame)&&(player2game - player1game >= 2) {
@@ -106,7 +107,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player1game = 0
             player2game = 0
             if player2set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                showAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+                showWinAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
             }
         }
         if (player1game == MaxGame) && (player2game == MaxGame) {
@@ -126,12 +127,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player2game = 0
             
             if player1set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                showAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+                showWinAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
             }
             if player2set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                showAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+                showWinAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
             }
         }
+        GameNow+=1 // начинаем следующий гейм
+        player1stat.append("")
+        player2stat.append("")
     }
     
     func ChangePoints( p1: Int, p2 : Int) { // p1, p2 - изменение очков 1-го и 2-го игроков
@@ -171,8 +175,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Game2Label.text = String(player2game)
         Set1Label.text = String(player1set)
         Set2Label.text = String(player2set)
-        Stat1Label.text = player1stat
-        Stat2Label.text = player2stat
+        Stat1Label.text = player1stat[GameNow]
+        Stat2Label.text = player2stat[GameNow]
         switch Podacha { // какая подача (1/2) - столько и мячиков на экране
         case 1: BallLabel.text = "🎾"
         case 2: BallLabel.text = "🎾🎾"
@@ -224,31 +228,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win1ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 1-го игрока
-        
         if (PodaetNow == 1) && (Podacha == 2) {
-            player1stat.removeLast()
-            player2stat.removeLast()
-            //var i: String
+            // вторая подача - заменяем символ
+            player1stat[GameNow].removeLast() // убираем .
+            player2stat[GameNow].removeLast()
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player1stat = player1stat + "Ạ"
+                player1stat[GameNow] = player1stat[GameNow] + "Ạ" // игрок 1 подал эйс на 2-й подаче
             }
             else {
-                player1stat = player1stat + "!"
+                player1stat[GameNow] = player1stat[GameNow] + "!" // игрок 1 выиграл 2-ю подачу после проигранной 1-й
             }
-            
         }
         else {
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player1stat = player1stat + "A"
+                player1stat[GameNow] = player1stat[GameNow] + "A" // игрок 1 подал эйс на 1-й подаче
             }
             else {
-                player1stat = player1stat + "/"
+                player1stat[GameNow] = player1stat[GameNow] + "/" // игрок 1 просто выиграл розыгрыш
             }
-            //player1stat = player1stat + "/"
         }
-        //"⁄"
-        player2stat = player2stat + "_"
-        //" "
+        player2stat[GameNow] = player2stat[GameNow] + " "
         ChangePoints(p1: 1, p2: 0)
         UpdatePoints()
     }
@@ -257,28 +256,58 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки проигрыша 1-го игрока
         if (PodaetNow == 1) && (Podacha == 1) { // если подает 1-й и ошибка на подаче то
             Podacha = 2 // 2-я подача
-            player1stat = player1stat + "."
-            //"﹒•"
-            player2stat = player2stat + "_"
-            //" "
+            player1stat[GameNow] = player1stat[GameNow] + "."
+            player2stat[GameNow] = player2stat[GameNow] + " "
         }
-        else {
-            ChangePoints(p1: 0, p2: 1) // ошибка на 2-й подаче = выигранное очко
+        else { // ошибка 1-го на 2-й подаче = выигранное очко 2-го
             if (PodaetNow == 1) {
-                player2stat.removeLast()
-                player2stat = player2stat + "D"
+                player2stat[GameNow].removeLast()
+                player2stat[GameNow] = player2stat[GameNow] + "D" // двойная ошибка
             }
+            if (PodaetNow == 2) {
+                if Podacha == 2 {
+                    player2stat[GameNow].removeLast() // убираем .
+                    player2stat[GameNow] = player2stat[GameNow] + "!"
+                }
+                else {
+                    player2stat[GameNow] = player2stat[GameNow] + "/"
+                    player1stat[GameNow] = player1stat[GameNow] + " "
+                }
+                
+                //player2stat = player2stat + "/"
+                //player1stat = player1stat + " "
+            }
+            ChangePoints(p1: 0, p2: 1)
         }
         UpdatePoints()
     }
     
     @IBAction func Win2ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 2-го игрока
+        if (PodaetNow == 2) && (Podacha == 2) {
+            // вторая подача - заменяем символ
+            player2stat[GameNow].removeLast() // убираем .
+            player1stat[GameNow].removeLast()
+            if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
+                player2stat[GameNow] = player2stat[GameNow] + "Ạ" // игрок 2 подал эйс на 2-й подаче
+            }
+            else {
+                player2stat[GameNow] = player2stat[GameNow] + "!" // игрок 2 выиграл 2-ю подачу после проигранной 1-й
+            }
+        }
+        else {
+            if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
+                player2stat[GameNow] = player2stat[GameNow] + "A" // игрок 2 подал эйс на 1-й подаче
+            }
+            else {
+                player2stat[GameNow] = player2stat[GameNow] + "/" // игрок 2 просто выиграл розыгрыш
+            }
+        }
+        player1stat[GameNow] = player1stat[GameNow] + " "
+        
         ChangePoints(p1: 0, p2: 1)
-        player2stat = player2stat + "/"
-        //"⁄"
-        player1stat = player1stat + " "
-        //" "
+        //player2stat = player2stat + "/"
+        //player1stat = player1stat + " "
         UpdatePoints()
     }
     
@@ -286,8 +315,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки проигрыша 2-го игрока
         if (PodaetNow == 2) && (Podacha == 1) { // если подает 2-й и ошибка на подаче то
             Podacha = 2 // 2-я подача
+            player2stat[GameNow] = player2stat[GameNow] + "."
+            player1stat[GameNow] = player1stat[GameNow] + " "
         }
         else {
+            // ошибка 2-го на 2-й подаче = выигранное очко 1-го
+            if (PodaetNow == 2) {
+                player1stat[GameNow].removeLast()
+                player1stat[GameNow] = player1stat[GameNow] + "D" // двойная ошибка
+            }
+            if (PodaetNow == 1) {
+                if Podacha == 2 {
+                    player1stat[GameNow].removeLast() // убираем .
+                    player1stat[GameNow] = player1stat[GameNow] + "!"
+                }
+                else {
+                    player1stat[GameNow] = player1stat[GameNow] + "/"
+                    player2stat[GameNow] = player2stat[GameNow] + " "
+                }
+            }
             ChangePoints(p1: 1, p2: 0)
         }
         UpdatePoints()
