@@ -176,6 +176,9 @@
                                 <buttonConfiguration key="configuration" style="plain" imagePlacement="top">
                                     <imageReference key="image" image="arrow.left.arrow.right.square.fill" catalog="system" symbolScale="large"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="SwapButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="abf-B1-TGv"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_serve_left" translatesAutoresizingMaskIntoConstraints="NO" id="FAL-BA-j7i">
                                 <rect key="frame" x="99.666666666666686" y="588" width="80" height="80"/>
@@ -219,7 +222,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40h-5s-De5">
                                 <rect key="frame" x="249.66666666666666" y="360" width="61.333333333333343" height="20"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Label3">
+                                    <fragment content="Label5">
                                         <attributes>
                                             <color key="NSColor" systemColor="systemGreenColor"/>
                                             <font key="NSFont" size="17" name="CourierNewPSMT"/>
@@ -231,7 +234,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvz-g7-Cvx">
                                 <rect key="frame" x="249.66666666666666" y="380" width="61.333333333333343" height="20"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Label4">
+                                    <fragment content="Label6">
                                         <attributes>
                                             <color key="NSColor" systemColor="systemPurpleColor"/>
                                             <font key="NSFont" size="17" name="CourierNewPSMT"/>
@@ -243,7 +246,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLv-Z7-Was">
                                 <rect key="frame" x="249.66666666666666" y="274" width="61.333333333333343" height="20"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Label1">
+                                    <fragment content="Label3">
                                         <attributes>
                                             <color key="NSColor" systemColor="systemGreenColor"/>
                                             <font key="NSFont" size="17" name="CourierNewPSMT"/>
@@ -254,6 +257,30 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB7-pl-g1L">
                                 <rect key="frame" x="249.66666666666666" y="294" width="61.333333333333343" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Label4">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemPurpleColor"/>
+                                            <font key="NSFont" size="17" name="CourierNewPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhe-hc-Vhp">
+                                <rect key="frame" x="249.66666666666666" y="188" width="61.333333333333343" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Label1">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemGreenColor"/>
+                                            <font key="NSFont" size="17" name="CourierNewPSMT"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJz-yb-sgZ">
+                                <rect key="frame" x="249.66666666666666" y="208" width="61.333333333333343" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label2">
                                         <attributes>
@@ -292,8 +319,10 @@
                             <constraint firstItem="dcs-BQ-5nV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tn5-sf-bkS" secondAttribute="trailing" constant="8" symbolic="YES" id="HiV-rg-EnR"/>
                             <constraint firstItem="V1r-s5-s3C" firstAttribute="top" secondItem="mg9-PR-ZTC" secondAttribute="bottom" constant="10" id="KPW-Rb-4GS"/>
                             <constraint firstItem="tNc-5f-8Me" firstAttribute="leading" secondItem="abG-LJ-sjE" secondAttribute="trailing" constant="10" id="KYf-4n-mp5"/>
+                            <constraint firstItem="hJz-yb-sgZ" firstAttribute="top" secondItem="Bhe-hc-Vhp" secondAttribute="bottom" id="LAa-Lf-3Ic"/>
                             <constraint firstItem="dcs-BQ-5nV" firstAttribute="bottom" secondItem="tn5-sf-bkS" secondAttribute="bottom" id="LTJ-xr-8xr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="X75-08-TCv" secondAttribute="trailing" constant="10" id="NDm-SI-8cI"/>
+                            <constraint firstItem="hJz-yb-sgZ" firstAttribute="leading" secondItem="Bhe-hc-Vhp" secondAttribute="leading" id="NLD-yp-Aqs"/>
                             <constraint firstItem="u1K-x6-VAb" firstAttribute="top" secondItem="zoN-6e-Tld" secondAttribute="bottom" constant="10" id="Nhr-L2-PAj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Kvz-g7-Cvx" secondAttribute="trailing" symbolic="YES" id="Nj4-dd-sLY"/>
                             <constraint firstItem="Kvz-g7-Cvx" firstAttribute="leading" secondItem="40h-5s-De5" secondAttribute="leading" id="OBp-0n-oqI"/>
@@ -309,6 +338,7 @@
                             <constraint firstItem="LxE-fl-wje" firstAttribute="top" secondItem="u1K-x6-VAb" secondAttribute="top" id="UuP-cs-kGE"/>
                             <constraint firstItem="HLv-Z7-Was" firstAttribute="leading" secondItem="7zC-aj-8dh" secondAttribute="trailing" constant="80" id="Veg-WZ-g6A"/>
                             <constraint firstItem="tn5-sf-bkS" firstAttribute="top" secondItem="u1K-x6-VAb" secondAttribute="bottom" constant="50" id="WBO-Br-T8R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bhe-hc-Vhp" secondAttribute="trailing" symbolic="YES" id="Wpf-dV-obF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SDx-S8-oQg" secondAttribute="trailing" symbolic="YES" id="X7A-hL-KZK"/>
                             <constraint firstItem="XGl-u1-kPl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="XaS-SE-Z1H"/>
                             <constraint firstItem="nhf-ab-pcT" firstAttribute="top" secondItem="tNc-5f-8Me" secondAttribute="bottom" constant="10" id="Xqr-ez-avE"/>
@@ -326,6 +356,7 @@
                             <constraint firstItem="Sf3-fy-7LC" firstAttribute="top" secondItem="zoN-6e-Tld" secondAttribute="bottom" constant="10" id="enq-2I-Fmh"/>
                             <constraint firstItem="HLv-Z7-Was" firstAttribute="top" secondItem="7zC-aj-8dh" secondAttribute="top" id="fSh-5f-g0a"/>
                             <constraint firstItem="XKJ-7b-CTW" firstAttribute="leading" secondItem="2Gf-ca-ipp" secondAttribute="leading" id="fSh-If-U73"/>
+                            <constraint firstItem="Bhe-hc-Vhp" firstAttribute="top" secondItem="dcs-BQ-5nV" secondAttribute="top" id="g3k-xG-yzk"/>
                             <constraint firstItem="uLT-1v-ykL" firstAttribute="trailing" secondItem="u1K-x6-VAb" secondAttribute="trailing" constant="10" id="hC6-US-nmZ"/>
                             <constraint firstItem="Lhd-2c-PRQ" firstAttribute="leading" secondItem="FAL-BA-j7i" secondAttribute="leading" id="hJA-Fi-unb"/>
                             <constraint firstItem="Kvz-g7-Cvx" firstAttribute="top" secondItem="40h-5s-De5" secondAttribute="bottom" id="hch-0W-A2i"/>
@@ -336,9 +367,11 @@
                             <constraint firstItem="mg9-PR-ZTC" firstAttribute="bottom" secondItem="XKJ-7b-CTW" secondAttribute="bottom" id="kcj-rp-U5z"/>
                             <constraint firstItem="mg9-PR-ZTC" firstAttribute="trailing" secondItem="u1K-x6-VAb" secondAttribute="trailing" id="lyy-cO-qBt"/>
                             <constraint firstItem="LxE-fl-wje" firstAttribute="leading" secondItem="u1K-x6-VAb" secondAttribute="trailing" constant="1" id="mK7-Xg-EWQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hJz-yb-sgZ" secondAttribute="trailing" symbolic="YES" id="mVl-SL-XiL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IV7-1b-M47" secondAttribute="trailing" symbolic="YES" id="mZb-vG-0Ca"/>
                             <constraint firstItem="XGl-u1-kPl" firstAttribute="top" secondItem="UPw-Qn-5rj" secondAttribute="bottom" constant="10" id="pF8-iS-QbE"/>
                             <constraint firstItem="FAL-BA-j7i" firstAttribute="top" secondItem="Lhd-2c-PRQ" secondAttribute="bottom" constant="1" id="peP-Qj-Req"/>
+                            <constraint firstItem="Bhe-hc-Vhp" firstAttribute="leading" secondItem="dcs-BQ-5nV" secondAttribute="trailing" constant="80" id="qCz-TF-4Pn"/>
                             <constraint firstItem="SDx-S8-oQg" firstAttribute="bottom" secondItem="2Gf-ca-ipp" secondAttribute="bottom" id="rgh-uF-ePx"/>
                             <constraint firstItem="cB7-pl-g1L" firstAttribute="top" secondItem="HLv-Z7-Was" secondAttribute="bottom" id="s0w-nc-Ow8"/>
                             <constraint firstItem="uLT-1v-ykL" firstAttribute="top" secondItem="XGl-u1-kPl" secondAttribute="bottom" constant="10" id="tJ4-Rw-Qpf"/>
@@ -358,8 +391,12 @@
                         <outlet property="GameStat2Label" destination="cB7-pl-g1L" id="IcG-Hn-74l"/>
                         <outlet property="Lose1Button" destination="XGl-u1-kPl" id="6ZB-4g-sSt"/>
                         <outlet property="Lose2Button" destination="nhf-ab-pcT" id="jaJ-cf-xZL"/>
+                        <outlet property="Player1SetScoreLabel" destination="Bhe-hc-Vhp" id="aTj-NT-20v"/>
+                        <outlet property="Player2SetScoreLabel" destination="hJz-yb-sgZ" id="4eo-LA-7YZ"/>
                         <outlet property="Point1Label" destination="mg9-PR-ZTC" id="gqy-ib-CGl"/>
+                        <outlet property="Point1WinButton" destination="uLT-1v-ykL" id="nj4-XZ-jq7"/>
                         <outlet property="Point2Label" destination="IV7-1b-M47" id="aSB-ZM-Azz"/>
+                        <outlet property="Point2WinButton" destination="X75-08-TCv" id="VNy-YL-7VV"/>
                         <outlet property="ScoreLabel" destination="XKJ-7b-CTW" id="diL-ht-2zk"/>
                         <outlet property="SecondPlayerImage" destination="abG-LJ-sjE" id="eYs-QC-weL"/>
                         <outlet property="SecondPlayerNameTextField" destination="Sf3-fy-7LC" id="UMC-Nc-k1J"/>
@@ -368,6 +405,7 @@
                         <outlet property="Set2Label" destination="hRs-ug-mtV" id="BMV-Em-jSn"/>
                         <outlet property="Stat1Label" destination="40h-5s-De5" id="O7a-xp-hQt"/>
                         <outlet property="Stat2Label" destination="Kvz-g7-Cvx" id="RpD-Ts-9xA"/>
+                        <outlet property="SwapButton" destination="LxE-fl-wje" id="WSC-Hr-5jf"/>
                         <outlet property="TurnirTextField" destination="zoN-6e-Tld" id="sQr-F1-pFM"/>
                         <outlet property="Win1Button" destination="UPw-Qn-5rj" id="uH2-65-CxT"/>
                         <outlet property="Win2Button" destination="tNc-5f-8Me" id="mBY-Jn-zwG"/>
