@@ -8,6 +8,9 @@
 import UIKit
 import CoreData
 
+var player1 = TennisPlayer()
+var player2 = TennisPlayer()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

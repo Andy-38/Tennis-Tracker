@@ -9,11 +9,15 @@ import UIKit
 
 class ProtocolViewController: UIViewController {
     
-    //override func viewDidLoad() {
-    //    super.viewDidLoad()
+    @IBOutlet weak var ProtocolTextView: UITextView! // текстовое поле для протокола
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         // выполняется при запуске приложения
-        
-    //}
+        ProtocolTextView.text = ""
+        ProtocolTextView.text.append("Протокол матча:")
+        ProtocolTextView.text.append(player1.setScore)
+    }
     
     //override func viewDidAppear(_ animated: Bool) {
     //    super.viewDidAppear(animated)

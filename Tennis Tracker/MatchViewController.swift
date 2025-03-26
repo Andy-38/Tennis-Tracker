@@ -7,24 +7,13 @@
 
 import UIKit
 
-class TennisPlayer {
-    var point: Int = 0 // очки игрока в гейме
-    var game: Int = 0 // геймы игрока
-    var set: Int = 0 // сэты игрока
-    var stat: [String] = [" ", " "] // статистика очков в гейме
-    var gamesStat : [String] = ["", ""] // статистика геймов в сэте
-    var setScore: String = "" // статистика сэтов в матче
-    var name: String = "Игрок" // имя игрока
-}
-
 class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
     let MaxGame = 6 // игра до 6 геймов в сэте
     let MaxSet = 2 // игра до победы в 2-х сэтах
     
-    var player1 = TennisPlayer()
-    var player2 = TennisPlayer()
+    
     
     var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
     var Podacha: Int = 1 // какая сейчас подача 1-я/2-я

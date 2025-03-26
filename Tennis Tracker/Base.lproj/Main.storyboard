@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="50" width="375" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -36,6 +36,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Протокол" image="book" catalog="system" id="j2X-bV-321"/>
+                    <connections>
+                        <outlet property="ProtocolTextView" destination="EQP-G4-7hh" id="dGu-cf-fV8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwZ-8X-ojX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
