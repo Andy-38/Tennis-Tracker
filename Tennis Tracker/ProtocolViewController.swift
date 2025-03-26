@@ -9,4 +9,15 @@ import UIKit
 
 class ProtocolViewController: UIViewController {
     
+    //override func viewDidLoad() {
+    //    super.viewDidLoad()
+        // выполняется при запуске приложения
+        
+    //}
+    
+    //override func viewDidAppear(_ animated: Bool) {
+    //    super.viewDidAppear(animated)
+        // выполняется при отображении экрана
+        
+    //}
 }

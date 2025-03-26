@@ -17,8 +17,23 @@
                     <view key="view" contentMode="scaleToFill" id="dYS-i9-fX5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Протокол матча" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-G4-7hh">
+                                <rect key="frame" x="0.0" y="50" width="375" height="679"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="C8Y-bG-pWc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EQP-G4-7hh" firstAttribute="leading" secondItem="C8Y-bG-pWc" secondAttribute="leading" id="AK3-cf-WGF"/>
+                            <constraint firstItem="C8Y-bG-pWc" firstAttribute="trailing" secondItem="EQP-G4-7hh" secondAttribute="trailing" id="RXZ-Tt-jFo"/>
+                            <constraint firstItem="EQP-G4-7hh" firstAttribute="top" secondItem="C8Y-bG-pWc" secondAttribute="top" id="Scd-B2-yBZ"/>
+                            <constraint firstItem="C8Y-bG-pWc" firstAttribute="bottom" secondItem="EQP-G4-7hh" secondAttribute="bottom" id="ztQ-hK-Otl"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Протокол" image="book" catalog="system" id="j2X-bV-321"/>
                 </viewController>
@@ -478,6 +493,9 @@
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <image name="tennis.racket" catalog="system" width="128" height="122"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
