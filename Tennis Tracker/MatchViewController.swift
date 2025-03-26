@@ -13,13 +13,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     let MaxGame = 6 // игра до 6 геймов в сэте
     let MaxSet = 2 // игра до победы в 2-х сэтах
     
-    
-    
     var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
     var Podacha: Int = 1 // какая сейчас подача 1-я/2-я
     var PodaetNow: Int = 1 // кто сейчас подает 1/2 игрок
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
-    var GameNow: Int = 1 // какой сейчас идет гейм
+    //var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
     var TurnirName: String = "" // название турнира
     
@@ -286,6 +284,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         BallLabel.translatesAutoresizingMaskIntoConstraints = true // чтоб можно было двигать метку
         BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30 // выставляем мячики первому игроку
         UpdatePoints()
+        player1.name = "Игрок1"
+        player2.name = "Игрок2"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

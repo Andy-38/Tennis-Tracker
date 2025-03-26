@@ -8,8 +8,10 @@
 import UIKit
 import CoreData
 
-var player1 = TennisPlayer()
-var player2 = TennisPlayer()
+// глобальные переменные, которые видны из всех ViewController'ов
+var player1 = TennisPlayer() // все характеристики 1-го игрока
+var player2 = TennisPlayer() // все характеристики 2-го игрока
+var GameNow: Int = 1 // какой сейчас идет гейм
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

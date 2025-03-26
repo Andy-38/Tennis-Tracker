@@ -2,7 +2,7 @@
 //  TennisPlayer.swift
 //  Tennis Tracker
 //
-//  Created by Андрей on 26.03.2025.
+//  Created by Andy Dvoytsov on 26.03.2025.
 //
 
 
