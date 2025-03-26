@@ -14,9 +14,10 @@ class TennisPlayer {
     var stat: [String] = [" ", " "] // статистика очков в гейме
     var gamesStat : [String] = ["", ""] // статистика геймов в сэте
     var setScore: String = "" // статистика сэтов в матче
+    var name: String = "Игрок" // имя игрока
 }
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
     let MaxGame = 6 // игра до 6 геймов в сэте
@@ -31,6 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
+    var TurnirName: String = "" // название турнира
     
     //var player1point: Int = 0 // очки 1-го игрока
     //var player2point: Int = 0 // очки 2-го игрока
@@ -153,7 +155,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player2game = 0
             */
             if player1.set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                showWinAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+                player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+                showWinAlert(playerName: player1.name)
                 FinishGame()
             }
         }
@@ -169,7 +172,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             player2game = 0
             */
             if player2.set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                showWinAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+                player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
+                showWinAlert(playerName: player2.name)
                 FinishGame()
             }
         }
@@ -196,11 +200,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             */
             
             if player1.set>=MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                showWinAlert(playerName: FirstPlayerNameTextField.text ?? "Игрок1")
+                player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+                showWinAlert(playerName: player1.name)
                 FinishGame()
             }
             if player2.set>=MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                showWinAlert(playerName: SecondPlayerNameTextField.text ?? "Игрок2")
+                player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
+                showWinAlert(playerName: player2.name)
                 FinishGame()
             }
         }
@@ -297,11 +303,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // вызывается когда пользователь коснулся экрана
         super.touchesBegan(touches, with: event)
         view.endEditing(true) // убираем клавиатуру
+        player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+        player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
+        TurnirName = TurnirTextField.text ?? ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // вызывается при нажатии кнопки "готово"
         textField.resignFirstResponder()
+        player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+        player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
+        TurnirName = TurnirTextField.text ?? ""
         return true
     }
     
