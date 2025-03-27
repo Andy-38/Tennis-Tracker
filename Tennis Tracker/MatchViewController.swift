@@ -242,6 +242,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         UpdatePoints()
         player1.name = "Игрок1"
         player2.name = "Игрок2"
+        match.TurnirName = "Без названия"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -249,16 +250,22 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         super.touchesBegan(touches, with: event)
         view.endEditing(true) // убираем клавиатуру
         player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+        if player1.name == "" { player1.name = "Игрок1" }
         player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-        match.TurnirName = TurnirTextField.text ?? ""
+        if player2.name == "" { player2.name = "Игрок2" }
+        match.TurnirName = TurnirTextField.text ?? "Без названия"
+        if match.TurnirName == "" { match.TurnirName = "Без названия" }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // вызывается при нажатии кнопки "готово"
         textField.resignFirstResponder()
         player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
+        if player1.name == "" { player1.name = "Игрок1" }
         player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-        match.TurnirName = TurnirTextField.text ?? ""
+        if player2.name == "" { player2.name = "Игрок2" }
+        match.TurnirName = TurnirTextField.text ?? "Без названия"
+        if match.TurnirName == "" { match.TurnirName = "Без названия" }
         return true
     }
     
@@ -385,10 +392,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
-       // "Data to share".share()
+        /*
         let items = ["Протокол матча"]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         self.present(ac, animated: true, completion: nil)
+         */
     }
 }
 

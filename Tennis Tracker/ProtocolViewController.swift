@@ -14,6 +14,7 @@ class ProtocolViewController: UIViewController {
  */
     
     @IBOutlet weak var ProtocolTextView: UITextView! // текстовое поле для протокола
+    @IBOutlet weak var ShareButton: UIButton! // кнопка "Поделиться"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,12 @@ class ProtocolViewController: UIViewController {
             }
         }
         
-        ProtocolTextView.isEditable = false // запрещаем редактирование протокола
+        ProtocolTextView.isEditable = false // запрещаем редактирование протокола buhs
+    }
+    
+    @IBAction func ShareButtonPress(_ sender: Any) { // делиться протоколом через системное меню
+        let items = [ProtocolTextView.text]
+        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+        self.present(ac, animated: true, completion: nil)
     }
 }

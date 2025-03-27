@@ -25,19 +25,33 @@
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-zP-5UV">
+                                <rect key="frame" x="326" y="50" width="49" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="large"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="ShareButtonPress:" destination="haI-NJ-TCJ" eventType="touchUpInside" id="x46-es-dlJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="C8Y-bG-pWc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="QdG-zP-5UV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C8Y-bG-pWc" secondAttribute="leading" symbolic="YES" id="5yV-6v-eSx"/>
+                            <constraint firstItem="C8Y-bG-pWc" firstAttribute="trailing" secondItem="QdG-zP-5UV" secondAttribute="trailing" id="8oU-rC-bsz"/>
                             <constraint firstItem="EQP-G4-7hh" firstAttribute="leading" secondItem="C8Y-bG-pWc" secondAttribute="leading" id="AK3-cf-WGF"/>
                             <constraint firstItem="C8Y-bG-pWc" firstAttribute="trailing" secondItem="EQP-G4-7hh" secondAttribute="trailing" id="RXZ-Tt-jFo"/>
                             <constraint firstItem="EQP-G4-7hh" firstAttribute="top" secondItem="C8Y-bG-pWc" secondAttribute="top" id="Scd-B2-yBZ"/>
+                            <constraint firstItem="QdG-zP-5UV" firstAttribute="top" secondItem="C8Y-bG-pWc" secondAttribute="top" id="YjW-ki-yVh"/>
                             <constraint firstItem="C8Y-bG-pWc" firstAttribute="bottom" secondItem="EQP-G4-7hh" secondAttribute="bottom" id="ztQ-hK-Otl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Протокол" image="book" catalog="system" id="j2X-bV-321"/>
                     <connections>
                         <outlet property="ProtocolTextView" destination="EQP-G4-7hh" id="dGu-cf-fV8"/>
+                        <outlet property="ShareButton" destination="QdG-zP-5UV" id="K7L-pn-p9Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kwZ-8X-ojX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -494,28 +508,29 @@
         <image name="img_serve_left" width="100" height="200"/>
         <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <image name="tennis.racket" catalog="system" width="128" height="122"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
