@@ -11,29 +11,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
     
-    //var MaxGame: Int = 6 // игра до 6 геймов в сэте
-    //var MaxSet: Int = 2 // игра до победы в 2-х сэтах
-    //var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
-    //var Podacha: Int = 1 // какая сейчас подача 1-я/2-я
-    //var PodaetNow: Int = 1 // кто сейчас подает 1/2 игрок
-    //var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
-    //var GameNow: Int = 1 // какой сейчас идет гейм
-    //var SetNow: Int = 1 // какой сейчас идет сет
-    //var TurnirName: String = "" // название турнира
-    
-    //var player1point: Int = 0 // очки 1-го игрока
-    //var player2point: Int = 0 // очки 2-го игрока
-    //var player1game: Int = 0 // геймы 1-го игрока
-    //var player2game: Int = 0 // геймы 2-го игрока
-    //var player1set: Int = 0 // сэты 1-го игрока
-    //var player2set: Int = 0 // сэты 2-го игрока
-    //var player1stat: [String] = [" ", " "] // статистика очков 1-го игрока
-    //var player2stat: [String] = [" ", " "] // статистика очков 2-го игрока
-    //var player1gamesStat: [String] = ["", ""] // статистика геймов 1-го игрока
-    //var player2gamesStat: [String] = ["", ""] // статистика геймов 2-го игрока
-    //var player1setScore: String = "" // статистика геймов в сете для 1-го игрока
-    //var player2setScore: String = "" // статистика геймов в сете для 2-го игрока
-    
     @IBOutlet weak var TurnirTextField: UITextField! // поле ввода названия турнира
     @IBOutlet weak var FirstPlayerNameTextField: UITextField! // поле ввода имени 1-го игрока
     @IBOutlet weak var SecondPlayerNameTextField: UITextField! // поле ввода имени 2-го игрока
@@ -61,7 +38,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Stat2Label: UILabel! // для отображения статистики очков 2-го игрока
     @IBOutlet weak var GameStat1Label: UILabel! // для отображения статистики геймов 1-го игрока
     @IBOutlet weak var GameStat2Label: UILabel! // для отображения статистики геймов 2-го игрока
-    
     @IBOutlet weak var Player1SetScoreLabel: UILabel! // для отображения выигранных геймов
     @IBOutlet weak var Player2SetScoreLabel: UILabel! // в предыдущих сетах
     
@@ -79,6 +55,9 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         FirstPlayerNameTextField.isEnabled = false
         SecondPlayerNameTextField.isEnabled = false
         TurnirTextField.isEnabled = false
+        match.Finished = true
+        match.MatchStop = Date(timeIntervalSinceNow: 0) // фиксируем время кончания матча
+        match.MatchLength = match.MatchStop.timeIntervalSince(match.MatchStart) // длительность матча
     }
     
     func showWinAlert(playerName : String) { // показывает сообщение о победе игрока
@@ -134,13 +113,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             // игрок 1 набрал 6 или больше геймов с разницей в 2 гейма
             player1.set+=1
             NextSet()
-            /*
-            SetNow+=1
-            player1gamesStat.append("")
-            player2gamesStat.append("")
-            player1game = 0
-            player2game = 0
-            */
             if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
                 player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
                 showWinAlert(playerName: player1.name)
@@ -151,13 +123,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             // игрок 2 набрал 6 или больше геймов с разницей в 2 гейма
             player2.set+=1
             NextSet()
-            /*
-            SetNow+=1
-            player1gamesStat.append("")
-            player2gamesStat.append("")
-            player1game = 0
-            player2game = 0
-            */
             if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
                 player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
                 showWinAlert(playerName: player2.name)
@@ -178,14 +143,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             player1.set = player1.set + (player1.game - match.MaxGame)
             player2.set = player2.set + (player2.game - match.MaxGame)
             NextSet()
-            /*
-            SetNow+=1
-            player1gamesStat.append("")
-            player2gamesStat.append("")
-            player1game = 0
-            player2game = 0
-            */
-            
             if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
                 player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
                 showWinAlert(playerName: player1.name)
@@ -255,24 +212,12 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         default: BallLabel.text = ""
         }
         
-        switch match.PodaetNow { // чья подача - тому и рисуем мячики
+        switch match.PodaetNow { // пишем подающему какая у него подача 1/2
         case 1: do {
-        //   BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
             FirstPlayerStatusLabel.text = String(match.Podacha)+" подача"
-        //    SecondPlayerStetusLabel.text = "Прием"
-        //    Win1Button.setTitle("Эйс", for: .normal)
-        //    Win2Button.setTitle("Виннер", for: .normal)
-        //    FirstPlayerImage.image = UIImage(named: "img_serve_left")
-        //    SecondPlayerImage.image = UIImage(named: "img_return_right")
         }
         case 2: do {
-        //    BallLabel.frame.origin.x = Point2Label.frame.origin.x
             SecondPlayerStetusLabel.text = String(match.Podacha)+" подача"
-        //    FirstPlayerStatusLabel.text = "Прием"
-        //    Win2Button.setTitle("Эйс", for: .normal)
-        //    Win1Button.setTitle("Виннер", for: .normal)
-        //    SecondPlayerImage.image = UIImage(named: "img_serve_right")
-        //    FirstPlayerImage.image = UIImage(named: "img_return_left")
         }
         default: BallLabel.frame.origin.x = Point1Label.frame.origin.x
         }
@@ -336,7 +281,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        //player2stat[GameNow] = player2stat[GameNow] + " "
         ChangePoints(p1: 1, p2: 0)
         UpdatePoints()
     }
@@ -362,9 +306,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/"
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
                 }
-                
-                //player2stat = player2stat + "/"
-                //player1stat = player1stat + " "
             }
             ChangePoints(p1: 0, p2: 1)
         }
@@ -400,11 +341,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        //player1stat[GameNow] = player1stat[GameNow] + " "
-        
         ChangePoints(p1: 0, p2: 1)
-        //player2stat = player2stat + "/"
-        //player1stat = player1stat + " "
         UpdatePoints()
     }
     

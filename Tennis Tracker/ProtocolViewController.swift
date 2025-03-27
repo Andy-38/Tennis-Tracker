@@ -27,7 +27,23 @@ class ProtocolViewController: UIViewController {
         ProtocolTextView.text = ""
         ProtocolTextView.text.append("Протокол матча: \n\n")
         ProtocolTextView.text.append("Играли: (1) "+player1.name+"  и (2) "+player2.name+"\n\n")
-        //ProtocolTextView.text.append(player1.setScore+":"+player2.setScore)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss" // форматируем время в понятный формат
+        let dateStrStart = dateFormatter.string(from: match.MatchStart)
+        ProtocolTextView.text.append("Начало матча: "+dateStrStart+"\n")
+        
+        if match.Finished == false { // если матч еще идет - то конец матча это текущее время
+            match.MatchStop = Date(timeIntervalSinceNow: 0) // время конца матча
+            match.MatchLength = match.MatchStop.timeIntervalSince(match.MatchStart) // длительность матча
+        }
+        let dateStrStop =  dateFormatter.string(from: match.MatchStop)
+        ProtocolTextView.text.append("Конец матча: "+dateStrStop+"\n")
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second] // длительность - часы/минуты/секунды
+        ProtocolTextView.text.append("Длительность матча: "+formatter.string(from: match.MatchLength)!+"\n\n")
+        
         stroka1 = "1. |"
         stroka2 = "2. |"
         if match.GameNow > 1 {

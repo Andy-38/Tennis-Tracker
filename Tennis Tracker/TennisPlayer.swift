@@ -5,6 +5,8 @@
 //  Created by Andy Dvoytsov on 26.03.2025.
 //
 
+import Foundation
+
 
 class TennisPlayer { // класс для описания игрока
     var point: Int = 0 // очки игрока в гейме
@@ -26,4 +28,8 @@ class TennisMatch { // класс для описания матча
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
     var TurnirName: String = "" // название турнира
+    var MatchStart: Date = Date(timeIntervalSinceNow: 0)
+    var MatchStop: Date = Date(timeIntervalSinceNow: 0)
+    var MatchLength: Double = 0
+    var Finished: Bool = false // матч окончен или нет
 }
