@@ -13,7 +13,8 @@ class TennisPlayer { // класс для описания игрока
     var game: Int = 0 // геймы игрока
     var set: Int = 0 // сэты игрока
     var stat: [String] = [" ", " "] // статистика очков в гейме
-    var gamesStat : [String] = ["", ""] // статистика геймов в сэте
+    var inGameScore: [String] = ["0","0"] // очки после окончания каждого гейма
+    var gamesStat: [String] = ["", ""] // статистика геймов в сэте
     var setScore: String = "" // статистика сэтов в матче
     var name: String = "Игрок" // имя игрока
 }
@@ -28,8 +29,9 @@ class TennisMatch { // класс для описания матча
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
     var TurnirName: String = "" // название турнира
-    var MatchStart: Date = Date(timeIntervalSinceNow: 0)
-    var MatchStop: Date = Date(timeIntervalSinceNow: 0)
-    var MatchLength: Double = 0
+    var MatchStart: Date = Date(timeIntervalSinceNow: 0) // время начала матча
+    var MatchStop: Date = Date(timeIntervalSinceNow: 0) // время окончания матча
+    var MatchLength: Double = 0 // длительность матча
     var Finished: Bool = false // матч окончен или нет
+    var Winner: Int = 0 // победитель матча 1 или 2, 0 - не определено
 }

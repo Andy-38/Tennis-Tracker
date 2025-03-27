@@ -105,6 +105,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // функция для пересчета геймов
         player1.game = player1.game + g1
         player2.game = player2.game + g2
+        
+        player1.inGameScore[match.GameNow] = String(player1.game)
+        player2.inGameScore[match.GameNow] = String(player2.game)
+        
         if (match.PodaetNow == 1) { match.PodaetNow = 2}
         else { match.PodaetNow = 1} // смена подачи
         SmenaPodachi()
@@ -116,6 +120,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
                 player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
                 showWinAlert(playerName: player1.name)
+                match.Winner = 1
                 FinishGame()
             }
         }
@@ -126,6 +131,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
                 player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
                 showWinAlert(playerName: player2.name)
+                match.Winner = 2
                 FinishGame()
             }
         }
@@ -146,17 +152,22 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
                 player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
                 showWinAlert(playerName: player1.name)
+                match.Winner = 1
                 FinishGame()
             }
             if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
                 player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
                 showWinAlert(playerName: player2.name)
+                match.Winner = 2
                 FinishGame()
             }
         }
         match.GameNow+=1 // начинаем следующий гейм
         player1.stat.append(" ")
         player2.stat.append(" ")
+        player1.inGameScore.append("0")
+        player2.inGameScore.append("0")
+        
     }
     
     func ChangePoints( p1: Int, p2 : Int) { // p1, p2 - изменение очков 1-го и 2-го игроков
