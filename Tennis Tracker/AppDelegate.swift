@@ -11,7 +11,8 @@ import CoreData
 // глобальные переменные, которые видны из всех ViewController'ов
 var player1 = TennisPlayer() // все характеристики 1-го игрока
 var player2 = TennisPlayer() // все характеристики 2-го игрока
-var GameNow: Int = 1 // какой сейчас идет гейм
+var match = TennisMatch() // текущий теннисный матч
+//var GameNow: Int = 1 // какой сейчас идет гейм
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
