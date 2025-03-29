@@ -96,8 +96,8 @@ class ProtocolViewController: UIViewController {
     }
     
     @IBAction func ShareButtonPress(_ sender: Any) { // делиться протоколом через системное меню
-        let items = [ProtocolTextView.text]
-        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
-        self.present(ac, animated: true, completion: nil)
+        let items:[Any] = [ProtocolTextView.text ?? "Протокол матча:"]
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.present(avc, animated: true, completion: nil)
     }
 }
