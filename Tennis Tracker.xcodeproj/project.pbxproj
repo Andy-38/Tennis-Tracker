@@ -19,6 +19,7 @@
 		A1C5CBF429EEE1750041050C /* Tennis_TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBF329EEE1750041050C /* Tennis_TrackerTests.swift */; };
 		A1C5CBFE29EEE1750041050C /* Tennis_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBFD29EEE1750041050C /* Tennis_TrackerUITests.swift */; };
 		A1C5CC0029EEE1750041050C /* Tennis_TrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBFF29EEE1750041050C /* Tennis_TrackerUITestsLaunchTests.swift */; };
+		A1EFFFBC2D994E3C00CA51D6 /* StatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EFFFBB2D994E3C00CA51D6 /* StatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		A1C5CBF929EEE1750041050C /* Tennis TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tennis TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1C5CBFD29EEE1750041050C /* Tennis_TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tennis_TrackerUITests.swift; sourceTree = "<group>"; };
 		A1C5CBFF29EEE1750041050C /* Tennis_TrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tennis_TrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A1EFFFBB2D994E3C00CA51D6 /* StatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				A1C5CBDB29EEE1730041050C /* SceneDelegate.swift */,
 				A1C5CBDD29EEE1730041050C /* MatchViewController.swift */,
 				A18CA13D2D941C6C009BF76D /* ProtocolViewController.swift */,
+				A1EFFFBB2D994E3C00CA51D6 /* StatViewController.swift */,
 				A1C5CBE529EEE1740041050C /* Assets.xcassets */,
 				A1C5CBDF29EEE1730041050C /* Main.storyboard */,
 				A1C5CBE729EEE1740041050C /* LaunchScreen.storyboard */,
@@ -269,6 +272,7 @@
 			files = (
 				A1C5CBDE29EEE1730041050C /* MatchViewController.swift in Sources */,
 				A18CA13E2D941C6C009BF76D /* ProtocolViewController.swift in Sources */,
+				A1EFFFBC2D994E3C00CA51D6 /* StatViewController.swift in Sources */,
 				A1C5CBDA29EEE1730041050C /* AppDelegate.swift in Sources */,
 				A18CA1402D942914009BF76D /* TennisPlayer.swift in Sources */,
 				A1C5CBDC29EEE1730041050C /* SceneDelegate.swift in Sources */,

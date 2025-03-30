@@ -242,7 +242,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         UpdatePoints()
         player1.name = "Игрок1"
         player2.name = "Игрок2"
-        match.TurnirName = "Без названия"
+        match.TurnirName = "Турнир без названия"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -253,8 +253,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if player1.name == "" { player1.name = "Игрок1" }
         player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
         if player2.name == "" { player2.name = "Игрок2" }
-        match.TurnirName = TurnirTextField.text ?? "Без названия"
-        if match.TurnirName == "" { match.TurnirName = "Без названия" }
+        match.TurnirName = TurnirTextField.text ?? "Турнир без названия"
+        if match.TurnirName == "" { match.TurnirName = "Турнир без названия" }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -264,8 +264,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if player1.name == "" { player1.name = "Игрок1" }
         player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
         if player2.name == "" { player2.name = "Игрок2" }
-        match.TurnirName = TurnirTextField.text ?? "Без названия"
-        if match.TurnirName == "" { match.TurnirName = "Без названия" }
+        match.TurnirName = TurnirTextField.text ?? "Турнир без названия"
+        if match.TurnirName == "" { match.TurnirName = "Турнир без названия" }
         return true
     }
     
