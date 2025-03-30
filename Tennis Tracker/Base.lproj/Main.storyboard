@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Протокол матча" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-G4-7hh">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Протокол матча:" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-G4-7hh">
                                 <rect key="frame" x="0.0" y="50" width="375" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -312,11 +312,23 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFv-dq-MMb">
+                                <rect key="frame" x="327" y="50" width="48" height="34"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="large"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="ShareButtonPress:" destination="yfu-1B-KjB" eventType="touchUpInside" id="QaK-Pw-rdT"/>
+                                    <action selector="ShareButtonPress:" destination="haI-NJ-TCJ" eventType="touchUpInside" id="Uol-Wh-ZIw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="noO-nT-ejj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aID-wS-eKa" firstAttribute="leading" secondItem="noO-nT-ejj" secondAttribute="leading" constant="74" id="2PW-ax-bWf"/>
+                            <constraint firstItem="KFv-dq-MMb" firstAttribute="top" secondItem="K2D-MR-HIo" secondAttribute="top" id="391-n6-Ehm"/>
                             <constraint firstItem="Tdm-k0-fts" firstAttribute="leading" secondItem="big-xa-afh" secondAttribute="trailing" id="3Vg-pM-GbV"/>
                             <constraint firstItem="noO-nT-ejj" firstAttribute="trailing" secondItem="NSQ-AZ-A6G" secondAttribute="trailing" constant="74" id="3XJ-uS-bYO"/>
                             <constraint firstItem="YHx-u5-7IM" firstAttribute="leading" secondItem="VXk-so-tgH" secondAttribute="trailing" id="3l3-zF-vhg"/>
@@ -369,6 +381,7 @@
                             <constraint firstItem="V5b-IE-MjY" firstAttribute="top" secondItem="hxC-Ct-mII" secondAttribute="top" id="gMU-AM-Hc0"/>
                             <constraint firstItem="noO-nT-ejj" firstAttribute="bottom" secondItem="K2D-MR-HIo" secondAttribute="bottom" id="gRb-VD-IVd"/>
                             <constraint firstItem="yJM-jt-Xx5" firstAttribute="leading" secondItem="elg-C7-ibk" secondAttribute="leading" id="hRT-Cb-L62"/>
+                            <constraint firstItem="KFv-dq-MMb" firstAttribute="trailing" secondItem="K2D-MR-HIo" secondAttribute="trailing" id="hdg-h3-FHq"/>
                             <constraint firstItem="aID-wS-eKa" firstAttribute="top" secondItem="sz3-6n-PXw" secondAttribute="bottom" constant="10" id="iyN-UI-7Zn"/>
                             <constraint firstItem="O9u-OE-lOq" firstAttribute="top" secondItem="NSQ-AZ-A6G" secondAttribute="top" id="j66-At-i2d"/>
                             <constraint firstItem="Y9y-nv-0V4" firstAttribute="leading" secondItem="0Xc-VS-pGk" secondAttribute="trailing" id="j9D-o6-6dK"/>
@@ -414,6 +427,7 @@
                         <outlet property="Player2secondLabel" destination="Dtt-xo-lXc" id="adm-T4-aV9"/>
                         <outlet property="Player2ufeLabel" destination="AyP-KF-Tfz" id="xLU-f1-gvy"/>
                         <outlet property="Player2winnerLabel" destination="O9u-OE-lOq" id="0id-yR-kSQ"/>
+                        <outlet property="ShareButton" destination="KFv-dq-MMb" id="sE3-Rv-xyJ"/>
                         <outlet property="TurnirNameLabel" destination="Ymy-Sq-ESi" id="gDs-AI-pzu"/>
                     </connections>
                 </viewController>

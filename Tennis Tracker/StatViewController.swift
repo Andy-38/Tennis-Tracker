@@ -28,6 +28,7 @@ class StatViewController: UIViewController {
     @IBOutlet weak var Player2breakpointLabel: UILabel! // брейкпоинты 2-го
     @IBOutlet weak var Player1pointsLabel: UILabel! // очки 1-го
     @IBOutlet weak var Player2pointsLabel: UILabel! // очки 2-го
+    @IBOutlet weak var ShareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,4 +43,17 @@ class StatViewController: UIViewController {
         Player2nameLabel.text = player2.name
     }
     
+    @IBAction func ShareButtonPress(_ sender: Any) { // поделиться статистикой
+        ShareButton.isHidden = true // скрываем кнопку, чтоб не попала на скриншот
+        //подготавливаем и получаем скриншот
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let imageRef = UIGraphicsGetImageFromCurrentImageContext() // получаем изображение с контекста
+        UIGraphicsEndImageContext()
+        // получили, дальше - делимся через системное меню "поделиться"
+        let items:[Any] = [imageRef as Any]
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.present(avc, animated: true, completion: nil)
+        ShareButton.isHidden = false // отображаем кнопку
+    }
 }
