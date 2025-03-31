@@ -17,6 +17,33 @@ class TennisPlayer { // класс для описания игрока
     var gamesStat: [String] = ["", ""] // статистика геймов в сэте
     var setScore: String = "" // статистика сэтов в матче
     var name: String = "Игрок" // имя игрока
+    var doubleFaults: Int = 0 // количество двойных ошибок в матче
+    var aces: Int = 0 // количество эйсов в матче
+    var vsegoPodach : Int = 0 // общее количество подач
+    var podach2: Int = 0 // количество вторых подач
+    var podach1 : Int { // количество первых подач
+        get {
+            return vsegoPodach - podach2
+        }
+    }
+    var percent1: Int { // процент первых подач
+        get {
+            if vsegoPodach == 0 { return 0 }
+            else {
+                let percent: Float = (Float(podach1) / Float(vsegoPodach))*100
+                return Int(percent.rounded())
+            }
+        }
+    }
+    var percent2: Int { // процент вторых подач
+        get {
+            if podach2 == 0 { return 0 }
+            else {
+                let percent: Float = (1 - Float(doubleFaults) / Float(podach2))*100
+                return Int(percent.rounded())
+            }
+        }
+    }
 }
 
 class TennisMatch { // класс для описания матча

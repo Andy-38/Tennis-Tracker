@@ -9,6 +9,8 @@ import UIKit
 
 class StatViewController: UIViewController {
     
+    //var percent1: Int = 0 // процент первой подачи
+    
     @IBOutlet weak var TurnirNameLabel: UILabel! // название турнира
     @IBOutlet weak var Player1nameLabel: UILabel! // имя 1-го игрока
     @IBOutlet weak var Player2nameLabel: UILabel! // имя 2-го игрока
@@ -39,8 +41,88 @@ class StatViewController: UIViewController {
         super.viewDidAppear(animated)
         // выполняется при отображении экрана
         TurnirNameLabel.text = match.TurnirName
+        // игроки, победитель - зеленым цветом
         Player1nameLabel.text = player1.name
         Player2nameLabel.text = player2.name
+        switch match.Winner {
+        case 1: do {
+            Player1nameLabel.textColor = .systemGreen
+            Player2nameLabel.textColor = .white
+        }
+        case 2: do {
+            Player1nameLabel.textColor = .white
+            Player2nameLabel.textColor = .systemGreen
+        }
+        default: do {// если матч не закончился
+            Player1nameLabel.textColor = .white
+            Player2nameLabel.textColor = .white
+        }
+        }
+        
+        // двойные ошибки
+        Player1doubleFaultLabel.text = String(player1.doubleFaults)
+        Player2doubleFaultLabel.text = String(player2.doubleFaults)
+        if player1.doubleFaults>player2.doubleFaults {
+            Player1doubleFaultLabel.textColor = .white
+            Player2doubleFaultLabel.textColor = .systemGreen
+        }
+        else if player1.doubleFaults<player2.doubleFaults
+        {
+            Player2doubleFaultLabel.textColor = .white
+            Player1doubleFaultLabel.textColor = .systemGreen
+        }
+        else {
+            Player2doubleFaultLabel.textColor = .white
+            Player1doubleFaultLabel.textColor = .white
+        }
+        // эйсы
+        Player1aceLabel.text = String(player1.aces)
+        Player2aceLabel.text = String(player2.aces)
+        if player1.aces>player2.aces {
+            Player2aceLabel.textColor = .white
+            Player1aceLabel.textColor = .systemGreen
+        }
+        else if player1.aces<player2.aces
+        {
+            Player1aceLabel.textColor = .white
+            Player2aceLabel.textColor = .systemGreen
+        }
+        else {
+            Player2aceLabel.textColor = .white
+            Player1aceLabel.textColor = .white
+        }
+        // первые подачи
+        Player1firstLabel.text = String(player1.percent1)
+        Player2firstLabel.text = String(player2.percent1)
+        if player1.percent1>player2.percent1 {
+            Player2firstLabel.textColor = .white
+            Player1firstLabel.textColor = .systemGreen
+        }
+        else if player1.percent1<player2.percent1
+        {
+            Player1firstLabel.textColor = .white
+            Player2firstLabel.textColor = .systemGreen
+        }
+        else {
+            Player2firstLabel.textColor = .white
+            Player1firstLabel.textColor = .white
+        }
+        // вторые подачи
+        Player1secondLabel.text = String(player1.percent2)
+        Player2secondLabel.text = String(player2.percent2)
+        if player1.percent2>player2.percent2 {
+            Player2secondLabel.textColor = .white
+            Player1secondLabel.textColor = .systemGreen
+        }
+        else if player1.percent2<player2.percent2
+        {
+            Player1secondLabel.textColor = .white
+            Player2secondLabel.textColor = .systemGreen
+        }
+        else {
+            Player2secondLabel.textColor = .white
+            Player1secondLabel.textColor = .white
+        }
     }
     
     @IBAction func ShareButtonPress(_ sender: Any) { // поделиться статистикой
