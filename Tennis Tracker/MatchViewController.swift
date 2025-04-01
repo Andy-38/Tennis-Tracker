@@ -176,7 +176,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         player2.point = player2.point + p2
         match.Podacha = 1 // снова первая подача
         
-        if (player1.point >= match.MaxPoint)&&(player1.point - player2.point >= 2) { // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
+        if ((player1.point >= match.MaxPoint)&&(player1.point - player2.point >= 2))
+        || ((player1.point == match.MaxPoint) && (player2.point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
+            // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
+            // или 40:40 и решающее очко у 1-го то
             if (match.PodaetNow == 1) { // выиграл гейм на своей подаче
                 player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
             }
@@ -190,7 +193,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
         }
         
-        if (player2.point >= match.MaxPoint)&&(player2.point - player1.point >= 2) { // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
+        if ((player2.point >= match.MaxPoint)&&(player2.point - player1.point >= 2))
+        || ((player1.point == match.MaxPoint - 1) && (player2.point == match.MaxPoint) && (match.BolsheMenshe == false)) {
+            // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
+            // или 40:40 и решающее очко у 2-го то
             player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + " "
             if (match.PodaetNow == 2) { // выиграл гейм на своей подаче
                 player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
@@ -204,9 +210,9 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
         }
         
-        if (player1.point == match.MaxPoint)&&(player2.point == match.MaxPoint)&&(match.TieBreak7 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
-            player1.point = 3
-            player2.point = 3
+        if (player1.point == match.MaxPoint) && (player2.point == match.MaxPoint) && (match.TieBreak7 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
+            player1.point = match.MaxPoint - 1
+            player2.point = match.MaxPoint - 1
         }
     }
     

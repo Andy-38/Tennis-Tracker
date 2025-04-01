@@ -57,6 +57,7 @@ class TennisMatch { // класс для описания матча
     var Podacha: Int = 1 // какая сейчас подача 1-я/2-я
     var PodaetNow: Int = 1 // кто сейчас подает 1/2 игрок
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
+    var TieBreak10: Bool = false // есть ли тайбрейк до 10 вместо последнего сэта
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
     var TurnirName: String = "" // название турнира
@@ -65,4 +66,5 @@ class TennisMatch { // класс для описания матча
     var MatchLength: Double = 0 // длительность матча
     var Finished: Bool = false // матч окончен или нет
     var Winner: Int = 0 // победитель матча 1 или 2, 0 - не определено
+    var BolsheMenshe: Bool = true // есть ли больше-меньше в гейме
 }

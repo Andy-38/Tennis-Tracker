@@ -878,6 +878,9 @@
                                     <segment title="ТБ-7"/>
                                     <segment title="ТБ-10"/>
                                 </segments>
+                                <connections>
+                                    <action selector="SetControllerChange:" destination="tAT-58-Znh" eventType="valueChanged" id="KI6-Lp-scp"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Формат матча" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-Yj-Aq0">
                                 <rect key="frame" x="89.333333333333329" y="80" width="196.66666666666669" height="36"/>
@@ -903,6 +906,9 @@
                                     <segment title="7"/>
                                     <segment title="8"/>
                                 </segments>
+                                <connections>
+                                    <action selector="GameControllerChange:" destination="tAT-58-Znh" eventType="valueChanged" id="7ug-ZK-vEl"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество геймов в сете" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3y-lH-493">
                                 <rect key="frame" x="30" y="229" width="209" height="21"/>
@@ -916,6 +922,9 @@
                                     <segment title="Обычный"/>
                                     <segment title="Тайбрейк до 10"/>
                                 </segments>
+                                <connections>
+                                    <action selector="LastSetControlleChange:" destination="tAT-58-Znh" eventType="valueChanged" id="zwW-Ny-ZEf"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последний сет" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-0t-NMp">
                                 <rect key="frame" x="30" y="312" width="120" height="21"/>
@@ -929,6 +938,9 @@
                                     <segment title="Больше-меньше"/>
                                     <segment title="Решающее очко"/>
                                 </segments>
+                                <connections>
+                                    <action selector="AdvantadgeControllerChange:" destination="tAT-58-Znh" eventType="valueChanged" id="d3x-oU-h1v"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="При счете 40-40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-Qi-O25">
                                 <rect key="frame" x="30" y="395" width="134.33333333333334" height="21"/>

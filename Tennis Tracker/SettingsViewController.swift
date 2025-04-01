@@ -28,8 +28,46 @@ class SettingsViewController: UIViewController {
     
     @IBAction func DafaultButtonPress(_ sender: Any) {
         SetControl.selectedSegmentIndex = 1
+        
         GameControl.selectedSegmentIndex = 5
+        
         LastSetControl.selectedSegmentIndex = 0
+        match.TieBreak10 = false
         AdvantageControl.selectedSegmentIndex = 0
+        match.BolsheMenshe = true
+    }
+    
+    @IBAction func SetControllerChange(_ sender: Any) {
+        // меняем количество сетов в матче
+    }
+    
+    @IBAction func GameControllerChange(_ sender: Any) {
+        // меняем количество геймов в сете
+    }
+    
+    @IBAction func LastSetControlleChange(_ sender: Any) {
+        // меняем тип последнего сета: обычный / тайбрейк
+        switch AdvantageControl.selectedSegmentIndex {
+        case 0: do {
+            match.TieBreak10 = false
+        }
+        case 1: do {
+            match.TieBreak10 = true
+        }
+        default: match.TieBreak10 = false
+        }
+    }
+    
+    @IBAction func AdvantadgeControllerChange(_ sender: Any) {
+        // меняем больше-меньше / решающее очко при счете 40:40
+        switch AdvantageControl.selectedSegmentIndex {
+        case 0: do {
+            match.BolsheMenshe = true
+        }
+        case 1: do {
+            match.BolsheMenshe = false
+        }
+        default: match.BolsheMenshe = true
+        }
     }
 }
