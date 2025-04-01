@@ -875,8 +875,8 @@
                                     <segment title="1"/>
                                     <segment title="3"/>
                                     <segment title="5"/>
-                                    <segment title="ТБ-7"/>
-                                    <segment title="ТБ-10"/>
+                                    <segment title="ТБ-7" enabled="NO"/>
+                                    <segment title="ТБ-10" enabled="NO"/>
                                 </segments>
                                 <connections>
                                     <action selector="SetControllerChange:" destination="tAT-58-Znh" eventType="valueChanged" id="KI6-Lp-scp"/>
@@ -897,7 +897,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="5" translatesAutoresizingMaskIntoConstraints="NO" id="xqX-Qp-skh">
                                 <rect key="frame" x="30" y="251" width="315" height="32"/>
                                 <segments>
-                                    <segment title="1"/>
+                                    <segment title="1" enabled="NO"/>
                                     <segment title="2"/>
                                     <segment title="3"/>
                                     <segment title="4"/>
@@ -916,7 +916,7 @@
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WSl-46-vBi">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WSl-46-vBi">
                                 <rect key="frame" x="30" y="334" width="315" height="32"/>
                                 <segments>
                                     <segment title="Обычный"/>
@@ -949,7 +949,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iis-u2-xyw">
-                                <rect key="frame" x="78" y="664" width="219" height="35"/>
+                                <rect key="frame" x="78" y="654" width="219" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Стандартные настройки"/>
                                 <connections>
@@ -960,7 +960,7 @@
                         <viewLayoutGuide key="safeArea" id="I5M-t4-mVc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="I5M-t4-mVc" firstAttribute="bottom" secondItem="Iis-u2-xyw" secondAttribute="bottom" constant="30" id="4te-pR-9yx"/>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="bottom" secondItem="Iis-u2-xyw" secondAttribute="bottom" constant="40" id="4te-pR-9yx"/>
                             <constraint firstItem="Iis-u2-xyw" firstAttribute="centerX" secondItem="jqj-Q0-56v" secondAttribute="centerX" id="8UO-SQ-m8A"/>
                             <constraint firstItem="WSl-46-vBi" firstAttribute="top" secondItem="A4h-0t-NMp" secondAttribute="bottom" constant="1" id="9nm-ow-GTV"/>
                             <constraint firstItem="WSl-46-vBi" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="A1t-l4-4Nc"/>

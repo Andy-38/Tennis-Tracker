@@ -38,16 +38,29 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func SetControllerChange(_ sender: Any) {
-        // меняем количество сетов в матче
+        // меняем количество сетов в матче: 1, 3, 5, или тайбрейк до 7 или до 10
+        switch SetControl.selectedSegmentIndex {
+        case 0: do {
+            match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
+        }
+        case 1: do {
+            match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
+        }
+        case 2: do {
+            match.MaxSet = 3 // 5 сетов в матче, надо выиграть 3
+        }
+        default: match.MaxSet = 2
+        }
     }
     
     @IBAction func GameControllerChange(_ sender: Any) {
         // меняем количество геймов в сете
+        match.MaxGame = GameControl.selectedSegmentIndex + 1
     }
     
     @IBAction func LastSetControlleChange(_ sender: Any) {
-        // меняем тип последнего сета: обычный / тайбрейк
-        switch AdvantageControl.selectedSegmentIndex {
+        // меняем тип последнего сета: "обычный" или "тайбрейк до 10"
+        switch LastSetControl.selectedSegmentIndex {
         case 0: do {
             match.TieBreak10 = false
         }
@@ -59,7 +72,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func AdvantadgeControllerChange(_ sender: Any) {
-        // меняем больше-меньше / решающее очко при счете 40:40
+        // меняем "больше-меньше" или "решающее очко" при счете 40:40
         switch AdvantageControl.selectedSegmentIndex {
         case 0: do {
             match.BolsheMenshe = true
