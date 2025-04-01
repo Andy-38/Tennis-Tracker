@@ -28,13 +28,16 @@ class SettingsViewController: UIViewController {
     
     @IBAction func DafaultButtonPress(_ sender: Any) {
         SetControl.selectedSegmentIndex = 1
+        match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
         
         GameControl.selectedSegmentIndex = 5
+        match.MaxGame = 6 // 6 геймов в матче
         
         LastSetControl.selectedSegmentIndex = 0
-        match.TieBreak10 = false
+        match.TieBreak10 = false // нет тайбрейка в третьем сете
+        
         AdvantageControl.selectedSegmentIndex = 0
-        match.BolsheMenshe = true
+        match.BolsheMenshe = true // больше-меньше
     }
     
     @IBAction func SetControllerChange(_ sender: Any) {
