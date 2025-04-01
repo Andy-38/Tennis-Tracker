@@ -123,6 +123,72 @@ class StatViewController: UIViewController {
             Player2secondLabel.textColor = .white
             Player1secondLabel.textColor = .white
         }
+        // виннерсы
+        Player1winnerLabel.text = String(player1.winners)
+        Player2winnerLabel.text = String(player2.winners)
+        if player1.winners>player2.winners {
+            Player2winnerLabel.textColor = .white
+            Player1winnerLabel.textColor = .systemGreen
+        }
+        else if player1.winners<player2.winners
+        {
+            Player1winnerLabel.textColor = .white
+            Player2winnerLabel.textColor = .systemGreen
+        }
+        else {
+            Player2winnerLabel.textColor = .white
+            Player1winnerLabel.textColor = .white
+        }
+        // невынужденные ошибки
+        Player1ufeLabel.text = String(player1.ufe)
+        Player2ufeLabel.text = String(player2.ufe)
+        if player1.ufe > player2.ufe {
+            Player1ufeLabel.textColor = .white
+            Player2ufeLabel.textColor = .systemGreen
+        }
+        else if player1.ufe < player2.ufe
+        {
+            Player2ufeLabel.textColor = .white
+            Player1ufeLabel.textColor = .systemGreen
+        }
+        else {
+            Player2ufeLabel.textColor = .white
+            Player1ufeLabel.textColor = .white
+        }
+        // очки
+        let player1totalPoints = player1.totalPoints + player1.aces + player1.winners + player2.doubleFaults + player2.ufe
+        let player2totalPoints = player2.totalPoints + player2.aces + player2.winners + player1.doubleFaults + player1.ufe
+        Player1pointsLabel.text = String(player1totalPoints)
+        Player2pointsLabel.text = String(player2totalPoints)
+        if player1totalPoints>player2totalPoints {
+            Player2pointsLabel.textColor = .white
+            Player1pointsLabel.textColor = .systemGreen
+        }
+        else if player1totalPoints<player2totalPoints
+        {
+            Player1pointsLabel.textColor = .white
+            Player2pointsLabel.textColor = .systemGreen
+        }
+        else {
+            Player2pointsLabel.textColor = .white
+            Player1pointsLabel.textColor = .white
+        }
+        // брейкпоинты
+        Player1breakpointLabel.text = String(player1.breakpoint)
+        Player2breakpointLabel.text = String(player2.breakpoint)
+        if player1.breakpoint>player2.breakpoint {
+            Player2breakpointLabel.textColor = .white
+            Player1breakpointLabel.textColor = .systemGreen
+        }
+        else if player1.breakpoint<player2.breakpoint
+        {
+            Player1breakpointLabel.textColor = .white
+            Player2breakpointLabel.textColor = .systemGreen
+        }
+        else {
+            Player2breakpointLabel.textColor = .white
+            Player1breakpointLabel.textColor = .white
+        }
     }
     
     @IBAction func ShareButtonPress(_ sender: Any) { // поделиться статистикой

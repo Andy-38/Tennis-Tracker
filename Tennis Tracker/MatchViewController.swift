@@ -177,7 +177,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         match.Podacha = 1 // снова первая подача
         
         if (player1.point >= match.MaxPoint)&&(player1.point - player2.point >= 2) { // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
-            player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
+            if (match.PodaetNow == 1) { // выиграл гейм на своей подаче
+                player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
+            }
+            else { // выиграл гейм на подаче соперника
+                player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "★"
+                player1.breakpoint+=1 // игрок 1 реализовал брейкпоинт
+            }
             player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + " "
             ChangeGames(g1: 1, g2: 0) // игрок 1 выиграл +1 гейм
             player1.point = 0 // обнуляем очки 1-го
@@ -186,7 +192,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         
         if (player2.point >= match.MaxPoint)&&(player2.point - player1.point >= 2) { // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
             player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + " "
-            player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
+            if (match.PodaetNow == 2) { // выиграл гейм на своей подаче
+                player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
+            }
+            else { // выиграл гейм на подаче соперника
+                player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "★"
+                player2.breakpoint+=1 // игрок 1 реализовал брейкпоинт
+            }
             ChangeGames(g1: 0, g2: 1) // игрок 1 выиграл +1 гейм
             player1.point = 0 // обнуляем очки 1-го
             player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
@@ -271,6 +283,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win1ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 1-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player1.winners+=1 } // считаем виннеры 1-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player1.totalPoints+=1 } // считаем выигранные очки 1-го игрока
+        
+       // showWinAlert(playerName: "!"+((sender as? UIButton)?.titleLabel?.text)!+"!")
+        
         if (match.PodaetNow == 1) && (match.Podacha == 2) {
             // вторая подача - заменяем символ
             player1.stat[match.GameNow].removeLast() // убираем .
@@ -295,6 +312,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 if match.Podacha == 1 {
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/" // игрок 1 просто выиграл розыгрыш
                     if (match.PodaetNow == 1) { player1.vsegoPodach+=1} // +1 подача первого
+                    if (match.PodaetNow == 2) { player2.vsegoPodach+=1} // +1 подача второго
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
                 }
                 else {
@@ -326,8 +344,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 if match.Podacha == 2 {
                     player2.stat[match.GameNow].removeLast() // убираем .
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + "!"
+                    player1.ufe+=1 // считаем невынужденные ошибки первого
                 }
                 else {
+                    player2.vsegoPodach+=1 // +1 подача второго
+                    player1.ufe+=1 // считаем невынужденные ошибки первого
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/"
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
                 }
@@ -339,6 +360,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win2ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 2-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player2.winners+=1 } // считаем виннеры 2-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player2.totalPoints+=1 } // считаем выигранные очки 2-го игрока
         if (match.PodaetNow == 2) && (match.Podacha == 2) {
             // вторая подача - заменяем символ
             player2.stat[match.GameNow].removeLast() // убираем .
@@ -356,12 +379,14 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
                 player2.stat[match.GameNow] = player2.stat[match.GameNow] + "A" // игрок 2 подал эйс на 1-й подаче
                 player2.aces+=1
+                player2.vsegoPodach+=1 // +1 подача второго
                 player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
             }
             else {
                 if match.Podacha == 1 {
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/" // игрок 2 просто выиграл розыгрыш
                     if (match.PodaetNow == 1) {player1.vsegoPodach+=1} // +1 подача первого
+                    if (match.PodaetNow == 2) { player2.vsegoPodach+=1} // +1 подача второго
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
                 } else {
                     player2.stat[match.GameNow].removeLast()
@@ -378,6 +403,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if (match.PodaetNow == 2) && (match.Podacha == 1) { // если подает 2-й и ошибка на подаче то
             match.Podacha = 2 // 2-я подача
             player2.podach2+=1
+            player2.vsegoPodach+=1 // +1 подача второго
             player2.stat[match.GameNow] = player2.stat[match.GameNow] + "."
             player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
         }
@@ -392,9 +418,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 if match.Podacha == 2 {
                     player1.stat[match.GameNow].removeLast() // убираем .
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + "!"
+                    player2.ufe+=1 // считаем невынужденные ошибки второго
                 }
                 else {
                     player1.vsegoPodach+=1 // +1 подача первого
+                    player2.ufe+=1 // считаем невынужденные ошибки второго
                     player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/"
                     player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
                 }

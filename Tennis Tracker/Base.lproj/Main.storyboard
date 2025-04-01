@@ -448,6 +448,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="bLt-Ck-Qw7"/>
                         <segue destination="haI-NJ-TCJ" kind="relationship" relationship="viewControllers" id="4b7-vz-v5n"/>
                         <segue destination="yfu-1B-KjB" kind="relationship" relationship="viewControllers" id="0vd-ZU-tDc"/>
+                        <segue destination="tAT-58-Znh" kind="relationship" relationship="viewControllers" id="4cN-xl-X1H"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftI-5o-S8C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -860,11 +861,28 @@
             </objects>
             <point key="canvasLocation" x="-1076" y="-457"/>
         </scene>
+        <!--Настройки-->
+        <scene sceneID="05m-8k-EO3">
+            <objects>
+                <viewController id="tAT-58-Znh" customClass="SettingsViewController" customModule="Tennis_Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jqj-Q0-56v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="I5M-t4-mVc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Настройки" image="gearshape" catalog="system" id="yac-jI-enb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jGq-ly-wLe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-346" y="-457"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.left.arrow.right.square.fill" catalog="system" width="128" height="114"/>
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="img_return_right" width="200" height="200"/>
         <image name="img_serve_left" width="100" height="200"/>
         <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>

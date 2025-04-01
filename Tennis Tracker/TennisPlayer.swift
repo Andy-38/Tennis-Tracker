@@ -19,6 +19,10 @@ class TennisPlayer { // класс для описания игрока
     var name: String = "Игрок" // имя игрока
     var doubleFaults: Int = 0 // количество двойных ошибок в матче
     var aces: Int = 0 // количество эйсов в матче
+    var winners: Int = 0// количество виннеров в матче
+    var ufe: Int = 0 // количество невынужденных ошибок в матче
+    var breakpoint: Int = 0 // количество брейкпоинтов в матче
+    var totalPoints: Int = 0 // общее количество выигранных очков в матче
     var vsegoPodach : Int = 0 // общее количество подач
     var podach2: Int = 0 // количество вторых подач
     var podach1 : Int { // количество первых подач
