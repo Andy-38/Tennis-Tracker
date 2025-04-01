@@ -868,10 +868,120 @@
                     <view key="view" contentMode="scaleToFill" id="jqj-Q0-56v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="GUu-ef-tfO">
+                                <rect key="frame" x="30" y="168" width="315" height="32"/>
+                                <segments>
+                                    <segment title="1"/>
+                                    <segment title="3"/>
+                                    <segment title="5"/>
+                                    <segment title="ТБ-7"/>
+                                    <segment title="ТБ-10"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Формат матча" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-Yj-Aq0">
+                                <rect key="frame" x="89.333333333333329" y="80" width="196.66666666666669" height="36"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="30"/>
+                                <color key="textColor" systemColor="systemPurpleColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество сетов в матче" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgt-Vf-15n">
+                                <rect key="frame" x="30" y="146" width="209" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="5" translatesAutoresizingMaskIntoConstraints="NO" id="xqX-Qp-skh">
+                                <rect key="frame" x="30" y="251" width="315" height="32"/>
+                                <segments>
+                                    <segment title="1"/>
+                                    <segment title="2"/>
+                                    <segment title="3"/>
+                                    <segment title="4"/>
+                                    <segment title="5"/>
+                                    <segment title="6"/>
+                                    <segment title="7"/>
+                                    <segment title="8"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество геймов в сете" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3y-lH-493">
+                                <rect key="frame" x="30" y="229" width="209" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WSl-46-vBi">
+                                <rect key="frame" x="30" y="334" width="315" height="32"/>
+                                <segments>
+                                    <segment title="Обычный"/>
+                                    <segment title="Тайбрейк до 10"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последний сет" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-0t-NMp">
+                                <rect key="frame" x="30" y="312" width="120" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mYB-w0-EPS">
+                                <rect key="frame" x="30" y="417" width="315" height="32"/>
+                                <segments>
+                                    <segment title="Больше-меньше"/>
+                                    <segment title="Решающее очко"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="При счете 40-40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-Qi-O25">
+                                <rect key="frame" x="30" y="395" width="134.33333333333334" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iis-u2-xyw">
+                                <rect key="frame" x="78" y="664" width="219" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Стандартные настройки"/>
+                                <connections>
+                                    <action selector="DafaultButtonPress:" destination="tAT-58-Znh" eventType="touchUpInside" id="RCG-2c-QMA"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="I5M-t4-mVc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="bottom" secondItem="Iis-u2-xyw" secondAttribute="bottom" constant="30" id="4te-pR-9yx"/>
+                            <constraint firstItem="Iis-u2-xyw" firstAttribute="centerX" secondItem="jqj-Q0-56v" secondAttribute="centerX" id="8UO-SQ-m8A"/>
+                            <constraint firstItem="WSl-46-vBi" firstAttribute="top" secondItem="A4h-0t-NMp" secondAttribute="bottom" constant="1" id="9nm-ow-GTV"/>
+                            <constraint firstItem="WSl-46-vBi" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="A1t-l4-4Nc"/>
+                            <constraint firstItem="mYB-w0-EPS" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="AsY-QT-huK"/>
+                            <constraint firstItem="uPX-Qi-O25" firstAttribute="top" secondItem="WSl-46-vBi" secondAttribute="bottom" constant="30" id="CmC-Rd-YCB"/>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="trailing" secondItem="mYB-w0-EPS" secondAttribute="trailing" constant="30" id="Epr-vG-Ucm"/>
+                            <constraint firstItem="xqX-Qp-skh" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="H16-48-iWP"/>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="trailing" secondItem="WSl-46-vBi" secondAttribute="trailing" constant="30" id="J5q-f6-Rw4"/>
+                            <constraint firstItem="mYB-w0-EPS" firstAttribute="top" secondItem="uPX-Qi-O25" secondAttribute="bottom" constant="1" id="Kau-ac-RrV"/>
+                            <constraint firstItem="fgt-Vf-15n" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="L2g-rS-3Xh"/>
+                            <constraint firstItem="cxB-Yj-Aq0" firstAttribute="top" secondItem="I5M-t4-mVc" secondAttribute="top" constant="30" id="N59-PH-9lU"/>
+                            <constraint firstItem="cxB-Yj-Aq0" firstAttribute="centerX" secondItem="jqj-Q0-56v" secondAttribute="centerX" id="TqS-fh-WoF"/>
+                            <constraint firstItem="uPX-Qi-O25" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="ZNc-Qy-db0"/>
+                            <constraint firstItem="GUu-ef-tfO" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="et7-wf-0MM"/>
+                            <constraint firstItem="xqX-Qp-skh" firstAttribute="top" secondItem="O3y-lH-493" secondAttribute="bottom" constant="1" id="fW6-hW-K93"/>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="trailing" secondItem="xqX-Qp-skh" secondAttribute="trailing" constant="30" id="htJ-Zh-2X1"/>
+                            <constraint firstItem="I5M-t4-mVc" firstAttribute="trailing" secondItem="GUu-ef-tfO" secondAttribute="trailing" constant="30" id="jAB-Wk-eUf"/>
+                            <constraint firstItem="A4h-0t-NMp" firstAttribute="top" secondItem="xqX-Qp-skh" secondAttribute="bottom" constant="30" id="je8-GJ-hDY"/>
+                            <constraint firstItem="O3y-lH-493" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="l8A-gO-izy"/>
+                            <constraint firstItem="fgt-Vf-15n" firstAttribute="top" secondItem="cxB-Yj-Aq0" secondAttribute="bottom" constant="30" id="qoj-L7-7PO"/>
+                            <constraint firstItem="GUu-ef-tfO" firstAttribute="top" secondItem="fgt-Vf-15n" secondAttribute="bottom" constant="1" id="s65-ii-Tsg"/>
+                            <constraint firstItem="O3y-lH-493" firstAttribute="top" secondItem="GUu-ef-tfO" secondAttribute="bottom" constant="30" id="xx9-Rd-DEi"/>
+                            <constraint firstItem="A4h-0t-NMp" firstAttribute="leading" secondItem="I5M-t4-mVc" secondAttribute="leading" constant="30" id="yhV-8R-ejv"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Настройки" image="gearshape" catalog="system" id="yac-jI-enb"/>
+                    <connections>
+                        <outlet property="AdvantageControl" destination="mYB-w0-EPS" id="I6c-Qp-gZg"/>
+                        <outlet property="DefaulButton" destination="Iis-u2-xyw" id="f3o-yL-Tlg"/>
+                        <outlet property="GameControl" destination="xqX-Qp-skh" id="IPw-SG-ahb"/>
+                        <outlet property="LastSetControl" destination="WSl-46-vBi" id="3jL-Xz-fVH"/>
+                        <outlet property="SetControl" destination="GUu-ef-tfO" id="eFY-0O-GaP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jGq-ly-wLe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

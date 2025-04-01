@@ -9,8 +9,6 @@ import UIKit
 
 class StatViewController: UIViewController {
     
-    //var percent1: Int = 0 // процент первой подачи
-    
     @IBOutlet weak var TurnirNameLabel: UILabel! // название турнира
     @IBOutlet weak var Player1nameLabel: UILabel! // имя 1-го игрока
     @IBOutlet weak var Player2nameLabel: UILabel! // имя 2-го игрока
@@ -30,7 +28,7 @@ class StatViewController: UIViewController {
     @IBOutlet weak var Player2breakpointLabel: UILabel! // брейкпоинты 2-го
     @IBOutlet weak var Player1pointsLabel: UILabel! // очки 1-го
     @IBOutlet weak var Player2pointsLabel: UILabel! // очки 2-го
-    @IBOutlet weak var ShareButton: UIButton!
+    @IBOutlet weak var ShareButton: UIButton! // кнопка поделиться
     
     override func viewDidLoad() {
         super.viewDidLoad()
