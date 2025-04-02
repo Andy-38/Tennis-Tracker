@@ -57,6 +57,8 @@ class TennisMatch { // класс для описания матча
     var Podacha: Int = 1 // какая сейчас подача 1-я/2-я
     var PodaetNow: Int = 1 // кто сейчас подает 1/2 игрок
     var TieBreak7: Bool = false // идет ли сейчас тайбрейк в сэте
+    var TieBreak7point: Int = 0 // какой по счету розыгрыш на тайбрейке
+    var TieBreakPodacha: Int = 1 // с чьей подачи начался тайбрейк
     var TieBreak10: Bool = false // есть ли тайбрейк до 10 вместо последнего сэта
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет

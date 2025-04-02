@@ -61,6 +61,23 @@ class ProtocolViewController: UIViewController {
         formatter.allowedUnits = [.hour, .minute, .second] // длительность - часы/минуты/секунды
         ProtocolTextView.text.append("Длительность: "+formatter.string(from: match.MatchLength)!+"\n\n") // длительность матча
         
+        ProtocolTextView.text.append("Формат матча:\n")
+        ProtocolTextView.text.append("Выиграть сетов для победы - "+String(match.MaxSet)+"\n")
+        ProtocolTextView.text.append("Геймов в сете - "+String(match.MaxGame)+"\n")
+        
+        if match.TieBreak10 {
+            ProtocolTextView.text.append("Решающий сет - тайбрейк до 10\n")}
+        else {
+            ProtocolTextView.text.append("Решающий сет - обычный\n")
+        }
+        
+        if match.BolsheMenshe {
+            ProtocolTextView.text.append("При счете 40:40 - больше/меньше\n\n")}
+        else {
+            ProtocolTextView.text.append("При счете 40:40 - решающее очко\n\n")
+        }
+    
+        
         ProtocolTextView.text.append("---------------------------------\n")
         ProtocolTextView.text.append("История сетов \n\n")
         if match.SetNow > 1 {

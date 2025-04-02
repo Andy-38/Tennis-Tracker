@@ -109,9 +109,11 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         player1.inGameScore[match.GameNow] = String(player1.game)
         player2.inGameScore[match.GameNow] = String(player2.game)
         
-        if (match.PodaetNow == 1) { match.PodaetNow = 2}
-        else { match.PodaetNow = 1} // смена подачи
-        SmenaPodachi()
+        if !match.TieBreak7 { // если закончился обычный гейм, не тайбрейк, то смена подачи
+            if (match.PodaetNow == 1) { match.PodaetNow = 2}
+            else { match.PodaetNow = 1} // смена подачи
+            SmenaPodachi()
+        }
         
         if (player1.game>=match.MaxGame)&&(player1.game - player2.game >= 2) {
             // игрок 1 набрал 6 или больше геймов с разницей в 2 гейма
@@ -138,12 +140,20 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if (player1.game == match.MaxGame) && (player2.game == match.MaxGame) {
             // при счете 6:6 по сэтам начинается тайбрейк
             match.TieBreak7 = true
+            match.TieBreak7point = -1 // сколько розыгрышей в тайбрейке прошло
+            // в первом цикле увеличится на 1 и начнется с 0
+            match.TieBreakPodacha = match.PodaetNow // запоминаем на чьей подаче начался тайбрейк
             ScoreLabel.text = "ТБ(7)"
             match.MaxPoint = 7 // до 7 очков тайбрейк
         }
         if (player1.game + player2.game == 2 * match.MaxGame + 1) {
             // при счете 7:6 или 6:7 по сэтам заканчивается тайбрейк
             match.TieBreak7 = false
+            match.PodaetNow = match.TieBreakPodacha // возвращаем подачу тому кто начал тайбрейк
+            // и только потом проводим смену подачи
+            if (match.PodaetNow == 1) { match.PodaetNow = 2}
+            else { match.PodaetNow = 1} // смена подачи
+            SmenaPodachi()
             ScoreLabel.text = "Очки"
             match.MaxPoint = 4 // до 4-х очков гейм 0/15/30/40
             player1.set = player1.set + (player1.game - match.MaxGame)
@@ -180,7 +190,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         || ((player1.point == match.MaxPoint) && (player2.point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
             // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
             // или 40:40 и решающее очко у 1-го то
-            if (match.PodaetNow == 1) { // выиграл гейм на своей подаче
+            if (match.PodaetNow == 1)||(match.TieBreak7) { // выиграл гейм на своей подаче
+                // или выиграл тайбрейк
                 player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
             }
             else { // выиграл гейм на подаче соперника
@@ -198,7 +209,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
             // или 40:40 и решающее очко у 2-го то
             player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + " "
-            if (match.PodaetNow == 2) { // выиграл гейм на своей подаче
+            if (match.PodaetNow == 2)||(match.TieBreak7) { // выиграл гейм на своей подаче
+                // или выиграл тайбрейк
                 player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
             }
             else { // выиграл гейм на подаче соперника
@@ -213,6 +225,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if (player1.point == match.MaxPoint) && (player2.point == match.MaxPoint) && (match.TieBreak7 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
             player1.point = match.MaxPoint - 1
             player2.point = match.MaxPoint - 1
+        }
+        if match.TieBreak7 { // если идет тайбрейк до 7
+            match.TieBreak7point+=1 // считаем какой по счету розыгрыш в тайбрейке закончился
+            if match.TieBreak7point % 2 == 1 { // если нечетный - то смена подачи
+                if (match.PodaetNow == 1) { match.PodaetNow = 2}
+                else { match.PodaetNow = 1} // смена подачи
+                SmenaPodachi()        }
         }
     }
     
@@ -248,7 +267,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         case 2: do {
             SecondPlayerStetusLabel.text = String(match.Podacha)+" подача"
         }
-        default: BallLabel.frame.origin.x = Point1Label.frame.origin.x
+        default: BallLabel.frame.origin.x = Point1Label.frame.origin.x //???
         }
     }
     
