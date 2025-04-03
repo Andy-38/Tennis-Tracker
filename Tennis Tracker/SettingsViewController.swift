@@ -24,9 +24,16 @@ class SettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // выполняется при отображении экрана
+        if match.Finished {
+            SetControl.isEnabled = false // выключаем выбор числа сэтов в матче
+            GameControl.isEnabled = false // выключаем выбор числа геймов в сете
+            LastSetControl.isEnabled = false // выключаем выбор последнего сэта
+            AdvantageControl.isEnabled = false // выключаем выбор больше-меньше
+            DefaulButton.isEnabled = false // выключаем конопку стандартных настроек
+        }
     }
     
-    @IBAction func DafaultButtonPress(_ sender: Any) {
+    @IBAction func DefaultButtonPress(_ sender: Any) {
         SetControl.selectedSegmentIndex = 1
         match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
         
@@ -71,6 +78,16 @@ class SettingsViewController: UIViewController {
             AdvantageControl.isEnabled = true // включаем выбор больше-меньше
             GameControl.isEnabled = true // включаем выбор числа геймов
         }
+        case 3: do {
+            match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
+            LastSetControl.selectedSegmentIndex = 1
+            match.LastSetTieBreak10 = true // тайбрейк в решающем сете
+            LastSetControl.isEnabled = false // выключаем выбор последнего сэта
+            AdvantageControl.isEnabled = false // выключаем выбор больше-меньше
+            GameControl.isEnabled = false // выключаем выбор числа геймов
+            match.TieBreak10 = true // начинается тайбрейк
+            match.MaxPoint = 7 // до 7 очков тайбрейк
+        }
         case 4: do {
             match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
             LastSetControl.selectedSegmentIndex = 1
@@ -78,11 +95,7 @@ class SettingsViewController: UIViewController {
             LastSetControl.isEnabled = false // выключаем выбор последнего сэта
             AdvantageControl.isEnabled = false // выключаем выбор больше-меньше
             GameControl.isEnabled = false // выключаем выбор числа геймов
-            
-            match.TieBreak10 = true //
-            //match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
-            // в первом цикле увеличится на 1 и начнется с 0
-            //MatchViewController.ScoreLabel.text = "ТБ(10)"
+            match.TieBreak10 = true // начинается тайбрейк
             match.MaxPoint = 10 // до 10 очков тайбрейк
         }
         default: match.MaxSet = 2

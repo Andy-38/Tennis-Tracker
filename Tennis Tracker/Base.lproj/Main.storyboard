@@ -875,7 +875,7 @@
                                     <segment title="1"/>
                                     <segment title="3"/>
                                     <segment title="5"/>
-                                    <segment title="ТБ-7" enabled="NO"/>
+                                    <segment title="ТБ-7"/>
                                     <segment title="ТБ-10"/>
                                 </segments>
                                 <connections>
@@ -953,7 +953,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Стандартные настройки"/>
                                 <connections>
-                                    <action selector="DafaultButtonPress:" destination="tAT-58-Znh" eventType="touchUpInside" id="RCG-2c-QMA"/>
+                                    <action selector="DefaultButtonPress:" destination="tAT-58-Znh" eventType="touchUpInside" id="RCG-2c-QMA"/>
                                 </connections>
                             </button>
                         </subviews>

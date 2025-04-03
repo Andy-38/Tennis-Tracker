@@ -47,8 +47,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // выполняется при отображении экрана
-        if match.TieBreak10 {
-            ScoreLabel.text = "ТБ(10)"
+        if (match.TieBreak10)&&(!match.Finished) {
+            ScoreLabel.text = "ТБ("+String(match.MaxPoint)+")"
         } else {
             ScoreLabel.text = "Очки"
         }
