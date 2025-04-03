@@ -33,6 +33,7 @@ class SettingsViewController: UIViewController {
         GameControl.selectedSegmentIndex = 5
         match.MaxGame = 6 // 6 геймов в матче
         
+        LastSetControl.isEnabled = true // включаем выбор последнего сэта
         LastSetControl.selectedSegmentIndex = 0
         match.LastSetTieBreak10 = false // нет тайбрейка в третьем сете
         
@@ -42,15 +43,21 @@ class SettingsViewController: UIViewController {
     
     @IBAction func SetControllerChange(_ sender: Any) {
         // меняем количество сетов в матче: 1, 3, 5, или тайбрейк до 7 или до 10
+        LastSetControl.selectedSegmentIndex = 0
+        match.LastSetTieBreak10 = false // нет тайбрейка в третьем сете
+        
         switch SetControl.selectedSegmentIndex {
         case 0: do {
             match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
+            LastSetControl.isEnabled = false // выключаем выбор последнего сэта
         }
         case 1: do {
             match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
+            LastSetControl.isEnabled = true // включаем выбор последнего сэта
         }
         case 2: do {
             match.MaxSet = 3 // 5 сетов в матче, надо выиграть 3
+            LastSetControl.isEnabled = true // включаем выбор последнего сэта
         }
         default: match.MaxSet = 2
         }
