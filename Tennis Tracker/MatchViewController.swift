@@ -147,8 +147,9 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
                 FinishGame()
             }
         }
-        if (player2.game>=match.MaxGame)&&(player2.game - player1.game >= 2) {
+        if ((player2.game>=match.MaxGame)&&(player2.game - player1.game >= 2))||((player2.game==1)&&(match.TieBreak10))  {
             // игрок 2 набрал 6 или больше геймов с разницей в 2 гейма
+            // или игрок 2 выиграл тайбрейк до 10
             player2.set+=1
             NextSet()
             if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
