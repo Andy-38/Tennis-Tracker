@@ -876,7 +876,7 @@
                                     <segment title="3"/>
                                     <segment title="5"/>
                                     <segment title="ТБ-7" enabled="NO"/>
-                                    <segment title="ТБ-10" enabled="NO"/>
+                                    <segment title="ТБ-10"/>
                                 </segments>
                                 <connections>
                                     <action selector="SetControllerChange:" destination="tAT-58-Znh" eventType="valueChanged" id="KI6-Lp-scp"/>

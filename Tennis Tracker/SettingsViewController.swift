@@ -30,13 +30,17 @@ class SettingsViewController: UIViewController {
         SetControl.selectedSegmentIndex = 1
         match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
         
+        GameControl.isEnabled = true // включаем выбор числа геймов
         GameControl.selectedSegmentIndex = 5
         match.MaxGame = 6 // 6 геймов в матче
         
         LastSetControl.isEnabled = true // включаем выбор последнего сэта
         LastSetControl.selectedSegmentIndex = 0
-        match.LastSetTieBreak10 = false // нет тайбрейка в третьем сете
+        match.LastSetTieBreak10 = false // нет тайбрейка в решающем сете
+        match.TieBreak10 = false // не идет тайбрейк до 10
+        match.MaxPoint = 4 // до 4-х очков в гейме 0/15/30/40
         
+        AdvantageControl.isEnabled = true // включаем выбор больше-меньше
         AdvantageControl.selectedSegmentIndex = 0
         match.BolsheMenshe = true // больше-меньше
     }
@@ -44,20 +48,42 @@ class SettingsViewController: UIViewController {
     @IBAction func SetControllerChange(_ sender: Any) {
         // меняем количество сетов в матче: 1, 3, 5, или тайбрейк до 7 или до 10
         LastSetControl.selectedSegmentIndex = 0
-        match.LastSetTieBreak10 = false // нет тайбрейка в третьем сете
+        match.LastSetTieBreak10 = false // нет тайбрейка в решающем сете
+        match.TieBreak10 = false // не идет тайбрейк до 10
+        match.MaxPoint = 4 // до 4-х очков в гейме 0/15/30/40
         
         switch SetControl.selectedSegmentIndex {
         case 0: do {
             match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
             LastSetControl.isEnabled = false // выключаем выбор последнего сэта
+            AdvantageControl.isEnabled = true // включаем выбор больше-меньше
+            GameControl.isEnabled = true // включаем выбор числа геймов
         }
         case 1: do {
             match.MaxSet = 2 // 3 сета в матче, надо выиграть 2
             LastSetControl.isEnabled = true // включаем выбор последнего сэта
+            AdvantageControl.isEnabled = true // включаем выбор больше-меньше
+            GameControl.isEnabled = true // включаем выбор числа геймов
         }
         case 2: do {
             match.MaxSet = 3 // 5 сетов в матче, надо выиграть 3
             LastSetControl.isEnabled = true // включаем выбор последнего сэта
+            AdvantageControl.isEnabled = true // включаем выбор больше-меньше
+            GameControl.isEnabled = true // включаем выбор числа геймов
+        }
+        case 4: do {
+            match.MaxSet = 1 // 1 сет в матче, надо выиграть 1
+            LastSetControl.selectedSegmentIndex = 1
+            match.LastSetTieBreak10 = true // тайбрейк в решающем сете
+            LastSetControl.isEnabled = false // выключаем выбор последнего сэта
+            AdvantageControl.isEnabled = false // выключаем выбор больше-меньше
+            GameControl.isEnabled = false // выключаем выбор числа геймов
+            
+            match.TieBreak10 = true //
+            //match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
+            // в первом цикле увеличится на 1 и начнется с 0
+            //MatchViewController.ScoreLabel.text = "ТБ(10)"
+            match.MaxPoint = 10 // до 10 очков тайбрейк
         }
         default: match.MaxSet = 2
         }

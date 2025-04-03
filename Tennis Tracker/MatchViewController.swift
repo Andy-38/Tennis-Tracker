@@ -44,6 +44,16 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var FirstPlayerImage: UIImageView! // изображение 1-го игрока
     @IBOutlet weak var SecondPlayerImage: UIImageView! // изображение 2-го игрока
  
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // выполняется при отображении экрана
+        if match.TieBreak10 {
+            ScoreLabel.text = "ТБ(10)"
+        } else {
+            ScoreLabel.text = "Очки"
+        }
+    }
+    
     func FinishGame () { // конец матча
         Win1Button.isEnabled = false
         Win2Button.isEnabled = false
