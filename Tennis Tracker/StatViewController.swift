@@ -42,6 +42,7 @@ class StatViewController: UIViewController {
         // игроки, победитель - зеленым цветом
         Player1nameLabel.text = player1.name
         Player2nameLabel.text = player2.name
+        
         switch match.Winner {
         case 1: do {
             Player1nameLabel.textColor = .systemGreen
@@ -73,6 +74,7 @@ class StatViewController: UIViewController {
             Player2doubleFaultLabel.textColor = .white
             Player1doubleFaultLabel.textColor = .white
         }
+        
         // эйсы
         Player1aceLabel.text = String(player1.aces)
         Player2aceLabel.text = String(player2.aces)
@@ -89,6 +91,7 @@ class StatViewController: UIViewController {
             Player2aceLabel.textColor = .white
             Player1aceLabel.textColor = .white
         }
+        
         // первые подачи
         Player1firstLabel.text = String(player1.percent1)
         Player2firstLabel.text = String(player2.percent1)
@@ -105,6 +108,7 @@ class StatViewController: UIViewController {
             Player2firstLabel.textColor = .white
             Player1firstLabel.textColor = .white
         }
+        
         // вторые подачи
         Player1secondLabel.text = String(player1.percent2)
         Player2secondLabel.text = String(player2.percent2)
@@ -121,6 +125,7 @@ class StatViewController: UIViewController {
             Player2secondLabel.textColor = .white
             Player1secondLabel.textColor = .white
         }
+        
         // виннерсы
         Player1winnerLabel.text = String(player1.winners)
         Player2winnerLabel.text = String(player2.winners)
@@ -137,6 +142,7 @@ class StatViewController: UIViewController {
             Player2winnerLabel.textColor = .white
             Player1winnerLabel.textColor = .white
         }
+        
         // невынужденные ошибки
         Player1ufeLabel.text = String(player1.ufe)
         Player2ufeLabel.text = String(player2.ufe)
@@ -153,6 +159,7 @@ class StatViewController: UIViewController {
             Player2ufeLabel.textColor = .white
             Player1ufeLabel.textColor = .white
         }
+        
         // очки
         let player1totalPoints = player1.totalPoints + player1.aces + player1.winners + player2.doubleFaults + player2.ufe
         let player2totalPoints = player2.totalPoints + player2.aces + player2.winners + player1.doubleFaults + player1.ufe
@@ -171,6 +178,7 @@ class StatViewController: UIViewController {
             Player2pointsLabel.textColor = .white
             Player1pointsLabel.textColor = .white
         }
+        
         // брейкпоинты
         Player1breakpointLabel.text = String(player1.breakpoint)
         Player2breakpointLabel.text = String(player2.breakpoint)

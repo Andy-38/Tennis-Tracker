@@ -9,10 +9,6 @@ import UIKit
 
 class ProtocolViewController: UIViewController {
     
-/*    var stroka1: String = ""
-    var stroka2: String = ""
- */
-    
     @IBOutlet weak var ProtocolTextView: UITextView! // текстовое поле для протокола
     @IBOutlet weak var ShareButton: UIButton! // кнопка "Поделиться"
     
@@ -66,10 +62,12 @@ class ProtocolViewController: UIViewController {
             ProtocolTextView.text.append("Выиграть сетов для победы - "+String(match.MaxSet)+"\n")
             ProtocolTextView.text.append("Геймов в сете - "+String(match.MaxGame)+"\n")
             
-            if match.LastSetTieBreak10 {
-                ProtocolTextView.text.append("Решающий сет - тайбрейк до 10\n")}
-            else {
-                ProtocolTextView.text.append("Решающий сет - обычный\n")
+            if match.MaxSet>1 {
+                if match.LastSetTieBreak10 {
+                    ProtocolTextView.text.append("Решающий сет - тайбрейк до 10\n")}
+                else {
+                    ProtocolTextView.text.append("Решающий сет - обычный\n")
+                }
             }
             
             if match.BolsheMenshe {
@@ -81,7 +79,6 @@ class ProtocolViewController: UIViewController {
             ProtocolTextView.text.append("1 сет - тайбрейк до " + String(match.MaxPoint)+"\n\n")
         }
     
-        
         ProtocolTextView.text.append("---------------------------------\n")
         ProtocolTextView.text.append("История сетов \n\n")
         if match.SetNow > 1 {
@@ -94,17 +91,7 @@ class ProtocolViewController: UIViewController {
         
         ProtocolTextView.text.append("---------------------------------\n")
         ProtocolTextView.text.append("История геймов \n\n")
-/*        stroka1 = "1. |"
-        stroka2 = "2. |"
-        if match.GameNow > 1 {
-            for currentGame in 1...match.GameNow - 1 {
-                stroka1 = stroka1 + player1.stat[currentGame] + " |"
-                stroka2 = stroka2 + player2.stat[currentGame] + " |"
-            }
-        }
-        ProtocolTextView.text.append(stroka1 + "\n")
-        ProtocolTextView.text.append(stroka2 + "\n")
- */
+        
         if match.GameNow > 1 {
             for currentGame in 1...match.GameNow - 1 { // показываем все геймы по порядку
                 ProtocolTextView.text.append("Гейм №" + String(currentGame) + ":\n")
@@ -113,7 +100,7 @@ class ProtocolViewController: UIViewController {
             }
         }
         
-        ProtocolTextView.isEditable = false // запрещаем редактирование протокола buhs
+        ProtocolTextView.isEditable = false // запрещаем редактирование протокола игры
     }
     
     @IBAction func ShareButtonPress(_ sender: Any) { // делиться протоколом через системное меню

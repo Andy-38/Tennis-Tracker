@@ -108,14 +108,15 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         
         if match.TieBreak10 { // если закончился тайбрейк до 10
             ScoreLabel.text = "Очки" // восстанавливаем надпись
-            player1.game = player1.point // счет сета показываем не 1:0 а по очкам тайбрейка
+            player1.game = player1.point // счет сета записываем не 1:0 а по очкам тайбрейка
             player2.game = player2.point
         }
         
-        player1.setScore = player1.setScore + String(player1.game) + " "
+        player1.setScore = player1.setScore + String(player1.game) + " " // отображаем счет сета
         player2.setScore = player2.setScore + String(player2.game) + " "
-        player1.game = 0
+        player1.game = 0 // обнуляем счет геймов у игроков
         player2.game = 0
+        
         // если равенство по сетам 1:1 или 2:2, то начинаем решающий тайбрейк
         if (player1.set == player2.set)&&(player1.set == match.MaxSet - 1)&&(match.LastSetTieBreak10) {
             match.TieBreak10 = true //
@@ -170,7 +171,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
         }
         if (player1.game == match.MaxGame) && (player2.game == match.MaxGame) {
-            // при счете 6:6 по сэтам начинается тайбрейк
+            // при счете 6:6 по сэтам начинается тайбрейк до 7
             match.TieBreak7 = true
             match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
             // в первом цикле увеличится на 1 и начнется с 0
@@ -247,7 +248,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
             else { // выиграл гейм на подаче соперника
                 player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "★"
-                player2.breakpoint+=1 // игрок 1 реализовал брейкпоинт
+                player2.breakpoint+=1 // игрок 2 реализовал брейкпоинт
             }
             ChangeGames(g1: 0, g2: 1) // игрок 1 выиграл +1 гейм
             player1.point = 0 // обнуляем очки 1-го
@@ -299,7 +300,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         case 2: do {
             SecondPlayerStetusLabel.text = String(match.Podacha)+" подача"
         }
-        default: BallLabel.frame.origin.x = Point1Label.frame.origin.x //???
+        default: FirstPlayerStatusLabel.text = String(match.Podacha)+" подача"
         }
     }
     
@@ -308,7 +309,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // выполняется при запуске приложения
         BallLabel.translatesAutoresizingMaskIntoConstraints = true // чтоб можно было двигать метку
         BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30 // выставляем мячики первому игроку
-        UpdatePoints()
+        UpdatePoints() // прорисовываем очки, геймы, сэты
         player1.name = "Игрок1"
         player2.name = "Игрок2"
         match.TurnirName = "Турнир без названия"
@@ -342,8 +343,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки победы 1-го игрока
         if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player1.winners+=1 } // считаем виннеры 1-го игрока
         if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player1.totalPoints+=1 } // считаем выигранные очки 1-го игрока
-        
-       // showWinAlert(playerName: "!"+((sender as? UIButton)?.titleLabel?.text)!+"!")
         
         if (match.PodaetNow == 1) && (match.Podacha == 2) {
             // вторая подача - заменяем символ
@@ -491,9 +490,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
         /*
-        let items = ["Протокол матча"]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        self.present(ac, animated: true, completion: nil)
+        
          */
     }
 }
