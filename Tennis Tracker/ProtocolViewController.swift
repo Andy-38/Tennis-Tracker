@@ -65,7 +65,7 @@ class ProtocolViewController: UIViewController {
         ProtocolTextView.text.append("Выиграть сетов для победы - "+String(match.MaxSet)+"\n")
         ProtocolTextView.text.append("Геймов в сете - "+String(match.MaxGame)+"\n")
         
-        if match.TieBreak10 {
+        if match.LastSetTieBreak10 {
             ProtocolTextView.text.append("Решающий сет - тайбрейк до 10\n")}
         else {
             ProtocolTextView.text.append("Решающий сет - обычный\n")

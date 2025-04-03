@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController {
         match.MaxGame = 6 // 6 геймов в матче
         
         LastSetControl.selectedSegmentIndex = 0
-        match.TieBreak10 = false // нет тайбрейка в третьем сете
+        match.LastSetTieBreak10 = false // нет тайбрейка в третьем сете
         
         AdvantageControl.selectedSegmentIndex = 0
         match.BolsheMenshe = true // больше-меньше
@@ -65,12 +65,12 @@ class SettingsViewController: UIViewController {
         // меняем тип последнего сета: "обычный" или "тайбрейк до 10"
         switch LastSetControl.selectedSegmentIndex {
         case 0: do {
-            match.TieBreak10 = false
+            match.LastSetTieBreak10 = false
         }
         case 1: do {
-            match.TieBreak10 = true
+            match.LastSetTieBreak10 = true
         }
-        default: match.TieBreak10 = false
+        default: match.LastSetTieBreak10 = false
         }
     }
     

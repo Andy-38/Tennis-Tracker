@@ -12,7 +12,6 @@ import CoreData
 var player1 = TennisPlayer() // все характеристики 1-го игрока
 var player2 = TennisPlayer() // все характеристики 2-го игрока
 var match = TennisMatch() // текущий теннисный матч
-//var GameNow: Int = 1 // какой сейчас идет гейм
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -95,10 +95,25 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         match.SetNow+=1
         player1.gamesStat.append("")
         player2.gamesStat.append("")
+        
+        if match.TieBreak10 { // если закончился тайбрейк до 10
+            ScoreLabel.text = "Очки" // восстанавливаем надпись
+            player1.game = player1.point // счет сета показываем не 1:0 а по очкам тайбрейка
+            player2.game = player2.point
+        }
+        
         player1.setScore = player1.setScore + String(player1.game) + " "
         player2.setScore = player2.setScore + String(player2.game) + " "
         player1.game = 0
         player2.game = 0
+        // если равенство по сетам 1:1 или 2:2, то начинаем решающий тайбрейк
+        if (player1.set == player2.set)&&(player1.set == match.MaxSet - 1)&&(match.LastSetTieBreak10) {
+            match.TieBreak10 = true //
+            match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
+            // в первом цикле увеличится на 1 и начнется с 0
+            ScoreLabel.text = "ТБ(10)"
+            match.MaxPoint = 10 // до 10 очков тайбрейк
+        }
     }
     
     func ChangeGames( g1: Int, g2: Int) { // g1, g2 - изменение геймов 1-го и 2-го игроков
@@ -106,8 +121,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         player1.game = player1.game + g1
         player2.game = player2.game + g2
         
-        player1.inGameScore[match.GameNow] = String(player1.game)
-        player2.inGameScore[match.GameNow] = String(player2.game)
+        if !match.TieBreak10 { // если не тайбрейк10 то счет сета - по геймам
+            player1.inGameScore[match.GameNow] = String(player1.game)
+            player2.inGameScore[match.GameNow] = String(player2.game)
+        } else { // если тайбрейк10 то счета сета - по очкам
+            player1.inGameScore[match.GameNow] = String(player1.point)
+            player2.inGameScore[match.GameNow] = String(player2.point)
+        }
         
         if !match.TieBreak7 { // если закончился обычный гейм, не тайбрейк, то смена подачи
             if (match.PodaetNow == 1) { match.PodaetNow = 2}
@@ -115,8 +135,9 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SmenaPodachi()
         }
         
-        if (player1.game>=match.MaxGame)&&(player1.game - player2.game >= 2) {
+        if ((player1.game>=match.MaxGame)&&(player1.game - player2.game >= 2))||((player1.game==1)&&(match.TieBreak10)) {
             // игрок 1 набрал 6 или больше геймов с разницей в 2 гейма
+            // или игрок 1 выиграл тайбрейк до 10
             player1.set+=1
             NextSet()
             if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
@@ -140,14 +161,14 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if (player1.game == match.MaxGame) && (player2.game == match.MaxGame) {
             // при счете 6:6 по сэтам начинается тайбрейк
             match.TieBreak7 = true
-            match.TieBreak7point = -1 // сколько розыгрышей в тайбрейке прошло
+            match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
             // в первом цикле увеличится на 1 и начнется с 0
             match.TieBreakPodacha = match.PodaetNow // запоминаем на чьей подаче начался тайбрейк
             ScoreLabel.text = "ТБ(7)"
             match.MaxPoint = 7 // до 7 очков тайбрейк
         }
         if (player1.game + player2.game == 2 * match.MaxGame + 1) {
-            // при счете 7:6 или 6:7 по сэтам заканчивается тайбрейк
+            // при счете 7:6 или 6:7 по геймам заканчивается тайбрейк
             match.TieBreak7 = false
             match.PodaetNow = match.TieBreakPodacha // возвращаем подачу тому кто начал тайбрейк
             // и только потом проводим смену подачи
@@ -190,7 +211,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         || ((player1.point == match.MaxPoint) && (player2.point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
             // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
             // или 40:40 и решающее очко у 1-го то
-            if (match.PodaetNow == 1)||(match.TieBreak7) { // выиграл гейм на своей подаче
+            if (match.PodaetNow == 1)||(match.TieBreak7)||(match.TieBreak10) { // выиграл гейм на своей подаче
                 // или выиграл тайбрейк
                 player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
             }
@@ -209,7 +230,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
             // или 40:40 и решающее очко у 2-го то
             player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + " "
-            if (match.PodaetNow == 2)||(match.TieBreak7) { // выиграл гейм на своей подаче
+            if (match.PodaetNow == 2)||(match.TieBreak7)||(match.TieBreak10) { // выиграл гейм на своей подаче
                 // или выиграл тайбрейк
                 player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
             }
@@ -222,13 +243,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
         }
         
-        if (player1.point == match.MaxPoint) && (player2.point == match.MaxPoint) && (match.TieBreak7 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
+        if (player1.point == match.MaxPoint) && (player2.point == match.MaxPoint) && (match.TieBreak7 == false) && (match.TieBreak10 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
             player1.point = match.MaxPoint - 1
             player2.point = match.MaxPoint - 1
         }
-        if match.TieBreak7 { // если идет тайбрейк до 7
-            match.TieBreak7point+=1 // считаем какой по счету розыгрыш в тайбрейке закончился
-            if match.TieBreak7point % 2 == 1 { // если нечетный - то смена подачи
+        if (match.TieBreak7)||(match.TieBreak10) { // если идет тайбрейк до 7 или до 10
+            match.TieBreakPoint+=1 // считаем какой по счету розыгрыш в тайбрейке закончился
+            if match.TieBreakPoint % 2 == 1 { // если нечетный - то смена подачи
                 if (match.PodaetNow == 1) { match.PodaetNow = 2}
                 else { match.PodaetNow = 1} // смена подачи
                 SmenaPodachi()        }
@@ -237,7 +258,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     func UpdatePoints() {
         // отображаем на экране текущие очки, геймы, сэты
-        if match.TieBreak7 {
+        if (match.TieBreak7)||(match.TieBreak10) {
             Point1Label.text = String(player1.point)
             Point2Label.text = String(player2.point)
         } else {
