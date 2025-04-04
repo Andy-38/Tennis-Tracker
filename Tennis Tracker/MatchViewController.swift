@@ -7,6 +7,22 @@
 
 import UIKit
 
+extension UIButton {
+    func setFont(_ font: UIFont) {
+        if #available(iOS 15.0, *) {
+            self.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = font
+                return outgoing
+            }
+        }
+        else {
+            self.titleLabel?.font = font
+        }
+    }
+}
+
+
 class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
@@ -87,8 +103,20 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SecondPlayerStetusLabel.text = "Прием"
             Win1Button.setTitle("Эйс", for: .normal)
             Win2Button.setTitle("Виннер", for: .normal)
-            Lose1Button.titleLabel?.text = "Ошибка на подаче"
-            Lose2Button.titleLabel?.text = "Ошибка"
+            
+            Lose1Button.setTitle("Ошибка на подаче", for: .normal)
+            Lose2Button.setTitle("Ошибка", for: .normal)
+            
+            //Lose1Button.titleLabel?.text = "Ошибка на подаче"
+            //Lose2Button.titleLabel?.text = "Ошибка"
+            /*Lose1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+            Lose2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)*/
+            
+            /*Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+            Lose1Button.titleLabel?.textAlignment = .center
+            Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+            Lose2Button.titleLabel?.textAlignment = .center*/
+            
             FirstPlayerImage.image = UIImage(named: "img_serve_left")
             SecondPlayerImage.image = UIImage(named: "img_return_right")
         }
@@ -98,8 +126,18 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             FirstPlayerStatusLabel.text = "Прием"
             Win2Button.setTitle("Эйс", for: .normal)
             Win1Button.setTitle("Виннер", for: .normal)
-            Lose2Button.titleLabel?.text = "Ошибка на подаче"
-            Lose1Button.titleLabel?.text = "Ошибка"
+            
+            //Lose2Button.titleLabel?.text = "Ошибка на подаче"
+            //Lose1Button.titleLabel?.text = "Ошибка"
+            
+            Lose2Button.setTitle("Ошибка на подаче", for: .normal)
+            Lose1Button.setTitle("Ошибка", for: .normal)
+            
+            /*Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+            Lose1Button.titleLabel?.textAlignment = .center
+            Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+            Lose2Button.titleLabel?.textAlignment = .center*/
+            
             SecondPlayerImage.image = UIImage(named: "img_serve_right")
             FirstPlayerImage.image = UIImage(named: "img_return_left")
         }
@@ -316,10 +354,16 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // выполняется при запуске приложения
         BallLabel.translatesAutoresizingMaskIntoConstraints = true // чтоб можно было двигать метку
         BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30 // выставляем мячики первому игроку
-        Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+        //Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
         Lose1Button.titleLabel?.textAlignment = .center
-        Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+        //Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
         Lose2Button.titleLabel?.textAlignment = .center
+        
+        Win1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+        Win2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+        Lose1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+        Lose2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+        
         UpdatePoints() // прорисовываем очки, геймы, сэты
         player1.name = "Игрок1"
         player2.name = "Игрок2"
@@ -501,11 +545,12 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func FirstPlayerImageButtonPress(_ sender: Any) {
-        //BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
         FirstPlayerStatusLabel.text = "Игра"
         SecondPlayerStetusLabel.text = "Игра"
         Win1Button.setTitle("Виннер", for: .normal)
         Win2Button.setTitle("Виннер", for: .normal)
+        Lose1Button.setTitle("Ошибка", for: .normal)
+        Lose2Button.setTitle("Ошибка", for: .normal)
         FirstPlayerImage.image = UIImage(named: "img_stroke_left")
         SecondPlayerImage.image = UIImage(named: "img_stroke_right")
     }

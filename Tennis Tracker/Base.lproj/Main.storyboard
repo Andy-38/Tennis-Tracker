@@ -481,8 +481,15 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPw-Qn-5rj">
                                 <rect key="frame" x="10" y="505" width="79.666666666666671" height="62"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="Эйс" imagePadding="1" buttonSize="large">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="vbj-Ds-QX7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="1" maxY="0.0"/>
+                                <state key="normal" title="Эйс">
+                                    <imageReference key="image" image="checkmark.circle.fill" catalog="system" symbolScale="medium"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="Эйс" imagePadding="1">
                                     <imageReference key="image" image="checkmark.circle.fill" catalog="system" symbolScale="medium"/>
                                     <fontDescription key="titleFontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
                                     <directionalEdgeInsets key="contentInsets" top="14" leading="-1" bottom="10" trailing="0.0"/>
@@ -637,7 +644,10 @@
                                 </constraints>
                             </imageView>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-ab-pcT">
-                                <rect key="frame" x="285.66666666666669" y="577" width="79.333333333333314" height="62"/>
+                                <rect key="frame" x="285.66666666666663" y="577" width="80" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="MBi-SS-hzh"/>
+                                </constraints>
                                 <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="Ошибка" imagePadding="1" buttonSize="large" titleAlignment="automatic">
                                     <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="medium" variableValue="0.0"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -651,6 +661,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNc-5f-8Me">
                                 <rect key="frame" x="285.66666666666669" y="505" width="79.333333333333314" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="mdg-X5-mcd"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" imagePlacement="top" title="Виннер" imagePadding="1" buttonSize="large">
                                     <imageReference key="image" image="checkmark.circle.fill" catalog="system" symbolScale="medium"/>
@@ -844,7 +857,6 @@
                             <constraint firstItem="LxE-fl-wje" firstAttribute="leading" secondItem="u1K-x6-VAb" secondAttribute="trailing" constant="1" id="mK7-Xg-EWQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hJz-yb-sgZ" secondAttribute="trailing" symbolic="YES" id="mVl-SL-XiL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IV7-1b-M47" secondAttribute="trailing" symbolic="YES" id="mZb-vG-0Ca"/>
-                            <constraint firstItem="XGl-u1-kPl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="nWR-cL-3RQ"/>
                             <constraint firstItem="XGl-u1-kPl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="p3k-59-XoO"/>
                             <constraint firstItem="FAL-BA-j7i" firstAttribute="top" secondItem="Lhd-2c-PRQ" secondAttribute="bottom" constant="1" id="peP-Qj-Req"/>
                             <constraint firstItem="abG-LJ-sjE" firstAttribute="top" secondItem="ZMe-xb-Wp7" secondAttribute="bottom" constant="-80" id="poI-Vv-UrC"/>

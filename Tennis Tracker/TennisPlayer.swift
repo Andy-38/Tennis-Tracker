@@ -71,3 +71,4 @@ class TennisMatch { // класс для описания матча
     var Winner: Int = 0 // победитель матча 1 или 2, 0 - не определено
     var BolsheMenshe: Bool = true // есть ли больше-меньше в гейме
 }
+
