@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Tennis Tracker
 //
-//  Created by Andy Dvoytsov on 18.04.2023.
+//  Created by Andy Dvoytsov on 26.03.2025.
 //
 
 import UIKit

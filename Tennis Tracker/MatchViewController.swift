@@ -44,6 +44,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var FirstPlayerImage: UIImageView! // изображение 1-го игрока
     @IBOutlet weak var SecondPlayerImage: UIImageView! // изображение 2-го игрока
  
+    @IBOutlet weak var FirstPlayerImageButton: UIButton! // кнопка поверх изображения 1-го игрока
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // выполняется при отображении экрана
@@ -77,7 +79,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil) // отображаем алерт-контроллер
     }
     
-    func SmenaPodachi () { // при смене подачи
+    func SmenaPodachiDraw () { // отрисовка смены подачи
         switch match.PodaetNow {
         case 1: do {
             BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
@@ -85,6 +87,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SecondPlayerStetusLabel.text = "Прием"
             Win1Button.setTitle("Эйс", for: .normal)
             Win2Button.setTitle("Виннер", for: .normal)
+            Lose1Button.titleLabel?.text = "Ошибка на подаче"
+            Lose2Button.titleLabel?.text = "Ошибка"
             FirstPlayerImage.image = UIImage(named: "img_serve_left")
             SecondPlayerImage.image = UIImage(named: "img_return_right")
         }
@@ -94,6 +98,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             FirstPlayerStatusLabel.text = "Прием"
             Win2Button.setTitle("Эйс", for: .normal)
             Win1Button.setTitle("Виннер", for: .normal)
+            Lose2Button.titleLabel?.text = "Ошибка на подаче"
+            Lose1Button.titleLabel?.text = "Ошибка"
             SecondPlayerImage.image = UIImage(named: "img_serve_right")
             FirstPlayerImage.image = UIImage(named: "img_return_left")
         }
@@ -143,7 +149,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if !match.TieBreak7 { // если закончился обычный гейм, не тайбрейк, то смена подачи
             if (match.PodaetNow == 1) { match.PodaetNow = 2}
             else { match.PodaetNow = 1} // смена подачи
-            SmenaPodachi()
+            SmenaPodachiDraw()
         }
         
         if ((player1.game>=match.MaxGame)&&(player1.game - player2.game >= 2))||((player1.game==1)&&(match.TieBreak10)) {
@@ -186,7 +192,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             // и только потом проводим смену подачи
             if (match.PodaetNow == 1) { match.PodaetNow = 2}
             else { match.PodaetNow = 1} // смена подачи
-            SmenaPodachi()
+            SmenaPodachiDraw()
             ScoreLabel.text = "Очки"
             match.MaxPoint = 4 // до 4-х очков гейм 0/15/30/40
             player1.set = player1.set + (player1.game - match.MaxGame)
@@ -264,7 +270,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if match.TieBreakPoint % 2 == 1 { // если нечетный - то смена подачи
                 if (match.PodaetNow == 1) { match.PodaetNow = 2}
                 else { match.PodaetNow = 1} // смена подачи
-                SmenaPodachi()        }
+                SmenaPodachiDraw()        }
         }
     }
     
@@ -302,6 +308,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         }
         default: FirstPlayerStatusLabel.text = String(match.Podacha)+" подача"
         }
+        SmenaPodachiDraw() // отрисовка кто подает кто принимает
     }
     
     override func viewDidLoad() {
@@ -309,6 +316,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // выполняется при запуске приложения
         BallLabel.translatesAutoresizingMaskIntoConstraints = true // чтоб можно было двигать метку
         BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30 // выставляем мячики первому игроку
+        Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+        Lose1Button.titleLabel?.textAlignment = .center
+        Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+        Lose2Button.titleLabel?.textAlignment = .center
         UpdatePoints() // прорисовываем очки, геймы, сэты
         player1.name = "Игрок1"
         player2.name = "Игрок2"
@@ -412,6 +423,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             ChangePoints(p1: 0, p2: 1)
         }
         UpdatePoints()
+        
     }
     
     @IBAction func Win2ButtonPress(_ sender: Any) {
@@ -486,6 +498,16 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             ChangePoints(p1: 1, p2: 0)
         }
         UpdatePoints()
+    }
+    
+    @IBAction func FirstPlayerImageButtonPress(_ sender: Any) {
+        //BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
+        FirstPlayerStatusLabel.text = "Игра"
+        SecondPlayerStetusLabel.text = "Игра"
+        Win1Button.setTitle("Виннер", for: .normal)
+        Win2Button.setTitle("Виннер", for: .normal)
+        FirstPlayerImage.image = UIImage(named: "img_stroke_left")
+        SecondPlayerImage.image = UIImage(named: "img_stroke_right")
     }
     
     @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами

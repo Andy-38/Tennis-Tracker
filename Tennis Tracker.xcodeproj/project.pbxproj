@@ -10,6 +10,10 @@
 		A18CA13E2D941C6C009BF76D /* ProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18CA13D2D941C6C009BF76D /* ProtocolViewController.swift */; };
 		A18CA1402D942914009BF76D /* TennisPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18CA13F2D942914009BF76D /* TennisPlayer.swift */; };
 		A1AD0E2F2D9BE7EA000B0484 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AD0E2E2D9BE7EA000B0484 /* SettingsViewController.swift */; };
+		A1BFF8352DA033FE00CE7255 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1BFF8312DA033FE00CE7255 /* Arial.ttf */; };
+		A1BFF8362DA033FE00CE7255 /* Arial Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1BFF8322DA033FE00CE7255 /* Arial Italic.ttf */; };
+		A1BFF8372DA033FE00CE7255 /* Arial Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1BFF8332DA033FE00CE7255 /* Arial Bold.ttf */; };
+		A1BFF8382DA033FE00CE7255 /* Arial Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1BFF8342DA033FE00CE7255 /* Arial Bold Italic.ttf */; };
 		A1C5CBDA29EEE1730041050C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBD929EEE1730041050C /* AppDelegate.swift */; };
 		A1C5CBDC29EEE1730041050C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBDB29EEE1730041050C /* SceneDelegate.swift */; };
 		A1C5CBDE29EEE1730041050C /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C5CBDD29EEE1730041050C /* MatchViewController.swift */; };
@@ -44,6 +48,10 @@
 		A18CA13D2D941C6C009BF76D /* ProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolViewController.swift; sourceTree = "<group>"; };
 		A18CA13F2D942914009BF76D /* TennisPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisPlayer.swift; sourceTree = "<group>"; };
 		A1AD0E2E2D9BE7EA000B0484 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A1BFF8312DA033FE00CE7255 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
+		A1BFF8322DA033FE00CE7255 /* Arial Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Italic.ttf"; sourceTree = "<group>"; };
+		A1BFF8332DA033FE00CE7255 /* Arial Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Bold.ttf"; sourceTree = "<group>"; };
+		A1BFF8342DA033FE00CE7255 /* Arial Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Bold Italic.ttf"; sourceTree = "<group>"; };
 		A1C5CBD629EEE1730041050C /* Tennis Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1C5CBD929EEE1730041050C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1C5CBDB29EEE1730041050C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +97,10 @@
 		A1C5CBCD29EEE1730041050C = {
 			isa = PBXGroup;
 			children = (
+				A1BFF8312DA033FE00CE7255 /* Arial.ttf */,
+				A1BFF8332DA033FE00CE7255 /* Arial Bold.ttf */,
+				A1BFF8342DA033FE00CE7255 /* Arial Bold Italic.ttf */,
+				A1BFF8322DA033FE00CE7255 /* Arial Italic.ttf */,
 				A1C5CBD829EEE1730041050C /* Tennis Tracker */,
 				A1C5CBF229EEE1750041050C /* Tennis TrackerTests */,
 				A1C5CBFC29EEE1750041050C /* Tennis TrackerUITests */,
@@ -246,6 +258,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1BFF8352DA033FE00CE7255 /* Arial.ttf in Resources */,
+				A1BFF8362DA033FE00CE7255 /* Arial Italic.ttf in Resources */,
+				A1BFF8372DA033FE00CE7255 /* Arial Bold.ttf in Resources */,
+				A1BFF8382DA033FE00CE7255 /* Arial Bold Italic.ttf in Resources */,
 				A1C5CBE929EEE1740041050C /* LaunchScreen.storyboard in Resources */,
 				A1C5CBE629EEE1740041050C /* Assets.xcassets in Resources */,
 				A1C5CBE129EEE1730041050C /* Main.storyboard in Resources */,
