@@ -644,7 +644,7 @@
                                 </constraints>
                             </imageView>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-ab-pcT">
-                                <rect key="frame" x="285.66666666666663" y="577" width="80" height="62"/>
+                                <rect key="frame" x="285.66666666666669" y="577" width="79.333333333333314" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="MBi-SS-hzh"/>
                                 </constraints>
@@ -890,6 +890,7 @@
                         <outlet property="Point2WinButton" destination="X75-08-TCv" id="VNy-YL-7VV"/>
                         <outlet property="ScoreLabel" destination="XKJ-7b-CTW" id="diL-ht-2zk"/>
                         <outlet property="SecondPlayerImage" destination="abG-LJ-sjE" id="eYs-QC-weL"/>
+                        <outlet property="SecondPlayerImageButton" destination="ZMe-xb-Wp7" id="szD-Oj-LBh"/>
                         <outlet property="SecondPlayerNameTextField" destination="Sf3-fy-7LC" id="UMC-Nc-k1J"/>
                         <outlet property="SecondPlayerStetusLabel" destination="jQL-h1-sxG" id="Sie-cL-Igb"/>
                         <outlet property="Set1Label" destination="dcs-BQ-5nV" id="nJe-1K-RFJ"/>
