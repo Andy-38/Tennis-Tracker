@@ -8,7 +8,7 @@
 import Foundation
 
 
-class TennisPlayer { // класс для описания игрока
+struct TennisPlayer { // класс для описания игрока
     var point: Int = 0 // очки игрока в гейме
     var game: Int = 0 // геймы игрока
     var set: Int = 0 // сэты игрока
@@ -50,7 +50,7 @@ class TennisPlayer { // класс для описания игрока
     }
 }
 
-class TennisMatch { // класс для описания матча
+struct TennisMatch { // класс для описания матча
     var MaxGame: Int = 6 // игра до 6 геймов в сэте
     var MaxSet: Int = 2 // игра до победы в 2-х сэтах
     var MaxPoint: Int = 4 // до 4-х очков в гейме 0/15/30/40
@@ -72,3 +72,8 @@ class TennisMatch { // класс для описания матча
     var BolsheMenshe: Bool = true // есть ли больше-меньше в гейме
 }
 
+struct MatchState { // класс для запоминания текущего состояния матча
+    var player1: TennisPlayer = TennisPlayer()
+    var player2: TennisPlayer = TennisPlayer()
+    var match: TennisMatch = TennisMatch()
+}

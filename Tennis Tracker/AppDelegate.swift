@@ -12,6 +12,9 @@ import CoreData
 var player1 = TennisPlayer() // все характеристики 1-го игрока
 var player2 = TennisPlayer() // все характеристики 2-го игрока
 var match = TennisMatch() // текущий теннисный матч
+var CurrentState = MatchState() // текущее состояние матча
+var MatchStates: [MatchState] = [] // массив состояний матча от начала до конца
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

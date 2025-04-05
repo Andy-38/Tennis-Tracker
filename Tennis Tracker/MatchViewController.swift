@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIButton {
+extension UIButton { // расширение для кнопки, чтобы корректно менять фон
     func setFont(_ font: UIFont) {
         if #available(iOS 15.0, *) {
             self.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
@@ -26,6 +26,7 @@ extension UIButton {
 class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
+    var CurrentStep: Int = 0 // текущий шаг матча
     
     @IBOutlet weak var TurnirTextField: UITextField! // поле ввода названия турнира
     @IBOutlet weak var FirstPlayerNameTextField: UITextField! // поле ввода имени 1-го игрока
@@ -73,6 +74,26 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func SaveState() // запоминаем текущее состояние матча
+    {
+        CurrentStep+=1 // следующий шаг матча
+        CurrentState.player1 = player1 // сохраняем состояние
+        CurrentState.player2 = player2
+        CurrentState.match = match
+        MatchStates.append(CurrentState) // записываем текущее состояние в массив состояний
+    }
+    
+    func RestoreState() // восстанавливаем предыдущее состояние матча
+    {
+        if CurrentStep >= 1 {
+            CurrentStep-=1 // предыдущий шаг
+            player1 = MatchStates[CurrentStep].player1 // восстанавливаем состояние
+            player2 = MatchStates[CurrentStep].player2
+            match = MatchStates[CurrentStep].match
+            MatchStates.removeLast() // удаляем последнее состояние из массива
+        }
+    }
+    
     func FinishGame () { // конец матча
         Win1Button.isEnabled = false
         Win2Button.isEnabled = false
@@ -106,20 +127,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SecondPlayerStetusLabel.text = "Прием"
             Win1Button.setTitle("Эйс", for: .normal)
             Win2Button.setTitle("Виннер", for: .normal)
-            
             Lose1Button.setTitle("Ошибка на подаче", for: .normal)
             Lose2Button.setTitle("Ошибка", for: .normal)
-            
-            //Lose1Button.titleLabel?.text = "Ошибка на подаче"
-            //Lose2Button.titleLabel?.text = "Ошибка"
-            /*Lose1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
-            Lose2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)*/
-            
-            /*Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
-            Lose1Button.titleLabel?.textAlignment = .center
-            Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
-            Lose2Button.titleLabel?.textAlignment = .center*/
-            
             FirstPlayerImage.image = UIImage(named: "img_serve_left")
             SecondPlayerImage.image = UIImage(named: "img_return_right")
         }
@@ -129,18 +138,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             FirstPlayerStatusLabel.text = "Прием"
             Win2Button.setTitle("Эйс", for: .normal)
             Win1Button.setTitle("Виннер", for: .normal)
-            
-            //Lose2Button.titleLabel?.text = "Ошибка на подаче"
-            //Lose1Button.titleLabel?.text = "Ошибка"
-            
             Lose2Button.setTitle("Ошибка на подаче", for: .normal)
             Lose1Button.setTitle("Ошибка", for: .normal)
-            
-            /*Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
-            Lose1Button.titleLabel?.textAlignment = .center
-            Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
-            Lose2Button.titleLabel?.textAlignment = .center*/
-            
             SecondPlayerImage.image = UIImage(named: "img_serve_right")
             FirstPlayerImage.image = UIImage(named: "img_return_left")
         }
@@ -315,7 +314,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func UpdatePoints() {
+    func UpdatePointsDraw() {
         // отображаем на экране текущие очки, геймы, сэты
         if (match.TieBreak7)||(match.TieBreak10) {
             Point1Label.text = String(player1.point)
@@ -357,20 +356,23 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // выполняется при запуске приложения
         BallLabel.translatesAutoresizingMaskIntoConstraints = true // чтоб можно было двигать метку
         BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30 // выставляем мячики первому игроку
-        //Lose1Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
-        Lose1Button.titleLabel?.textAlignment = .center
-        //Lose2Button.titleLabel?.font = UIFont (name: "Arial Bold", size: 15)!
+        Lose1Button.titleLabel?.textAlignment = .center // выравнивание текста на кнопках по центру
         Lose2Button.titleLabel?.textAlignment = .center
         
-        Win1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
+        Win1Button.setFont(UIFont (name: "Arial Bold", size: 15)!) // корректный шрифт на кнопках
         Win2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
         Lose1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
         Lose2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
         
-        UpdatePoints() // прорисовываем очки, геймы, сэты
+        UpdatePointsDraw() // прорисовываем очки, геймы, сэты
         player1.name = "Игрок1"
         player2.name = "Игрок2"
         match.TurnirName = "Турнир без названия"
+        
+        CurrentState.player1 = player1 // сохраняем состояние
+        CurrentState.player2 = player2
+        CurrentState.match = match
+        MatchStates.append(CurrentState) // записываем текущее состояние в массив состояний
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -436,7 +438,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
         }
         ChangePoints(p1: 1, p2: 0)
-        UpdatePoints()
+        UpdatePointsDraw()
+        SaveState()
     }
     
     @IBAction func Lose1ButtonPress(_ sender: Any) {
@@ -480,8 +483,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
             ChangePoints(p1: 0, p2: 1)
         }
-        UpdatePoints()
-        
+        UpdatePointsDraw()
+        SaveState()
     }
     
     @IBAction func Win2ButtonPress(_ sender: Any) {
@@ -521,7 +524,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
         }
         ChangePoints(p1: 0, p2: 1)
-        UpdatePoints()
+        UpdatePointsDraw()
+        SaveState()
     }
     
     @IBAction func Lose2ButtonPress(_ sender: Any) {
@@ -566,7 +570,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             }
             ChangePoints(p1: 1, p2: 0)
         }
-        UpdatePoints()
+        UpdatePointsDraw()
+        SaveState()
     }
     
     @IBAction func FirstPlayerImageButtonPress(_ sender: Any) {
@@ -578,12 +583,12 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         Lose2Button.setTitle("Ошибка", for: .normal)
         FirstPlayerImage.image = UIImage(named: "img_stroke_left")
         SecondPlayerImage.image = UIImage(named: "img_stroke_right")
+        SaveState()
     }
     
     @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
-        /*
-        
-         */
+        RestoreState()
+        UpdatePointsDraw()
     }
 }
 
