@@ -31,6 +31,10 @@ class SettingsViewController: UIViewController {
             AdvantageControl.isEnabled = false // выключаем выбор больше-меньше
             DefaulButton.isEnabled = false // выключаем конопку стандартных настроек
         }
+        if FullReset { // восстанавливаем значения ползунков по умолчанию если был сброс до 0
+            FullReset = false
+            DefaultButtonPress(DefaulButton as Any)
+        }
     }
     
     @IBAction func DefaultButtonPress(_ sender: Any) {

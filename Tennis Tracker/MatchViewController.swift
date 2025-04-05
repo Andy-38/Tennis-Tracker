@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIButton { // расширение для кнопки, чтобы корректно менять фон
+extension UIButton { // расширение для кнопки, чтобы корректно менять шрифт
     func setFont(_ font: UIFont) {
         if #available(iOS 15.0, *) {
             self.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
@@ -39,6 +39,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Point2WinButton: UIButton! // кнопка выигранного очка 1-го игрока
     @IBOutlet weak var Point1WinButton: UIButton! // кнопка выигранного очка 2-го игрока
     @IBOutlet weak var SwapButton: UIButton! // кнопка чтобы поменять игроков местами
+    @IBOutlet weak var UndoButton: UIButton! // кнопка отмены последнего действия
     
     @IBOutlet weak var Set1Label: UILabel! // количество сетов 1-го игрока
     @IBOutlet weak var Set2Label: UILabel! // количество сетов 2-го игрока
@@ -87,9 +88,21 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     {
         if CurrentStep >= 1 {
             CurrentStep-=1 // предыдущий шаг
+            if CurrentStep == 0 { FullReset = true }
             player1 = MatchStates[CurrentStep].player1 // восстанавливаем состояние
             player2 = MatchStates[CurrentStep].player2
             match = MatchStates[CurrentStep].match
+            // восстанавливаем имена игроков и название турнира, если они менялись
+            if MatchStates[CurrentStep].player1.name != MatchStates[CurrentStep+1].player1.name
+            { FirstPlayerNameTextField.text = player1.name }
+            if MatchStates[CurrentStep].player2.name != MatchStates[CurrentStep+1].player2.name
+            { SecondPlayerNameTextField.text = player2.name }
+            if MatchStates[CurrentStep].match.TurnirName != MatchStates[CurrentStep+1].match.TurnirName
+            { TurnirTextField.text = match.TurnirName }
+            if match.TieBreak7 { ScoreLabel.text = "ТБ(7)"}
+            else { ScoreLabel.text = "Очки"}
+            if match.TieBreak10 { ScoreLabel.text = "ТБ("+String(match.MaxPoint)+")"}
+            
             MatchStates.removeLast() // удаляем последнее состояние из массива
         }
     }
@@ -586,9 +599,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         SaveState()
     }
     
-    @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
+    @IBAction func UndoButtonPress(_ sender: Any) { // отменить последнее действие
         RestoreState()
         UpdatePointsDraw()
+    }
+    
+    @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
+        
     }
 }
 
