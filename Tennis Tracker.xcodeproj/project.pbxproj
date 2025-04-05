@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -61,10 +61,6 @@
 		A1EFFFBB2D994E3C00CA51D6 /* StatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		A1BFF8392DA0550000CE7255 /* Fonts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Fonts; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		A1C5CBD329EEE1730041050C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -93,7 +89,6 @@
 		A1C5CBCD29EEE1730041050C = {
 			isa = PBXGroup;
 			children = (
-				A1BFF8392DA0550000CE7255 /* Fonts */,
 				A1C5CBD829EEE1730041050C /* Tennis Tracker */,
 				A1C5CBF229EEE1750041050C /* Tennis TrackerTests */,
 				A1C5CBFC29EEE1750041050C /* Tennis TrackerUITests */,
@@ -161,9 +156,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A1BFF8392DA0550000CE7255 /* Fonts */,
 			);
 			name = "Tennis Tracker";
 			productName = "Tennis Tracker";
