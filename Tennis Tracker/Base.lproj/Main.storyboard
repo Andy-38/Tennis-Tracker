@@ -779,7 +779,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OId-WF-xP3">
                                 <rect key="frame" x="159.66666666666666" y="649" width="51" height="60.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" image="arrow.uturn.backward.circle.fill" catalog="system">
+                                <buttonConfiguration key="configuration" style="tinted" image="arrow.uturn.backward.circle" catalog="system">
                                     <directionalEdgeInsets key="contentInsets" top="20" leading="0.0" bottom="20" trailing="0.0"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -1062,7 +1062,7 @@
     </scenes>
     <resources>
         <image name="arrow.left.arrow.right.square.fill" catalog="system" width="128" height="114"/>
-        <image name="arrow.uturn.backward.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="arrow.uturn.backward.circle" catalog="system" width="128" height="123"/>
         <image name="book" catalog="system" width="128" height="99"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
