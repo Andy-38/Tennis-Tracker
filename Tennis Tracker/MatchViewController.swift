@@ -68,7 +68,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // выполняется при отображении экрана
-        if (match.TieBreak10)&&(!match.Finished) {
+        if ((match.TieBreak10)||(match.TieBreak7))&&(!match.Finished) {
             ScoreLabel.text = "ТБ("+String(match.MaxPoint)+")"
         } else {
             ScoreLabel.text = "Очки"
@@ -115,13 +115,14 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         Point1WinButton.isEnabled = false
         Point2WinButton.isEnabled = false
         SwapButton.isEnabled = false
+        UndoButton.isEnabled = false
         FirstPlayerNameTextField.isEnabled = false
         SecondPlayerNameTextField.isEnabled = false
         TurnirTextField.isEnabled = false
         FirstPlayerImageButton.isEnabled = false
         SecondPlayerImageButton.isEnabled = false
         match.Finished = true
-        match.MatchStop = Date(timeIntervalSinceNow: 0) // фиксируем время кончания матча
+        match.MatchStop = Date(timeIntervalSinceNow: 0) // фиксируем время окончания матча
         match.MatchLength = match.MatchStop.timeIntervalSince(match.MatchStart) // длительность матча
     }
     
@@ -136,6 +137,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         switch match.PodaetNow {
         case 1: do {
             BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
+            //let a = Int(Point1Label.frame.origin.x + Point1Label.frame.width - 30)
+            //showWinAlert(playerName: String(a))
             FirstPlayerStatusLabel.text = String(match.Podacha)+" подача"
             SecondPlayerStetusLabel.text = "Прием"
             Win1Button.setTitle("Эйс", for: .normal)
@@ -161,7 +164,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     func NextSet() { // начало следующего сета
-        match.SetNow+=1
+        match.gamesInSet[match.SetNow] = match.GameNow // запоминаем сколько геймов было в сете
+        match.SetNow+=1 // увеличиваем счетчик сетов
         player1.gamesStat.append("")
         player2.gamesStat.append("")
         

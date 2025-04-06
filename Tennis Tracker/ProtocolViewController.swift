@@ -84,6 +84,7 @@ class ProtocolViewController: UIViewController {
         if match.SetNow > 1 {
             for currentSet in 1...match.SetNow - 1 { // показываем все сеты по порядку
                 ProtocolTextView.text.append("Сет №" + String(currentSet) + ":\n")
+                //ProtocolTextView.text.append("Сет №" + String(currentSet) + " ("+String(match.gamesInSet[currentSet])+" геймов):\n")
                 ProtocolTextView.text.append("1. " + player1.gamesStat[currentSet] + "\n")
                 ProtocolTextView.text.append("2. " + player2.gamesStat[currentSet] + "\n\n")
             }
@@ -92,9 +93,18 @@ class ProtocolViewController: UIViewController {
         ProtocolTextView.text.append("---------------------------------\n")
         ProtocolTextView.text.append("История геймов \n\n")
         
+        var currSet = 0
         if match.GameNow > 1 {
             for currentGame in 1...match.GameNow - 1 { // показываем все геймы по порядку
-                ProtocolTextView.text.append("Гейм №" + String(currentGame) + ":\n")
+                //ProtocolTextView.text.append("Гейм №" + String(currentGame) + ":\n")
+                if currentGame == match.gamesInSet[currSet]+1 {
+                    currSet+=1
+                    if currSet > 1 { // отделяем 2-й и последующий сеты
+                        ProtocolTextView.text.append("---------------------------------\n")
+                    }
+                    ProtocolTextView.text.append("Сет №" + String(currSet) + ":\n\n")
+                }
+                ProtocolTextView.text.append("Гейм №" + String(currentGame-match.gamesInSet[currSet-1]) + ":\n")
                 ProtocolTextView.text.append("1. " + player1.stat[currentGame] + " [" + player1.inGameScore[currentGame]+"] \n")
                 ProtocolTextView.text.append("2. " + player2.stat[currentGame] + " [" + player2.inGameScore[currentGame]+"] \n\n")
             }

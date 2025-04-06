@@ -63,6 +63,7 @@ struct TennisMatch { // класс для описания матча
     var LastSetTieBreak10: Bool = false // есть ли тайбрейк до 10 вместо последнего сэта
     var GameNow: Int = 1 // какой сейчас идет гейм
     var SetNow: Int = 1 // какой сейчас идет сет
+    var gamesInSet: [Int] = [0, 0, 0, 0, 0, 0] // количество геймов в каждом сете
     var TurnirName: String = "" // название турнира
     var MatchStart: Date = Date(timeIntervalSinceNow: 0) // время начала матча
     var MatchStop: Date = Date(timeIntervalSinceNow: 0) // время окончания матча
