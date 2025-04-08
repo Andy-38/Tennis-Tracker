@@ -24,22 +24,22 @@ class ProtocolViewController: UIViewController {
         ProtocolTextView.text = ""
         ProtocolTextView.text.append("Протокол матча: \n\n")
         ProtocolTextView.text.append("Турнир: "+match.TurnirName+"\n") // название турнира
-        ProtocolTextView.text.append("Играли: (1)"+player1.name+"  и (2)"+player2.name+"\n\n") // имена игроков
+        ProtocolTextView.text.append("Играли: (1)"+player[1].name+"  и (2)"+player[2].name+"\n\n") // имена игроков
         
         ProtocolTextView.text.append("Победитель матча: ") // показываем победителя матча
         switch match.Winner {
         case 1: do {
-            ProtocolTextView.text.append(player1.name)
+            ProtocolTextView.text.append(player[1].name)
         }
         case 2: do {
-            ProtocolTextView.text.append(player2.name)
+            ProtocolTextView.text.append(player[2].name)
         }
         default: ProtocolTextView.text.append("не определен") // если матч не закончился
         }
         ProtocolTextView.text.append("\n")
         
-        ProtocolTextView.text.append("1: "+player1.setScore+"\n") // показываем очки в сетах
-        ProtocolTextView.text.append("2: "+player2.setScore+"\n\n")
+        ProtocolTextView.text.append("1: "+player[1].setScore+"\n") // показываем очки в сетах
+        ProtocolTextView.text.append("2: "+player[2].setScore+"\n\n")
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss" // форматируем время в понятный формат
@@ -85,8 +85,8 @@ class ProtocolViewController: UIViewController {
             for currentSet in 1...match.SetNow - 1 { // показываем все сеты по порядку
                 ProtocolTextView.text.append("Сет №" + String(currentSet) + ":\n")
                 //ProtocolTextView.text.append("Сет №" + String(currentSet) + " ("+String(match.gamesInSet[currentSet])+" геймов):\n")
-                ProtocolTextView.text.append("1. " + player1.gamesStat[currentSet] + "\n")
-                ProtocolTextView.text.append("2. " + player2.gamesStat[currentSet] + "\n\n")
+                ProtocolTextView.text.append("1. " + player[1].gamesStat[currentSet] + "\n")
+                ProtocolTextView.text.append("2. " + player[2].gamesStat[currentSet] + "\n\n")
             }
         }
         
@@ -105,8 +105,8 @@ class ProtocolViewController: UIViewController {
                     ProtocolTextView.text.append("Сет №" + String(currSet) + ":\n\n")
                 }
                 ProtocolTextView.text.append("Гейм №" + String(currentGame-match.gamesInSet[currSet-1]) + ":\n")
-                ProtocolTextView.text.append("1. " + player1.stat[currentGame] + " [" + player1.inGameScore[currentGame]+"] \n")
-                ProtocolTextView.text.append("2. " + player2.stat[currentGame] + " [" + player2.inGameScore[currentGame]+"] \n\n")
+                ProtocolTextView.text.append("1. " + player[1].stat[currentGame] + " [" + player[1].inGameScore[currentGame]+"] \n")
+                ProtocolTextView.text.append("2. " + player[2].stat[currentGame] + " [" + player[2].inGameScore[currentGame]+"] \n\n")
             }
         }
         

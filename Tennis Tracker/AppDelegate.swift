@@ -9,8 +9,10 @@ import UIKit
 import CoreData
 
 // глобальные переменные, которые видны из всех ViewController'ов
-var player1 = TennisPlayer() // все характеристики 1-го игрока
-var player2 = TennisPlayer() // все характеристики 2-го игрока
+//var player1 = TennisPlayer() // все характеристики 1-го игрока
+//var player2 = TennisPlayer() // все характеристики 2-го игрока
+var player: [TennisPlayer] = [TennisPlayer(), TennisPlayer(), TennisPlayer()] // массив игроков
+var playerColor: [UIColor] = [.white, .systemGreen, .systemPurple] // каким цветом очки игроков
 var match = TennisMatch() // текущий теннисный матч
 var CurrentState = MatchState() // текущее состояние матча
 var MatchStates: [MatchState] = [] // массив состояний матча от начала до конца

@@ -78,8 +78,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     func SaveState() // запоминаем текущее состояние матча
     {
         CurrentStep+=1 // следующий шаг матча
-        CurrentState.player1 = player1 // сохраняем состояние
-        CurrentState.player2 = player2
+        CurrentState.player1 = player[1] // сохраняем состояние
+        CurrentState.player2 = player[2]
         CurrentState.match = match
         MatchStates.append(CurrentState) // записываем текущее состояние в массив состояний
     }
@@ -89,14 +89,14 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if CurrentStep >= 1 {
             CurrentStep-=1 // предыдущий шаг
             if CurrentStep == 0 { FullReset = true }
-            player1 = MatchStates[CurrentStep].player1 // восстанавливаем состояние
-            player2 = MatchStates[CurrentStep].player2
+            player[1] = MatchStates[CurrentStep].player1 // восстанавливаем состояние
+            player[2] = MatchStates[CurrentStep].player2
             match = MatchStates[CurrentStep].match
             // восстанавливаем имена игроков и название турнира, если они менялись
             if MatchStates[CurrentStep].player1.name != MatchStates[CurrentStep+1].player1.name
-            { FirstPlayerNameTextField.text = player1.name }
+            { FirstPlayerNameTextField.text = player[1].name }
             if MatchStates[CurrentStep].player2.name != MatchStates[CurrentStep+1].player2.name
-            { SecondPlayerNameTextField.text = player2.name }
+            { SecondPlayerNameTextField.text = player[2].name }
             if MatchStates[CurrentStep].match.TurnirName != MatchStates[CurrentStep+1].match.TurnirName
             { TurnirTextField.text = match.TurnirName }
             if match.TieBreak7 { ScoreLabel.text = "ТБ(7)"}
@@ -166,22 +166,22 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     func NextSet() { // начало следующего сета
         match.gamesInSet[match.SetNow] = match.GameNow // запоминаем сколько геймов было в сете
         match.SetNow+=1 // увеличиваем счетчик сетов
-        player1.gamesStat.append("")
-        player2.gamesStat.append("")
+        player[1].gamesStat.append("")
+        player[2].gamesStat.append("")
         
         if match.TieBreak10 { // если закончился тайбрейк до 10
             ScoreLabel.text = "Очки" // восстанавливаем надпись
-            player1.game = player1.point // счет сета записываем не 1:0 а по очкам тайбрейка
-            player2.game = player2.point
+            player[1].game = player[1].point // счет сета записываем не 1:0 а по очкам тайбрейка
+            player[2].game = player[2].point
         }
         
-        player1.setScore = player1.setScore + String(player1.game) + " " // отображаем счет сета
-        player2.setScore = player2.setScore + String(player2.game) + " "
-        player1.game = 0 // обнуляем счет геймов у игроков
-        player2.game = 0
+        player[1].setScore = player[1].setScore + String(player[1].game) + " " // отображаем счет сета
+        player[2].setScore = player[2].setScore + String(player[2].game) + " "
+        player[1].game = 0 // обнуляем счет геймов у игроков
+        player[2].game = 0
         
         // если равенство по сетам 1:1 или 2:2, то начинаем решающий тайбрейк
-        if (player1.set == player2.set)&&(player1.set == match.MaxSet - 1)&&(match.LastSetTieBreak10) {
+        if (player[1].set == player[2].set)&&(player[1].set == match.MaxSet - 1)&&(match.LastSetTieBreak10) {
             match.TieBreak10 = true //
             match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
             // в первом цикле увеличится на 1 и начнется с 0
@@ -192,15 +192,15 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     func ChangeGames( g1: Int, g2: Int) { // g1, g2 - изменение геймов 1-го и 2-го игроков
         // функция для пересчета геймов
-        player1.game = player1.game + g1
-        player2.game = player2.game + g2
+        player[1].game = player[1].game + g1
+        player[2].game = player[2].game + g2
         
         if !match.TieBreak10 { // если не тайбрейк10 то счет сета - по геймам
-            player1.inGameScore[match.GameNow] = String(player1.game)
-            player2.inGameScore[match.GameNow] = String(player2.game)
+            player[1].inGameScore[match.GameNow] = String(player[1].game)
+            player[2].inGameScore[match.GameNow] = String(player[2].game)
         } else { // если тайбрейк10 то счета сета - по очкам
-            player1.inGameScore[match.GameNow] = String(player1.point)
-            player2.inGameScore[match.GameNow] = String(player2.point)
+            player[1].inGameScore[match.GameNow] = String(player[1].point)
+            player[2].inGameScore[match.GameNow] = String(player[2].point)
         }
         
         if !match.TieBreak7 { // если закончился обычный гейм, не тайбрейк, то смена подачи
@@ -209,31 +209,31 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SmenaPodachiDraw()
         }
         
-        if ((player1.game>=match.MaxGame)&&(player1.game - player2.game >= 2))||((player1.game==1)&&(match.TieBreak10)) {
+        if ((player[1].game>=match.MaxGame)&&(player[1].game - player[2].game >= 2))||((player[1].game==1)&&(match.TieBreak10)) {
             // игрок 1 набрал 6 или больше геймов с разницей в 2 гейма
             // или игрок 1 выиграл тайбрейк до 10
-            player1.set+=1
+            player[1].set+=1
             NextSet()
-            if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
-                showWinAlert(playerName: player1.name)
+            if player[1].set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
+                player[1].name = FirstPlayerNameTextField.text ?? "Игрок1"
+                showWinAlert(playerName: player[1].name)
                 match.Winner = 1
                 FinishGame()
             }
         }
-        if ((player2.game>=match.MaxGame)&&(player2.game - player1.game >= 2))||((player2.game==1)&&(match.TieBreak10))  {
+        if ((player[2].game>=match.MaxGame)&&(player[2].game - player[1].game >= 2))||((player[2].game==1)&&(match.TieBreak10))  {
             // игрок 2 набрал 6 или больше геймов с разницей в 2 гейма
             // или игрок 2 выиграл тайбрейк до 10
-            player2.set+=1
+            player[2].set+=1
             NextSet()
-            if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-                showWinAlert(playerName: player2.name)
+            if player[2].set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
+                player[2].name = SecondPlayerNameTextField.text ?? "Игрок2"
+                showWinAlert(playerName: player[2].name)
                 match.Winner = 2
                 FinishGame()
             }
         }
-        if (player1.game == match.MaxGame) && (player2.game == match.MaxGame) {
+        if (player[1].game == match.MaxGame) && (player[2].game == match.MaxGame) {
             // при счете 6:6 по сэтам начинается тайбрейк до 7
             match.TieBreak7 = true
             match.TieBreakPoint = -1 // сколько розыгрышей в тайбрейке прошло
@@ -242,7 +242,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             ScoreLabel.text = "ТБ(7)"
             match.MaxPoint = 7 // до 7 очков тайбрейк
         }
-        if (player1.game + player2.game == 2 * match.MaxGame + 1) {
+        if (player[1].game + player[2].game == 2 * match.MaxGame + 1) {
             // при счете 7:6 или 6:7 по геймам заканчивается тайбрейк
             match.TieBreak7 = false
             match.PodaetNow = match.TieBreakPodacha // возвращаем подачу тому кто начал тайбрейк
@@ -252,75 +252,75 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             SmenaPodachiDraw()
             ScoreLabel.text = "Очки"
             match.MaxPoint = 4 // до 4-х очков гейм 0/15/30/40
-            player1.set = player1.set + (player1.game - match.MaxGame)
-            player2.set = player2.set + (player2.game - match.MaxGame)
+            player[1].set = player[1].set + (player[1].game - match.MaxGame)
+            player[2].set = player[2].set + (player[2].game - match.MaxGame)
             NextSet()
-            if player1.set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
-                player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
-                showWinAlert(playerName: player1.name)
+            if player[1].set>=match.MaxSet { // если 1-й игрок выиграл 2 сета - сообщение о победе
+                player[1].name = FirstPlayerNameTextField.text ?? "Игрок1"
+                showWinAlert(playerName: player[1].name)
                 match.Winner = 1
                 FinishGame()
             }
-            if player2.set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
-                player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-                showWinAlert(playerName: player2.name)
+            if player[2].set>=match.MaxSet { // если 2-й игрок выиграл 2 сета - сообщение о победе
+                player[2].name = SecondPlayerNameTextField.text ?? "Игрок2"
+                showWinAlert(playerName: player[2].name)
                 match.Winner = 2
                 FinishGame()
             }
         }
         match.GameNow+=1 // начинаем следующий гейм
-        player1.stat.append(" ")
-        player2.stat.append(" ")
-        player1.inGameScore.append("0")
-        player2.inGameScore.append("0")
+        player[1].stat.append(" ")
+        player[2].stat.append(" ")
+        player[1].inGameScore.append("0")
+        player[2].inGameScore.append("0")
         
     }
     
     func ChangePoints( p1: Int, p2 : Int) { // p1, p2 - изменение очков 1-го и 2-го игроков
         // функция для пересчета счета
-        player1.point = player1.point + p1
-        player2.point = player2.point + p2
+        player[1].point = player[1].point + p1
+        player[2].point = player[2].point + p2
         match.Podacha = 1 // снова первая подача
         
-        if ((player1.point >= match.MaxPoint)&&(player1.point - player2.point >= 2))
-        || ((player1.point == match.MaxPoint) && (player2.point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
+        if ((player[1].point >= match.MaxPoint)&&(player[1].point - player[2].point >= 2))
+        || ((player[1].point == match.MaxPoint) && (player[2].point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
             // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
             // или 40:40 и решающее очко у 1-го то
             if (match.PodaetNow == 1)||(match.TieBreak7)||(match.TieBreak10) { // выиграл гейм на своей подаче
                 // или выиграл тайбрейк
-                player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "o"
+                player[1].gamesStat[match.SetNow] = player[1].gamesStat[match.SetNow] + "o"
             }
             else { // выиграл гейм на подаче соперника
-                player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + "★"
-                player1.breakpoint+=1 // игрок 1 реализовал брейкпоинт
+                player[1].gamesStat[match.SetNow] = player[1].gamesStat[match.SetNow] + "★"
+                player[1].breakpoint+=1 // игрок 1 реализовал брейкпоинт
             }
-            player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + " "
+            player[2].gamesStat[match.SetNow] = player[2].gamesStat[match.SetNow] + " "
             ChangeGames(g1: 1, g2: 0) // игрок 1 выиграл +1 гейм
-            player1.point = 0 // обнуляем очки 1-го
-            player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
+            player[1].point = 0 // обнуляем очки 1-го
+            player[2].point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
         }
         
-        if ((player2.point >= match.MaxPoint)&&(player2.point - player1.point >= 2))
-        || ((player1.point == match.MaxPoint - 1) && (player2.point == match.MaxPoint) && (match.BolsheMenshe == false)) {
+        if ((player[2].point >= match.MaxPoint)&&(player[2].point - player[1].point >= 2))
+        || ((player[1].point == match.MaxPoint - 1) && (player[2].point == match.MaxPoint) && (match.BolsheMenshe == false)) {
             // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
             // или 40:40 и решающее очко у 2-го то
-            player1.gamesStat[match.SetNow] = player1.gamesStat[match.SetNow] + " "
+            player[1].gamesStat[match.SetNow] = player[1].gamesStat[match.SetNow] + " "
             if (match.PodaetNow == 2)||(match.TieBreak7)||(match.TieBreak10) { // выиграл гейм на своей подаче
                 // или выиграл тайбрейк
-                player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "o"
+                player[2].gamesStat[match.SetNow] = player[2].gamesStat[match.SetNow] + "o"
             }
             else { // выиграл гейм на подаче соперника
-                player2.gamesStat[match.SetNow] = player2.gamesStat[match.SetNow] + "★"
-                player2.breakpoint+=1 // игрок 2 реализовал брейкпоинт
+                player[2].gamesStat[match.SetNow] = player[2].gamesStat[match.SetNow] + "★"
+                player[2].breakpoint+=1 // игрок 2 реализовал брейкпоинт
             }
             ChangeGames(g1: 0, g2: 1) // игрок 1 выиграл +1 гейм
-            player1.point = 0 // обнуляем очки 1-го
-            player2.point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
+            player[1].point = 0 // обнуляем очки 1-го
+            player[2].point = 0 // и 2-го игроков чтоб следующий гнейм начался с нуля
         }
         
-        if (player1.point == match.MaxPoint) && (player2.point == match.MaxPoint) && (match.TieBreak7 == false) && (match.TieBreak10 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
-            player1.point = match.MaxPoint - 1
-            player2.point = match.MaxPoint - 1
+        if (player[1].point == match.MaxPoint) && (player[2].point == match.MaxPoint) && (match.TieBreak7 == false) && (match.TieBreak10 == false) { // если не тайбрейк, у кого то было больше и он проиграл очко, то счет 40:40
+            player[1].point = match.MaxPoint - 1
+            player[2].point = match.MaxPoint - 1
         }
         if (match.TieBreak7)||(match.TieBreak10) { // если идет тайбрейк до 7 или до 10
             match.TieBreakPoint+=1 // считаем какой по счету розыгрыш в тайбрейке закончился
@@ -334,22 +334,42 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     func UpdatePointsDraw() {
         // отображаем на экране текущие очки, геймы, сэты
         if (match.TieBreak7)||(match.TieBreak10) {
-            Point1Label.text = String(player1.point)
-            Point2Label.text = String(player2.point)
+            Point1Label.text = String(player[1].point)
+            Point2Label.text = String(player[2].point)
         } else {
-            Point1Label.text = GamePoints[player1.point]
-            Point2Label.text = GamePoints[player2.point]
+            Point1Label.text = GamePoints[player[1].point]
+            Point2Label.text = GamePoints[player[2].point]
         }
-        Game1Label.text = String(player1.game)
-        Game2Label.text = String(player2.game)
-        Set1Label.text = String(player1.set)
-        Set2Label.text = String(player2.set)
-        Stat1Label.text = player1.stat[match.GameNow]
-        Stat2Label.text = player2.stat[match.GameNow]
-        GameStat1Label.text = player1.gamesStat[match.SetNow]
-        GameStat2Label.text = player2.gamesStat[match.SetNow]
-        Player1SetScoreLabel.text = player1.setScore
-        Player2SetScoreLabel.text = player2.setScore
+        Game1Label.text = String(player[1].game)
+        Game2Label.text = String(player[2].game)
+        Set1Label.text = String(player[1].set)
+        Set2Label.text = String(player[2].set)
+        Stat1Label.text = player[1].stat[match.GameNow]
+        Stat2Label.text = player[2].stat[match.GameNow]
+        GameStat1Label.text = player[1].gamesStat[match.SetNow]
+        GameStat2Label.text = player[2].gamesStat[match.SetNow]
+        Player1SetScoreLabel.text = player[1].setScore
+        Player2SetScoreLabel.text = player[2].setScore
+        
+        FirstPlayerNameTextField.text = player[1].name
+        SecondPlayerNameTextField.text = player[2].name
+        
+        //меняем цвета в зависимости от того, с какой стороны какой игрок
+        FirstPlayerNameTextField.textColor = playerColor[1]
+        SecondPlayerNameTextField.textColor = playerColor[2]
+        Set1Label.textColor = playerColor[1]
+        Game1Label.textColor = playerColor[1]
+        Point1Label.textColor = playerColor[1]
+        Set2Label.textColor = playerColor[2]
+        Game2Label.textColor = playerColor[2]
+        Point2Label.textColor = playerColor[2]
+        Stat1Label.textColor = playerColor[1]
+        GameStat1Label.textColor = playerColor[1]
+        Player1SetScoreLabel.textColor = playerColor[1]
+        Stat2Label.textColor = playerColor[2]
+        GameStat2Label.textColor = playerColor[2]
+        Player2SetScoreLabel.textColor = playerColor[2]
+        
         switch match.Podacha { // какая подача (1/2) - столько и мячиков на экране
         case 1: BallLabel.text = "🎾"
         case 2: BallLabel.text = "🎾🎾"
@@ -381,13 +401,13 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         Lose1Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
         Lose2Button.setFont(UIFont (name: "Arial Bold", size: 15)!)
         
-        UpdatePointsDraw() // прорисовываем очки, геймы, сэты
-        player1.name = "Игрок1"
-        player2.name = "Игрок2"
+        player[1].name = "Игрок1"
+        player[2].name = "Игрок2"
         match.TurnirName = "Турнир без названия"
+        UpdatePointsDraw() // прорисовываем очки, геймы, сэты
         
-        CurrentState.player1 = player1 // сохраняем состояние
-        CurrentState.player2 = player2
+        CurrentState.player1 = player[1] // сохраняем состояние
+        CurrentState.player2 = player[2]
         CurrentState.match = match
         MatchStates.append(CurrentState) // записываем текущее состояние в массив состояний
     }
@@ -396,10 +416,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // вызывается когда пользователь коснулся экрана
         super.touchesBegan(touches, with: event)
         view.endEditing(true) // убираем клавиатуру
-        player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
-        if player1.name == "" { player1.name = "Игрок1" }
-        player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-        if player2.name == "" { player2.name = "Игрок2" }
+        player[1].name = FirstPlayerNameTextField.text ?? "Игрок1"
+        if player[1].name == "" { player[1].name = "Игрок1" }
+        player[2].name = SecondPlayerNameTextField.text ?? "Игрок2"
+        if player[2].name == "" { player[2].name = "Игрок2" }
         match.TurnirName = TurnirTextField.text ?? "Турнир без названия"
         if match.TurnirName == "" { match.TurnirName = "Турнир без названия" }
     }
@@ -407,10 +427,10 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // вызывается при нажатии кнопки "готово"
         textField.resignFirstResponder()
-        player1.name = FirstPlayerNameTextField.text ?? "Игрок1"
-        if player1.name == "" { player1.name = "Игрок1" }
-        player2.name = SecondPlayerNameTextField.text ?? "Игрок2"
-        if player2.name == "" { player2.name = "Игрок2" }
+        player[1].name = FirstPlayerNameTextField.text ?? "Игрок1"
+        if player[1].name == "" { player[1].name = "Игрок1" }
+        player[2].name = SecondPlayerNameTextField.text ?? "Игрок2"
+        if player[2].name == "" { player[2].name = "Игрок2" }
         match.TurnirName = TurnirTextField.text ?? "Турнир без названия"
         if match.TurnirName == "" { match.TurnirName = "Турнир без названия" }
         return true
@@ -418,39 +438,39 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win1ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 1-го игрока
-        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player1.winners+=1 } // считаем виннеры 1-го игрока
-        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player1.totalPoints+=1 } // считаем выигранные очки 1-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player[1].winners+=1 } // считаем виннеры 1-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player[1].totalPoints+=1 } // считаем выигранные очки 1-го игрока
         
         if (match.PodaetNow == 1) && (match.Podacha == 2) {
             // вторая подача - заменяем символ
-            player1.stat[match.GameNow].removeLast() // убираем .
-            player2.stat[match.GameNow].removeLast()
+            player[1].stat[match.GameNow].removeLast() // убираем .
+            player[2].stat[match.GameNow].removeLast()
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player1.stat[match.GameNow] = player1.stat[match.GameNow] + "Ạ" // игрок 1 подал эйс на 2-й подаче
-                player1.aces+=1
+                player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "Ạ" // игрок 1 подал эйс на 2-й подаче
+                player[1].aces+=1
             }
             else {
-                player1.stat[match.GameNow] = player1.stat[match.GameNow] + "!" // игрок 1 выиграл 2-ю подачу после проигранной 1-й
+                player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "!" // игрок 1 выиграл 2-ю подачу после проигранной 1-й
             }
-            player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
+            player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " "
         }
         else {
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player1.stat[match.GameNow] = player1.stat[match.GameNow] + "A" // игрок 1 подал эйс на 1-й подаче
-                player1.aces+=1
-                player1.vsegoPodach+=1 // +1 подача первого
-                player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
+                player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "A" // игрок 1 подал эйс на 1-й подаче
+                player[1].aces+=1
+                player[1].vsegoPodach+=1 // +1 подача первого
+                player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " "
             }
             else {
                 if match.Podacha == 1 {
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/" // игрок 1 просто выиграл розыгрыш
-                    if (match.PodaetNow == 1) { player1.vsegoPodach+=1} // +1 подача первого
-                    if (match.PodaetNow == 2) { player2.vsegoPodach+=1} // +1 подача второго
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "/" // игрок 1 просто выиграл розыгрыш
+                    if (match.PodaetNow == 1) { player[1].vsegoPodach+=1} // +1 подача первого
+                    if (match.PodaetNow == 2) { player[2].vsegoPodach+=1} // +1 подача второго
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " "
                 }
                 else {
-                    player1.stat[match.GameNow].removeLast()
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/"
+                    player[1].stat[match.GameNow].removeLast()
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "/"
                 }
             }
         }
@@ -463,40 +483,40 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки проигрыша 1-го игрока
         if (match.PodaetNow == 1) && (match.Podacha == 1) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка на подаче" ) { // если подает 1-й и ошибка на подаче то
             match.Podacha = 2 // 2-я подача
-            player1.podach2+=1
-            player1.vsegoPodach+=1 // +1 подача первого
-            player1.stat[match.GameNow] = player1.stat[match.GameNow] + "."
-            player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
+            player[1].podach2+=1
+            player[1].vsegoPodach+=1 // +1 подача первого
+            player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "."
+            player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " "
         }
         else { // ошибка 1-го на 2-й подаче = выигранное очко 2-го
             if (match.PodaetNow == 1) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка на подаче" )  {
-                player2.stat[match.GameNow].removeLast()
-                player2.stat[match.GameNow] = player2.stat[match.GameNow] + "D" // двойная ошибка
-                player1.doubleFaults+=1 // считаем двойные ошибки для статистики
+                player[2].stat[match.GameNow].removeLast()
+                player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "D" // двойная ошибка
+                player[1].doubleFaults+=1 // считаем двойные ошибки для статистики
             }
             if (match.PodaetNow == 2) {
                 if match.Podacha == 2 {
-                    player2.stat[match.GameNow].removeLast() // убираем .
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "!"
-                    player1.ufe+=1 // считаем невынужденные ошибки первого
+                    player[2].stat[match.GameNow].removeLast() // убираем .
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "!"
+                    player[1].ufe+=1 // считаем невынужденные ошибки первого
                 }
                 else {
-                    player2.vsegoPodach+=1 // +1 подача второго
-                    player1.ufe+=1 // считаем невынужденные ошибки первого
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/"
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
+                    player[2].vsegoPodach+=1 // +1 подача второго
+                    player[1].ufe+=1 // считаем невынужденные ошибки первого
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "/"
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " "
                 }
             }
             if (match.PodaetNow == 1) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка" ) {
                 
-                player1.ufe+=1 // считаем невынужденные ошибки первого
+                player[1].ufe+=1 // считаем невынужденные ошибки первого
                 if match.Podacha == 2 {
-                    player2.stat[match.GameNow].removeLast() // убираем " "
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/" }
+                    player[2].stat[match.GameNow].removeLast() // убираем " "
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "/" }
                 else {
-                    player1.vsegoPodach+=1 // +1 подача первого
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/"
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + " " }
+                    player[1].vsegoPodach+=1 // +1 подача первого
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "/"
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " " }
             }
             ChangePoints(p1: 0, p2: 1)
         }
@@ -506,37 +526,37 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func Win2ButtonPress(_ sender: Any) {
         // при нажатии кнопки победы 2-го игрока
-        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player2.winners+=1 } // считаем виннеры 2-го игрока
-        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player2.totalPoints+=1 } // считаем выигранные очки 2-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == "Виннер" { player[2].winners+=1 } // считаем виннеры 2-го игрока
+        if (sender as? UIButton)?.titleLabel?.text == " Выиграно очко" { player[2].totalPoints+=1 } // считаем выигранные очки 2-го игрока
         if (match.PodaetNow == 2) && (match.Podacha == 2) {
             // вторая подача - заменяем символ
-            player2.stat[match.GameNow].removeLast() // убираем .
-            player1.stat[match.GameNow].removeLast()
+            player[2].stat[match.GameNow].removeLast() // убираем .
+            player[1].stat[match.GameNow].removeLast()
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player2.stat[match.GameNow] = player2.stat[match.GameNow] + "Ạ" // игрок 2 подал эйс на 2-й подаче
-                player2.aces+=1
+                player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "Ạ" // игрок 2 подал эйс на 2-й подаче
+                player[2].aces+=1
             }
             else {
-                player2.stat[match.GameNow] = player2.stat[match.GameNow] + "!" // игрок 2 выиграл 2-ю подачу после проигранной 1-й
+                player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "!" // игрок 2 выиграл 2-ю подачу после проигранной 1-й
             }
-            player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
+            player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " "
         }
         else {
             if (sender as? UIButton)?.titleLabel?.text == "Эйс" {
-                player2.stat[match.GameNow] = player2.stat[match.GameNow] + "A" // игрок 2 подал эйс на 1-й подаче
-                player2.aces+=1
-                player2.vsegoPodach+=1 // +1 подача второго
-                player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
+                player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "A" // игрок 2 подал эйс на 1-й подаче
+                player[2].aces+=1
+                player[2].vsegoPodach+=1 // +1 подача второго
+                player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " "
             }
             else {
                 if match.Podacha == 1 {
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/" // игрок 2 просто выиграл розыгрыш
-                    if (match.PodaetNow == 1) {player1.vsegoPodach+=1} // +1 подача первого
-                    if (match.PodaetNow == 2) { player2.vsegoPodach+=1} // +1 подача второго
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "/" // игрок 2 просто выиграл розыгрыш
+                    if (match.PodaetNow == 1) {player[1].vsegoPodach+=1} // +1 подача первого
+                    if (match.PodaetNow == 2) { player[2].vsegoPodach+=1} // +1 подача второго
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " "
                 } else {
-                    player2.stat[match.GameNow].removeLast()
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + "/"
+                    player[2].stat[match.GameNow].removeLast()
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "/"
                 }
             }
         }
@@ -549,41 +569,41 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         // при нажатии кнопки проигрыша 2-го игрока
         if (match.PodaetNow == 2) && (match.Podacha == 1) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка на подаче" )  { // если подает 2-й и ошибка на подаче то
             match.Podacha = 2 // 2-я подача
-            player2.podach2+=1
-            player2.vsegoPodach+=1 // +1 подача второго
-            player2.stat[match.GameNow] = player2.stat[match.GameNow] + "."
-            player1.stat[match.GameNow] = player1.stat[match.GameNow] + " "
+            player[2].podach2+=1
+            player[2].vsegoPodach+=1 // +1 подача второго
+            player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + "."
+            player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + " "
         }
         else {
             // ошибка 2-го на 2-й подаче = выигранное очко 1-го
             if (match.PodaetNow == 2) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка на подаче" )  {
-                player1.stat[match.GameNow].removeLast()
-                player1.stat[match.GameNow] = player1.stat[match.GameNow] + "D" // двойная ошибка
-                player2.doubleFaults+=1 // считаем двойные ошибки для статистики
+                player[1].stat[match.GameNow].removeLast()
+                player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "D" // двойная ошибка
+                player[2].doubleFaults+=1 // считаем двойные ошибки для статистики
             }
             if (match.PodaetNow == 1) {
                 if match.Podacha == 2 {
-                    player1.stat[match.GameNow].removeLast() // убираем .
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "!"
-                    player2.ufe+=1 // считаем невынужденные ошибки второго
+                    player[1].stat[match.GameNow].removeLast() // убираем .
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "!"
+                    player[2].ufe+=1 // считаем невынужденные ошибки второго
                 }
                 else {
-                    player1.vsegoPodach+=1 // +1 подача первого
-                    player2.ufe+=1 // считаем невынужденные ошибки второго
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/"
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + " "
+                    player[1].vsegoPodach+=1 // +1 подача первого
+                    player[2].ufe+=1 // считаем невынужденные ошибки второго
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "/"
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " "
                 }
             }
             if (match.PodaetNow == 2) && ((sender as? UIButton)?.titleLabel?.text == "Ошибка" ) {
                 
-                player2.ufe+=1 // считаем невынужденные ошибки второго
+                player[2].ufe+=1 // считаем невынужденные ошибки второго
                 if match.Podacha == 2 {
-                    player1.stat[match.GameNow].removeLast() // убираем " "
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/" }
+                    player[1].stat[match.GameNow].removeLast() // убираем " "
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "/" }
                 else {
-                    player2.vsegoPodach+=1 // +1 подача второго
-                    player1.stat[match.GameNow] = player1.stat[match.GameNow] + "/"
-                    player2.stat[match.GameNow] = player2.stat[match.GameNow] + " " }
+                    player[2].vsegoPodach+=1 // +1 подача второго
+                    player[1].stat[match.GameNow] = player[1].stat[match.GameNow] + "/"
+                    player[2].stat[match.GameNow] = player[2].stat[match.GameNow] + " " }
             }
             ChangePoints(p1: 1, p2: 0)
         }
@@ -592,6 +612,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func FirstPlayerImageButtonPress(_ sender: Any) {
+        // подача прошла начался длинный розыгрыш
         FirstPlayerStatusLabel.text = "Игра"
         SecondPlayerStetusLabel.text = "Игра"
         Win1Button.setTitle("Виннер", for: .normal)
@@ -604,12 +625,47 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func UndoButtonPress(_ sender: Any) { // отменить последнее действие
-        RestoreState()
-        UpdatePointsDraw()
+        RestoreState() // восстановили предыдущее состояние матча
+        UpdatePointsDraw() // прорисовали его на экране
     }
     
     @IBAction func SwapButtonPress(_ sender: Any) { // поменять игроков местами
+        player[0] = player[1]
+        player[1] = player[2]
+        player[2] = player[0]
         
+        playerColor[0] = playerColor[1]
+        playerColor[1] = playerColor[2]
+        playerColor[2] = playerColor[0]
+        
+        if match.PodaetNow == 1 {match.PodaetNow = 2}
+        else {match.PodaetNow = 1}
+        UpdatePointsDraw()
+        
+        /*
+        FirstPlayerNameTextField.text = player[1].name
+        SecondPlayerNameTextField.text = player[2].name
+        FirstPlayerNameTextField.textColor = playerColor[1]
+        SecondPlayerNameTextField.textColor = playerColor[2]
+        
+        Set1Label.textColor = playerColor[1]
+        Game1Label.textColor = playerColor[1]
+        Point1Label.textColor = playerColor[1]
+        
+        Set2Label.textColor = playerColor[2]
+        Game2Label.textColor = playerColor[2]
+        Point2Label.textColor = playerColor[2]
+        
+        Stat1Label.textColor = playerColor[1]
+        GameStat1Label.textColor = playerColor[1]
+        Player1SetScoreLabel.textColor = playerColor[1]
+        
+        Stat2Label.textColor = playerColor[2]
+        GameStat2Label.textColor = playerColor[2]
+        Player2SetScoreLabel.textColor = playerColor[2]
+        */
+        
+        SaveState()
     }
 }
 
