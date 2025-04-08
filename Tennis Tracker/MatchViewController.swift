@@ -283,7 +283,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         match.Podacha = 1 // снова первая подача
         
         if ((player[1].point >= match.MaxPoint)&&(player[1].point - player[2].point >= 2))
-        || ((player[1].point == match.MaxPoint) && (player[2].point == match.MaxPoint - 1) && (match.BolsheMenshe == false)) {
+            || ((player[1].point == match.MaxPoint) && (player[2].point == match.MaxPoint - 1) && (match.BolsheMenshe == false) && (!match.TieBreak10) && (!match.TieBreak7)) {
             // если игрок 1 набрал больше 40 очков, а у 2-го меньше 30 то
             // или 40:40 и решающее очко у 1-го то
             if (match.PodaetNow == 1)||(match.TieBreak7)||(match.TieBreak10) { // выиграл гейм на своей подаче
@@ -301,7 +301,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         }
         
         if ((player[2].point >= match.MaxPoint)&&(player[2].point - player[1].point >= 2))
-        || ((player[1].point == match.MaxPoint - 1) && (player[2].point == match.MaxPoint) && (match.BolsheMenshe == false)) {
+        || ((player[1].point == match.MaxPoint - 1) && (player[2].point == match.MaxPoint) && (match.BolsheMenshe == false) && (!match.TieBreak10) && (!match.TieBreak7)) {
             // если игрок 2 набрал больше 40 очков, а у 1-го меньше 30 то
             // или 40:40 и решающее очко у 2-го то
             player[1].gamesStat[match.SetNow] = player[1].gamesStat[match.SetNow] + " "
