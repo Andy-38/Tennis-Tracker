@@ -61,11 +61,11 @@ class StatViewController: UIViewController {
         // двойные ошибки
         Player1doubleFaultLabel.text = String(player[1].doubleFaults)
         Player2doubleFaultLabel.text = String(player[2].doubleFaults)
-        if player[1].doubleFaults>player[2].doubleFaults {
+        if player[1].doubleFaults > player[2].doubleFaults {
             Player1doubleFaultLabel.textColor = .white
             Player2doubleFaultLabel.textColor = .systemGreen
         }
-        else if player[1].doubleFaults<player[2].doubleFaults
+        else if player[1].doubleFaults < player[2].doubleFaults
         {
             Player2doubleFaultLabel.textColor = .white
             Player1doubleFaultLabel.textColor = .systemGreen
@@ -78,11 +78,11 @@ class StatViewController: UIViewController {
         // эйсы
         Player1aceLabel.text = String(player[1].aces)
         Player2aceLabel.text = String(player[2].aces)
-        if player[1].aces>player[2].aces {
+        if player[1].aces > player[2].aces {
             Player2aceLabel.textColor = .white
             Player1aceLabel.textColor = .systemGreen
         }
-        else if player[1].aces<player[2].aces
+        else if player[1].aces < player[2].aces
         {
             Player1aceLabel.textColor = .white
             Player2aceLabel.textColor = .systemGreen
@@ -95,11 +95,11 @@ class StatViewController: UIViewController {
         // первые подачи
         Player1firstLabel.text = String(player[1].percent1)
         Player2firstLabel.text = String(player[2].percent1)
-        if player[1].percent1>player[2].percent1 {
+        if player[1].percent1 > player[2].percent1 {
             Player2firstLabel.textColor = .white
             Player1firstLabel.textColor = .systemGreen
         }
-        else if player[1].percent1<player[2].percent1
+        else if player[1].percent1 < player[2].percent1
         {
             Player1firstLabel.textColor = .white
             Player2firstLabel.textColor = .systemGreen
@@ -112,11 +112,11 @@ class StatViewController: UIViewController {
         // вторые подачи
         Player1secondLabel.text = String(player[1].percent2)
         Player2secondLabel.text = String(player[2].percent2)
-        if player[1].percent2>player[2].percent2 {
+        if player[1].percent2 > player[2].percent2 {
             Player2secondLabel.textColor = .white
             Player1secondLabel.textColor = .systemGreen
         }
-        else if player[1].percent2<player[2].percent2
+        else if player[1].percent2 < player[2].percent2
         {
             Player1secondLabel.textColor = .white
             Player2secondLabel.textColor = .systemGreen
@@ -129,11 +129,11 @@ class StatViewController: UIViewController {
         // виннерсы
         Player1winnerLabel.text = String(player[1].winners)
         Player2winnerLabel.text = String(player[2].winners)
-        if player[1].winners>player[2].winners {
+        if player[1].winners > player[2].winners {
             Player2winnerLabel.textColor = .white
             Player1winnerLabel.textColor = .systemGreen
         }
-        else if player[1].winners<player[2].winners
+        else if player[1].winners < player[2].winners
         {
             Player1winnerLabel.textColor = .white
             Player2winnerLabel.textColor = .systemGreen
@@ -165,11 +165,11 @@ class StatViewController: UIViewController {
         let player2totalPoints = player[2].totalPoints + player[2].aces + player[2].winners + player[1].doubleFaults + player[1].ufe
         Player1pointsLabel.text = String(player1totalPoints)
         Player2pointsLabel.text = String(player2totalPoints)
-        if player1totalPoints>player2totalPoints {
+        if player1totalPoints > player2totalPoints {
             Player2pointsLabel.textColor = .white
             Player1pointsLabel.textColor = .systemGreen
         }
-        else if player1totalPoints<player2totalPoints
+        else if player1totalPoints < player2totalPoints
         {
             Player1pointsLabel.textColor = .white
             Player2pointsLabel.textColor = .systemGreen
@@ -182,11 +182,11 @@ class StatViewController: UIViewController {
         // брейкпоинты
         Player1breakpointLabel.text = String(player[1].breakpoint)
         Player2breakpointLabel.text = String(player[2].breakpoint)
-        if player[1].breakpoint>player[2].breakpoint {
+        if player[1].breakpoint > player[2].breakpoint {
             Player2breakpointLabel.textColor = .white
             Player1breakpointLabel.textColor = .systemGreen
         }
-        else if player[1].breakpoint<player[2].breakpoint
+        else if player[1].breakpoint < player[2].breakpoint
         {
             Player1breakpointLabel.textColor = .white
             Player2breakpointLabel.textColor = .systemGreen

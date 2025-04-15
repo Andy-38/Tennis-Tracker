@@ -22,7 +22,6 @@ extension UIButton { // расширение для кнопки, чтобы к�
     }
 }
 
-
 class MatchViewController: UIViewController, UITextFieldDelegate {
     
     let GamePoints = ["0", "15", "30", "40", "AD", "0"] // счет
@@ -102,7 +101,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if match.TieBreak7 { ScoreLabel.text = "ТБ(7)"}
             else { ScoreLabel.text = "Очки"}
             if match.TieBreak10 { ScoreLabel.text = "ТБ("+String(match.MaxPoint)+")"}
-            
             MatchStates.removeLast() // удаляем последнее состояние из массива
         }
     }
@@ -137,8 +135,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         switch match.PodaetNow {
         case 1: do {
             BallLabel.frame.origin.x = Point1Label.frame.origin.x + Point1Label.frame.width - 30
-            //let a = Int(Point1Label.frame.origin.x + Point1Label.frame.width - 30)
-            //showWinAlert(playerName: String(a))
             FirstPlayerStatusLabel.text = String(match.Podacha)+" подача"
             SecondPlayerStetusLabel.text = "Прием"
             Win1Button.setTitle("Эйс", for: .normal)
@@ -273,8 +269,7 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         player[2].stat.append(" ")
         player[1].inGameScore.append("0")
         player[2].inGameScore.append("0")
-        
-    }
+        }
     
     func ChangePoints( p1: Int, p2 : Int) { // p1, p2 - изменение очков 1-го и 2-го игроков
         // функция для пересчета счета
@@ -327,7 +322,8 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
             if match.TieBreakPoint % 2 == 1 { // если нечетный - то смена подачи
                 if (match.PodaetNow == 1) { match.PodaetNow = 2}
                 else { match.PodaetNow = 1} // смена подачи
-                SmenaPodachiDraw()        }
+                SmenaPodachiDraw()
+            }
         }
     }
     
@@ -641,30 +637,6 @@ class MatchViewController: UIViewController, UITextFieldDelegate {
         if match.PodaetNow == 1 {match.PodaetNow = 2}
         else {match.PodaetNow = 1}
         UpdatePointsDraw()
-        
-        /*
-        FirstPlayerNameTextField.text = player[1].name
-        SecondPlayerNameTextField.text = player[2].name
-        FirstPlayerNameTextField.textColor = playerColor[1]
-        SecondPlayerNameTextField.textColor = playerColor[2]
-        
-        Set1Label.textColor = playerColor[1]
-        Game1Label.textColor = playerColor[1]
-        Point1Label.textColor = playerColor[1]
-        
-        Set2Label.textColor = playerColor[2]
-        Game2Label.textColor = playerColor[2]
-        Point2Label.textColor = playerColor[2]
-        
-        Stat1Label.textColor = playerColor[1]
-        GameStat1Label.textColor = playerColor[1]
-        Player1SetScoreLabel.textColor = playerColor[1]
-        
-        Stat2Label.textColor = playerColor[2]
-        GameStat2Label.textColor = playerColor[2]
-        Player2SetScoreLabel.textColor = playerColor[2]
-        */
-        
         SaveState()
     }
 }
